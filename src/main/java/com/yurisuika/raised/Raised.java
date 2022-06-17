@@ -2,30 +2,33 @@ package com.yurisuika.raised;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mojang.blaze3d.platform.InputConstants;
-import net.minecraft.client.KeyMapping;
-import net.minecraftforge.client.ClientRegistry;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.stream.Stream;
 
 @Mod("raised")
 public class Raised {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("raised");
+    private static final Logger LOGGER = LogManager.getLogger();
 
-    public static KeyMapping down;
-    public static KeyMapping up;
+    public static KeyBinding down;
+    public static KeyBinding up;
 
     public static File file = new File(FMLPaths.CONFIGDIR.get().toFile(), "raised.json");
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -46,7 +49,18 @@ public class Raised {
     static void loadConfig() {
         try {
             if (file.exists()) {
-                config = gson.fromJson(Files.readString(file.toPath()), RaisedConfig.class);
+                StringBuilder contentBuilder = new StringBuilder();
+
+                try (Stream<String> stream = Files.lines(file.toPath(), StandardCharsets.UTF_8))
+                {
+                    stream.forEach(s -> contentBuilder.append(s).append("\n"));
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+
+                config = gson.fromJson(contentBuilder.toString(), RaisedConfig.class);
             } else {
                 config = new RaisedConfig();
             }
@@ -94,8 +108,8 @@ public class Raised {
 
         loadConfig();
 
-        down = new KeyMapping("raised.down", KeyConflictContext.IN_GAME, InputConstants.getKey("key.keyboard.minus"), "raised.title");
-        up = new KeyMapping("raised.up", KeyConflictContext.IN_GAME, InputConstants.getKey("key.keyboard.equal"), "raised.title");
+        down = new KeyBinding("raised.down", KeyConflictContext.IN_GAME, InputMappings.getKey("key.keyboard.minus"), "raised.title");
+        up = new KeyBinding("raised.up", KeyConflictContext.IN_GAME, InputMappings.getKey("key.keyboard.equal"), "raised.title");
 
         ClientRegistry.registerKeyBinding(down);
         ClientRegistry.registerKeyBinding(up);

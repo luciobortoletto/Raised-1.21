@@ -19,4 +19,24 @@ public class ForgeIngameGuiRemapFalseMixin {
         return value - Raised.getDistance();
     }
 
+    @ModifyVariable(method = "renderFood", at = @At(value = "HEAD"), ordinal = 1, argsOnly = true)
+    private int modifyFood(int value) {
+        return value - Raised.getDistance();
+    }
+
+    @ModifyVariable(method = "renderHealth", at = @At(value = "HEAD"), ordinal = 1, argsOnly = true)
+    private int modifyHealth(int value) {
+        return value - Raised.getDistance();
+    }
+
+    @ModifyVariable(method = "renderAir", at = @At(value = "HEAD"), ordinal = 1, argsOnly = true)
+    private int modifyAir(int value) {
+        return value - Raised.getDistance();
+    }
+
+    @ModifyVariable(method = "renderHealthMount", at = @At(value = "HEAD"), ordinal = 1, argsOnly = true)
+    private int modifyHealthMount(int value) {
+        return value - Raised.getDistance();
+    }
+
 }
