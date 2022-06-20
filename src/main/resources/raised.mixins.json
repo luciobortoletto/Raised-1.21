@@ -2,10 +2,11 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.yurisuika.raised.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
   "client": [
+    "client.gui.hud.ChatHudMixin",
     "client.gui.hud.InGameHudMixin",
     "mods.AppleskinMixin",
     "mods.DetailArmorBarMixin",
