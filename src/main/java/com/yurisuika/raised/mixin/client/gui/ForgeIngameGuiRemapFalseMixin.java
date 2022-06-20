@@ -6,12 +6,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(value = ForgeIngameGui.class, remap = false)
+@Mixin(value = ForgeIngameGui.class, remap = false, priority = -1)
 public class ForgeIngameGuiRemapFalseMixin {
 
     @ModifyVariable(method = "renderChat", at = @At(value = "HEAD"), ordinal = 1, argsOnly = true)
     private int modifyChat(int value) {
-        return value - Raised.getDistance();
+        return value - Raised.getDistance() - Raised.getOffset();
     }
 
     @ModifyVariable(method = "renderRecordOverlay", at = @At(value = "HEAD"), ordinal = 1, argsOnly = true)

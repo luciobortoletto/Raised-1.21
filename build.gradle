@@ -66,7 +66,7 @@ dependencies {
 
     compileOnly 'com.github.Lizard-Of-Oz.Inventorio:inventorio-1.18-forge:1.18.2-SNAPSHOT'
     compileOnly 'com.github.RedLime:DetailArmorBar:1.18-forge-SNAPSHOT'
-    compileOnly 'curse.maven:health-overlay-368223:3562379'
+    compileOnly 'curse.maven:health-overlay-368223:3837277'
     compileOnly 'curse.maven:levelhearts-273640:3697146'
 }
 
