@@ -9,6 +9,7 @@
     "client.gui.ForgeIngameGuiMixin",
     "client.gui.ForgeIngameGuiRemapFalseMixin",
     "client.gui.IngameGuiMixin",
+    "client.gui.NewChatGuiMixin",
     "mods.AppleskinMixin",
     "mods.DetailArmorBarMixin",
     "mods.HealthOverlayMixin",

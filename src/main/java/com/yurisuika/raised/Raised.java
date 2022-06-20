@@ -29,6 +29,8 @@ public class Raised {
 
     public static KeyBinding down;
     public static KeyBinding up;
+    public static KeyBinding offsetDown;
+    public static KeyBinding offsetUp;
 
     public static File file = new File(FMLPaths.CONFIGDIR.get().toFile(), "raised.json");
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -83,8 +85,17 @@ public class Raised {
         saveConfig();
     }
 
+    public static void setOffset(int change) {
+        config.offset += change;
+        saveConfig();
+    }
+
     public static int getDistance() {
         return config.distance;
+    }
+
+    public static int getOffset() {
+        return config.offset;
     }
 
     public void input(InputEvent.KeyInputEvent event){
@@ -93,6 +104,12 @@ public class Raised {
         }
         if (up.consumeClick()) {
             setDistance(1);
+        }
+        if (offsetDown.consumeClick()) {
+            setOffset(-1);
+        }
+        if (offsetUp.consumeClick()) {
+            setOffset(1);
         }
     }
 
@@ -110,9 +127,13 @@ public class Raised {
 
         down = new KeyBinding("raised.down", KeyConflictContext.IN_GAME, InputMappings.getKey("key.keyboard.minus"), "raised.title");
         up = new KeyBinding("raised.up", KeyConflictContext.IN_GAME, InputMappings.getKey("key.keyboard.equal"), "raised.title");
+        offsetDown = new KeyBinding("raised.offset.down", KeyConflictContext.IN_GAME, InputMappings.getKey("key.keyboard.left.bracket"), "raised.title");
+        offsetUp = new KeyBinding("raised.offset.up", KeyConflictContext.IN_GAME, InputMappings.getKey("key.keyboard.right.bracket"), "raised.title");
 
         ClientRegistry.registerKeyBinding(down);
         ClientRegistry.registerKeyBinding(up);
+        ClientRegistry.registerKeyBinding(offsetDown);
+        ClientRegistry.registerKeyBinding(offsetUp);
     }
 
 }
