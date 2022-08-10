@@ -6,8 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "client.gui.ForgeIngameGuiMixin",
-    "client.gui.ForgeIngameGuiRemapFalseMixin",
+    "client.gui.ForgeGuiMixin",
+    "client.gui.ForgeGuiRemapFalseMixin",
     "client.gui.GuiMixin",
     "client.gui.components.ChatComponentMixin",
     "mods.DetailArmorBarMixin",

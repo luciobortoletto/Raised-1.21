@@ -5,8 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.KeyMapping;
-import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -85,7 +85,7 @@ public class Raised {
     }
 
 
-    public void input(InputEvent.KeyInputEvent event){
+    public void input(InputEvent.Key event){
         if (down.consumeClick()) {
             setDistance(-1);
         }
@@ -100,6 +100,13 @@ public class Raised {
         }
     }
 
+    public void registerKeys(RegisterKeyMappingsEvent event) {
+        event.register(down);
+        event.register(up);
+        event.register(offsetDown);
+        event.register(offsetUp);
+    }
+
     public Raised()
     {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -109,6 +116,7 @@ public class Raised {
     public void setup(final FMLClientSetupEvent event) {
         LOGGER.info("Loading Raised!");
         MinecraftForge.EVENT_BUS.addListener(this::input);
+        MinecraftForge.EVENT_BUS.addListener(this::registerKeys);
 
         loadConfig();
 
@@ -116,11 +124,6 @@ public class Raised {
         up = new KeyMapping("raised.up", KeyConflictContext.IN_GAME, InputConstants.getKey("key.keyboard.equal"), "raised.title");
         offsetDown = new KeyMapping("raised.offset.down", KeyConflictContext.IN_GAME, InputConstants.getKey("key.keyboard.left.bracket"), "raised.title");
         offsetUp = new KeyMapping("raised.offset.up", KeyConflictContext.IN_GAME, InputConstants.getKey("key.keyboard.right.bracket"), "raised.title");
-
-        ClientRegistry.registerKeyBinding(down);
-        ClientRegistry.registerKeyBinding(up);
-        ClientRegistry.registerKeyBinding(offsetDown);
-        ClientRegistry.registerKeyBinding(offsetUp);
     }
 
 }
