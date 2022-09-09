@@ -64,7 +64,7 @@ dependencies {
     minecraft 'net.minecraftforge:forge:' + project.minecraft_version + '-' + project.forge_version
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    compileOnly 'com.github.Lizard-Of-Oz.Inventorio:inventorio-1.17-forge:1.17-SNAPSHOT'
+    compileOnly 'curse.maven:inventorio-forge-497122:3550015'
     compileOnly 'curse.maven:detail-armor-bar-forge-520755:3470830'
     compileOnly 'curse.maven:health-overlay-368223:3837181'
     compileOnly 'curse.maven:levelhearts-273640:3542877'
