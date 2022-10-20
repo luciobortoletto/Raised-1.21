@@ -125,7 +125,6 @@ public class Raised {
 
     public void setup(final FMLClientSetupEvent event) {
         LOGGER.info("Loading Raised!");
-//        MinecraftForge.EVENT_BUS.addListener(this::input);
 
         loadConfig();
     }
