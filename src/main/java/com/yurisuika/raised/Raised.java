@@ -14,6 +14,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -27,10 +28,10 @@ public class Raised {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public static KeyBinding down;
-    public static KeyBinding up;
-    public static KeyBinding offsetDown;
-    public static KeyBinding offsetUp;
+    public static final KeyBinding down = new KeyBinding("raised.down", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_MINUS, "raised.title");
+    public static final KeyBinding up = new KeyBinding("raised.up", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_EQUAL, "raised.title");
+    public static final KeyBinding offsetDown = new KeyBinding("raised.offset.down", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_BRACKET, "raised.title");
+    public static final KeyBinding offsetUp = new KeyBinding("raised.offset.up", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_BRACKET, "raised.title");
 
     public static File file = new File(FMLPaths.CONFIGDIR.get().toFile(), "raised.json");
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -124,11 +125,6 @@ public class Raised {
         MinecraftForge.EVENT_BUS.addListener(this::input);
 
         loadConfig();
-
-        down = new KeyBinding("raised.down", KeyConflictContext.IN_GAME, InputMappings.getKey("key.keyboard.minus"), "raised.title");
-        up = new KeyBinding("raised.up", KeyConflictContext.IN_GAME, InputMappings.getKey("key.keyboard.equal"), "raised.title");
-        offsetDown = new KeyBinding("raised.offset.down", KeyConflictContext.IN_GAME, InputMappings.getKey("key.keyboard.left.bracket"), "raised.title");
-        offsetUp = new KeyBinding("raised.offset.up", KeyConflictContext.IN_GAME, InputMappings.getKey("key.keyboard.right.bracket"), "raised.title");
 
         ClientRegistry.registerKeyBinding(down);
         ClientRegistry.registerKeyBinding(up);
