@@ -65,9 +65,10 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     compileOnly 'curse.maven:appleskin-248787:3686480'
-    compileOnly 'com.github.Lizard-Of-Oz.Inventorio:inventorio-1.16-forge:1.16-SNAPSHOT'
+    compileOnly 'curse.maven:create-328085:3536025'
     compileOnly 'curse.maven:detail-armor-bar-forge-520755:3470828'
     compileOnly 'curse.maven:health-overlay-368223:3441946'
+    compileOnly 'curse.maven:inventorio-forge-497122:3967909'
     compileOnly 'curse.maven:levelhearts-273640:3542875'
 }
 

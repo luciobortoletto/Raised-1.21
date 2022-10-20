@@ -11,6 +11,7 @@
     "client.gui.IngameGuiMixin",
     "client.gui.NewChatGuiMixin",
     "mods.AppleskinMixin",
+    "mods.CreateMixin",
     "mods.DetailArmorBarMixin",
     "mods.HealthOverlayMixin",
     "mods.InventorioMixin",
