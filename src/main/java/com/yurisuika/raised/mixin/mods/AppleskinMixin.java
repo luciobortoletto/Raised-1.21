@@ -7,17 +7,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import squeek.appleskin.client.HUDOverlayHandler;
 
-@Mixin(HUDOverlayHandler.class)
 public class AppleskinMixin {
 
-    @Redirect(method = "onPreRender", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-    private int modifyScaledHeight(MainWindow instance) {
-        return instance.getGuiScaledHeight() - Raised.getDistance();
-    }
+    @Mixin(HUDOverlayHandler.class)
+    public static class HUDOverlayHandlerMixin {
 
-    @Redirect(method = "onRender", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-    private int modifyScaledHeight2(MainWindow instance) {
-        return instance.getGuiScaledHeight() - Raised.getDistance();
+        @Redirect(method = "onPreRender", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
+        private int modifyScaledHeight(MainWindow instance) {
+            return instance.getGuiScaledHeight() - Raised.getDistance();
+        }
+
+        @Redirect(method = "onRender", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
+        private int modifyScaledHeight2(MainWindow instance) {
+            return instance.getGuiScaledHeight() - Raised.getDistance();
+        }
+
     }
 
 }

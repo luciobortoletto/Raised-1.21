@@ -7,22 +7,26 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(IngameGui.class)
 public class LevelHeartsMixin {
 
-    @Redirect(method = "redrawHealth", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-    private int modifyHeartsScaledHeight(MainWindow instance) {
-        return instance.getGuiScaledHeight() - Raised.getDistance();
-    }
+    @Mixin(IngameGui.class)
+    public static class IngameGuiMixin {
 
-    @Redirect(method = "redrawAir", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-    private int modifyAirScaledHeight(MainWindow instance) {
-        return instance.getGuiScaledHeight() - Raised.getDistance();
-    }
+        @Redirect(method = "redrawHealth", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
+        private int modifyRedrawHealth(MainWindow instance) {
+            return instance.getGuiScaledHeight() - Raised.getDistance();
+        }
 
-    @Redirect(method = "redrawArmor", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-    private int modifyArmorScaledHeight(MainWindow instance) {
-        return instance.getGuiScaledHeight() - Raised.getDistance();
+        @Redirect(method = "redrawAir", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
+        private int modifyRedrawAir(MainWindow instance) {
+            return instance.getGuiScaledHeight() - Raised.getDistance();
+        }
+
+        @Redirect(method = "redrawArmor", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
+        private int modifyRedrawArmor(MainWindow instance) {
+            return instance.getGuiScaledHeight() - Raised.getDistance();
+        }
+
     }
 
 }

@@ -28,10 +28,11 @@ public class Raised {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public static final KeyBinding down = new KeyBinding("raised.down", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_MINUS, "raised.title");
-    public static final KeyBinding up = new KeyBinding("raised.up", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_EQUAL, "raised.title");
-    public static final KeyBinding offsetDown = new KeyBinding("raised.offset.down", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_BRACKET, "raised.title");
-    public static final KeyBinding offsetUp = new KeyBinding("raised.offset.up", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_BRACKET, "raised.title");
+    public static final KeyBinding down = new KeyBinding("raised.down", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_KP_SUBTRACT, "raised.title");
+    public static final KeyBinding up = new KeyBinding("raised.up", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_KP_ADD, "raised.title");
+    public static final KeyBinding offsetDown = new KeyBinding("raised.offset.down", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_KP_DIVIDE, "raised.title");
+    public static final KeyBinding offsetUp = new KeyBinding("raised.offset.up", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_KP_MULTIPLY, "raised.title");
+    public static final KeyBinding reset = new KeyBinding("raised.reset", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_KP_ENTER, "raised.title");
 
     public static File file = new File(FMLPaths.CONFIGDIR.get().toFile(), "raised.json");
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -91,6 +92,12 @@ public class Raised {
         saveConfig();
     }
 
+    public static void setReset() {
+        config.distance = 2;
+        config.offset = 0;
+        saveConfig();
+    }
+
     public static int getDistance() {
         return config.distance;
     }
@@ -112,6 +119,9 @@ public class Raised {
         if (offsetUp.consumeClick()) {
             setOffset(1);
         }
+        if (reset.consumeClick()) {
+            Raised.setReset();
+        }
     }
 
     public Raised()
@@ -130,6 +140,7 @@ public class Raised {
         ClientRegistry.registerKeyBinding(up);
         ClientRegistry.registerKeyBinding(offsetDown);
         ClientRegistry.registerKeyBinding(offsetUp);
+        ClientRegistry.registerKeyBinding(reset);
     }
 
 }
