@@ -102,6 +102,7 @@ public class Raised {
             event.register(up);
             event.register(offsetDown);
             event.register(offsetUp);
+            event.register(reset);
         }
     }
 
