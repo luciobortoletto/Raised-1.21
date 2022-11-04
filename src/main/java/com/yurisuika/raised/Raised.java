@@ -27,7 +27,7 @@ public class Raised {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final KeyMapping down = new KeyMapping("raised.down", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_KP_DIVIDE, "raised.title");
+    public static final KeyMapping down = new KeyMapping("raised.down", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_KP_SUBTRACT, "raised.title");
     public static final KeyMapping up = new KeyMapping("raised.up", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_KP_ADD, "raised.title");
     public static final KeyMapping offsetDown = new KeyMapping("raised.offset.down", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_KP_DIVIDE, "raised.title");
     public static final KeyMapping offsetUp = new KeyMapping("raised.offset.up", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_KP_MULTIPLY, "raised.title");
