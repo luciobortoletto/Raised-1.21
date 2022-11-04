@@ -23,6 +23,12 @@ Raises the hotbar so the selector is not cut off!
     ordering="NONE"
     side="CLIENT"
 [[dependencies.raised]]
+    modId="healthoverlay"
+    mandatory=false
+    versionRange="[3,)"
+    ordering="NONE"
+    side="CLIENT"
+[[dependencies.raised]]
     modId="inventorio"
     mandatory=false
     versionRange="[1,)"

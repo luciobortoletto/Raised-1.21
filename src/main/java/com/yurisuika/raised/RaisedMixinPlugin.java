@@ -16,10 +16,10 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
     private static final Supplier<Boolean> TRUE = () -> true;
 
     private static final Map<String, Supplier<Boolean>> CONDITIONS = ImmutableMap.of(
-            "com.yurisuika.raised.mixin.mods.DetailArmorBarMixin", () -> FMLLoader.getLoadingModList().getModFileById("detailab") != null,
-            "com.yurisuika.raised.mixin.mods.HealthOverlayMixin", () -> FMLLoader.getLoadingModList().getModFileById("healthoverlay") != null,
-            "com.yurisuika.raised.mixin.mods.InventorioMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventorio") != null,
-            "com.yurisuika.raised.mixin.mods.LevelHeartsMixin", () -> FMLLoader.getLoadingModList().getModFileById("levelhearts") != null
+            "com.yurisuika.raised.mixin.mods.DetailArmorBarMixin$ArmorBarRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("detailab") != null,
+            "com.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("healthoverlay") != null,
+            "com.yurisuika.raised.mixin.mods.InventorioMixin$HotbarHUDRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventorio") != null,
+            "com.yurisuika.raised.mixin.mods.LevelHeartsMixin$IngameGuiMixin", () -> FMLLoader.getLoadingModList().getModFileById("levelhearts") != null
     );
 
     @Override

@@ -10,10 +10,10 @@
     "client.gui.ForgeIngameGuiRemapFalseMixin",
     "client.gui.GuiMixin",
     "client.gui.components.ChatComponentMixin",
-    "mods.DetailArmorBarMixin",
-    "mods.HealthOverlayMixin",
-    "mods.InventorioMixin",
-    "mods.LevelHeartsMixin"
+    "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
+    "mods.HealthOverlayMixin$HeartRendererMixin",
+    "mods.InventorioMixin$HotbarHUDRendererMixin",
+    "mods.LevelHeartsMixin$IngameGuiMixin"
   ],
   "injectors": {
     "defaultRequire": 1
