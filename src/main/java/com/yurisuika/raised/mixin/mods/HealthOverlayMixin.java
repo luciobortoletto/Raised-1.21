@@ -1,18 +1,22 @@
 package com.yurisuika.raised.mixin.mods;
 
 import com.yurisuika.raised.Raised;
-import net.minecraft.client.util.Window;
+import net.minecraft.client.MainWindow;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import terrails.healthoverlay.HeartRenderer;
+import terrails.healthoverlay.HealthRenderer;
 
-@Mixin(HeartRenderer.class)
 public class HealthOverlayMixin {
 
-    @Redirect(method = "renderHeartBar", at = @At(value = "INVOKE", target = "net/minecraft/client/util/Window.getScaledHeight()I"))
-    private int modifyScaledHeight(Window instance) {
-        return instance.getScaledHeight() - Raised.getDistance();
+    @Mixin(HealthRenderer.class)
+    public static class HeartRendererMixin {
+
+        @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
+        private static int redirectRenderPlayerHearts(MainWindow instance) {
+            return instance.getGuiScaledHeight() - Raised.getDistance();
+        }
+
     }
 
 }

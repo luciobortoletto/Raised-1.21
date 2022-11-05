@@ -1,0 +1,32 @@
+{
+  "required": true,
+  "package": "com.yurisuika.raised.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "raised.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "client.gui.ForgeIngameGuiMixin",
+    "client.gui.ForgeIngameGuiRemapFalseMixin",
+    "client.gui.IngameGuiMixin",
+    "client.gui.NewChatGuiMixin",
+    "mods.AppleskinMixin$HUDOverlayHandlerMixin",
+    "mods.BotaniaMixin$HUDHandlerMixin",
+    "mods.BotaniaMixin$ItemFlightTiaraMixin",
+    "mods.CreateMixin$CopperBacktankArmorMixin",
+    "mods.CreateMixin$SchematicHotbarSlotOverlayMixin",
+    "mods.CreateMixin$ToolboxHandlerClientMixin",
+    "mods.CreateMixin$ToolSelectionScreenMixin",
+    "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
+    "mods.HealthOverlayMixin$HeartRendererMixin",
+    "mods.InventorioMixin$HotbarHUDRendererMixin",
+    "mods.LevelHeartsMixin$IngameGuiMixin",
+    "mods.QuarkMixin$HotbarChangerModuleMixin",
+    "mods.QuarkMixin$UsageTickerModuleMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "plugin": "com.yurisuika.raised.RaisedMixinPlugin",
+  "minVersion": "0.8"
+}
