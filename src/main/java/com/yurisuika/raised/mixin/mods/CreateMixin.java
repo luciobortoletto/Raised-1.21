@@ -12,21 +12,21 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 public class CreateMixin {
 
-    @Mixin(value = CopperBacktankArmorLayer.class, remap = false)
+    @Mixin(CopperBacktankArmorLayer.class)
     public static class CopperBacktankArmorMixin {
 
         @Redirect(method = "renderRemainingAirOverlay", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private static int modifyRenderRemainingAirOverlay(MainWindow instance) {
+        private static int redirectRenderRemainingAirOverlay(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 
     }
 
-    @Mixin(value = SchematicHotbarSlotOverlay.class, remap = false)
+    @Mixin(SchematicHotbarSlotOverlay.class)
     public static class SchematicHotbarSlotOverlayMixin {
 
         @Redirect(method = "renderOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private static int modifyRenderOn(MainWindow instance) {
+        private int redirectRenderOn(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 
@@ -36,17 +36,17 @@ public class CreateMixin {
     public static class ToolboxHandlerClientMixin {
 
         @Redirect(method = "renderOverlay", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private static int modifyScaledHeight(MainWindow instance) {
+        private static int redirectScaledHeight(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 
     }
 
-    @Mixin(value = ToolSelectionScreen.class, remap = false)
-    public static class ToolSelectionScreeMixin {
+    @Mixin(ToolSelectionScreen.class)
+    public static class ToolSelectionScreenMixin {
 
         @Redirect(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private static int modifyDraw(MainWindow instance) {
+        private int redirectDraw(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 

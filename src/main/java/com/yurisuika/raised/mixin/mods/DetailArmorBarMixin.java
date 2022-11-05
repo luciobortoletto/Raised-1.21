@@ -13,7 +13,7 @@ public class DetailArmorBarMixin {
     public static class ArmorBarRendererMixin {
 
         @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private int modifyRender(MainWindow instance) {
+        private int redirectRender(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 

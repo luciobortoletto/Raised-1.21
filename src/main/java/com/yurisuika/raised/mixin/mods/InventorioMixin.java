@@ -13,12 +13,12 @@ public class InventorioMixin {
     public static class HotbarHUDRendererMixin {
 
         @Redirect(method = "renderSegmentedHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private int modifyRenderSegmentedHotbar(MainWindow instance) {
+        private int redirectRenderSegmentedHotbar(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 
         @Redirect(method = "renderHotbarAddons", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private int modifyRenderHotbarAddons(MainWindow instance) {
+        private int redirectRenderHotbarAddons(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 

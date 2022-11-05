@@ -14,7 +14,7 @@ public class QuarkMixin {
     public static class HotbarChangerModuleMixin {
 
         @Redirect(method = "hudPost", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private int modifyHudPost(MainWindow instance) {
+        private int redirectHudPost(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 
@@ -24,7 +24,7 @@ public class QuarkMixin {
     public static class UsageTickerModuleMixin {
 
         @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private int modifyRender(MainWindow instance) {
+        private int redirectRender(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 

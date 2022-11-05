@@ -61,6 +61,6 @@ Raises the hotbar so the selector is not cut off!
 [[dependencies.raised]]
     modId="quark"
     mandatory=false
-    versionRange="[3,)"
+    versionRange="[r2,)"
     ordering="NONE"
     side="CLIENT"

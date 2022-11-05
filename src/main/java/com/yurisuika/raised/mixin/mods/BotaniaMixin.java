@@ -14,7 +14,7 @@ public class BotaniaMixin {
     public static class HUDHandlerMixin {
 
         @Redirect(method = "renderManaInvBar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private static int modifyRenderManaInvBar(MainWindow instance) {
+        private static int redirectRenderManaInvBar(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 
@@ -24,7 +24,7 @@ public class BotaniaMixin {
     public static class ItemFlightTiaraMixin {
 
         @Redirect(method = "renderHUD", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private static int modifyRenderHUD(MainWindow instance) {
+        private static int redirectRenderHUD(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 

@@ -13,12 +13,12 @@ public class AppleskinMixin {
     public static class HUDOverlayHandlerMixin {
 
         @Redirect(method = "onPreRender", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private int modifyScaledHeight(MainWindow instance) {
+        private int redirectOnPreRender(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 
         @Redirect(method = "onRender", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private int modifyScaledHeight2(MainWindow instance) {
+        private int redirectOnRender(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 

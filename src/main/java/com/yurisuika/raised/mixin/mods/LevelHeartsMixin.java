@@ -13,17 +13,17 @@ public class LevelHeartsMixin {
     public static class IngameGuiMixin {
 
         @Redirect(method = "redrawHealth", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private int modifyRedrawHealth(MainWindow instance) {
+        private int redirectRedrawHealth(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 
         @Redirect(method = "redrawAir", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private int modifyRedrawAir(MainWindow instance) {
+        private int redirectRedrawAir(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 
         @Redirect(method = "redrawArmor", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private int modifyRedrawArmor(MainWindow instance) {
+        private int redirectRedrawArmor(MainWindow instance) {
             return instance.getGuiScaledHeight() - Raised.getDistance();
         }
 
