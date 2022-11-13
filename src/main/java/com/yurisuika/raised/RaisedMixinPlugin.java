@@ -19,7 +19,7 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
             "com.yurisuika.raised.mixin.mods.AppleskinMixin$HUDOverlayHandlerMixin", () -> FMLLoader.getLoadingModList().getModFileById("appleskin") != null,
             "com.yurisuika.raised.mixin.mods.BotaniaMixin$HUDHandlerMixin", () -> FMLLoader.getLoadingModList().getModFileById("botania") != null,
             "com.yurisuika.raised.mixin.mods.BotaniaMixin$ItemFlightTiaraMixin", () -> FMLLoader.getLoadingModList().getModFileById("botania") != null,
-            "com.yurisuika.raised.mixin.mods.CreateMixin$CopperBacktankArmorMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
+            "com.yurisuika.raised.mixin.mods.CreateMixin$CopperBacktankArmorLayerMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
             "com.yurisuika.raised.mixin.mods.CreateMixin$SchematicHotbarSlotOverlayMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null
     );
 
