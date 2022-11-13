@@ -1,7 +1,7 @@
 package com.yurisuika.raised.mixin.mods;
 
 import com.yurisuika.raised.Raised;
-import net.minecraft.client.MainWindow;
+import net.minecraft.client.util.Window;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -12,14 +12,14 @@ public class AppleskinMixin {
     @Mixin(HUDOverlayHandler.class)
     public static class HUDOverlayHandlerMixin {
 
-        @Redirect(method = "onPreRender", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private int redirectOnPreRender(MainWindow instance) {
-            return instance.getGuiScaledHeight() - Raised.getDistance();
+        @Redirect(method = "onPreRender", at = @At(value = "INVOKE", target = "net/minecraft/client/util/Window.getScaledHeight()I"))
+        private int redirectOnPreRender(Window instance) {
+            return instance.getScaledHeight() - Raised.getDistance();
         }
 
-        @Redirect(method = "onRender", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MainWindow;getGuiScaledHeight()I"))
-        private int redirectOnRender(MainWindow instance) {
-            return instance.getGuiScaledHeight() - Raised.getDistance();
+        @Redirect(method = "onRender", at = @At(value = "INVOKE", target = "net/minecraft/client/util/Window.getScaledHeight()I"))
+        private int redirectOnRender(Window instance) {
+            return instance.getScaledHeight() - Raised.getDistance();
         }
 
     }

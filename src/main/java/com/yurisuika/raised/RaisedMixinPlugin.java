@@ -1,7 +1,7 @@
 package com.yurisuika.raised;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraftforge.fml.loading.FMLLoader;
+import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -16,30 +16,15 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
     private static final Supplier<Boolean> TRUE = () -> true;
 
     private static final Map<String, Supplier<Boolean>> CONDITIONS = ImmutableMap.of(
-            "com.yurisuika.raised.mixin.mods.AppleskinMixin$HUDOverlayHandlerMixin", () -> FMLLoader.getLoadingModList().getModFileById("appleskin") != null,
-            "com.yurisuika.raised.mixin.mods.BotaniaMixin$HUDHandlerMixin", () -> FMLLoader.getLoadingModList().getModFileById("botania") != null,
-            "com.yurisuika.raised.mixin.mods.BotaniaMixin$ItemFlightTiaraMixin", () -> FMLLoader.getLoadingModList().getModFileById("botania") != null,
-            "com.yurisuika.raised.mixin.mods.CreateMixin$CopperBacktankArmorMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
-            "com.yurisuika.raised.mixin.mods.CreateMixin$SchematicHotbarSlotOverlayMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null
-    );
-
-    private static final Map<String, Supplier<Boolean>> CONDITIONS2 = ImmutableMap.of(
-            "com.yurisuika.raised.mixin.mods.CreateMixin$ToolboxHandlerClientMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
-            "com.yurisuika.raised.mixin.mods.CreateMixin$ToolSelectionScreenMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
-            "com.yurisuika.raised.mixin.mods.DetailArmorBarMixin$ArmorBarRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("detailab") != null,
-            "com.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("healthoverlay") != null,
-            "com.yurisuika.raised.mixin.mods.InventorioMixin$HotbarHUDRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventorio") != null
-    );
-
-    private static final Map<String, Supplier<Boolean>> CONDITIONS3 = ImmutableMap.of(
-            "com.yurisuika.raised.mixin.mods.LevelHeartsMixin$IngameGuiMixin", () -> FMLLoader.getLoadingModList().getModFileById("levelhearts") != null,
-            "com.yurisuika.raised.mixin.mods.QuarkMixin$HotbarChangerModuleMixin", () -> FMLLoader.getLoadingModList().getModFileById("quark") != null,
-            "com.yurisuika.raised.mixin.mods.QuarkMixin$UsageTickerModuleMixin", () -> FMLLoader.getLoadingModList().getModFileById("quark") != null
+            "com.yurisuika.raised.mixin.mods.AppleskinMixin$HUDOverlayHandlerMixin", () -> FabricLoader.getInstance().isModLoaded("appleskin"),
+            "com.yurisuika.raised.mixin.mods.DetailArmorBarMixin$ArmorBarRendererMixin", () -> FabricLoader.getInstance().isModLoaded("detailab"),
+            "com.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FabricLoader.getInstance().isModLoaded("healthoverlay"),
+            "com.yurisuika.raised.mixin.mods.InventorioMixin$HotbarHUDRendererMixin", () -> FabricLoader.getInstance().isModLoaded("inventorio")
     );
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return CONDITIONS.getOrDefault(mixinClassName, TRUE).get() && CONDITIONS2.getOrDefault(mixinClassName, TRUE).get() && CONDITIONS3.getOrDefault(mixinClassName, TRUE).get();
+        return CONDITIONS.getOrDefault(mixinClassName, TRUE).get();
     }
 
     @Override

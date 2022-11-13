@@ -8,10 +8,11 @@
   "client": [
     "client.gui.hud.ChatHudMixin",
     "client.gui.hud.InGameHudMixin",
-    "mods.AppleskinMixin",
-    "mods.DetailArmorBarMixin",
-    "mods.HealthOverlayMixin",
-    "mods.InventorioMixin"
+    "client.gui.hud.SpectatorHudMixin",
+    "mods.AppleskinMixin$HUDOverlayHandlerMixin",
+    "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
+    "mods.HealthOverlayMixin$HeartRendererMixin",
+    "mods.InventorioMixin$HotbarHUDRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
