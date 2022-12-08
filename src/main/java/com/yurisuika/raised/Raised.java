@@ -44,8 +44,7 @@ public class Raised {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(gson.toJson(getConfig()));
             fileWriter.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -55,12 +54,9 @@ public class Raised {
             if (file.exists()) {
                 StringBuilder contentBuilder = new StringBuilder();
 
-                try (Stream<String> stream = Files.lines(file.toPath(), StandardCharsets.UTF_8))
-                {
+                try (Stream<String> stream = Files.lines(file.toPath(), StandardCharsets.UTF_8)) {
                     stream.forEach(s -> contentBuilder.append(s).append("\n"));
-                }
-                catch (IOException e)
-                {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
 
@@ -106,7 +102,7 @@ public class Raised {
         return config.offset;
     }
 
-    public void input(InputEvent.KeyInputEvent event){
+    public void input(InputEvent.KeyInputEvent event) {
         if (down.consumeClick()) {
             setDistance(-1);
         }
@@ -124,8 +120,7 @@ public class Raised {
         }
     }
 
-    public Raised()
-    {
+    public Raised() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
     }
