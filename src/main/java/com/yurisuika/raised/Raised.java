@@ -74,16 +74,11 @@ public class Raised implements ClientModInitializer {
         try {
             if (file.exists()) {
                 StringBuilder contentBuilder = new StringBuilder();
-
-                try (Stream<String> stream = Files.lines(file.toPath(), StandardCharsets.UTF_8))
-                {
+                try (Stream<String> stream = Files.lines(file.toPath(), StandardCharsets.UTF_8)) {
                     stream.forEach(s -> contentBuilder.append(s).append("\n"));
-                }
-                catch (IOException e)
-                {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
-
                 config = gson.fromJson(contentBuilder.toString(), RaisedConfig.class);
             } else {
                 config = new RaisedConfig();
