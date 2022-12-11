@@ -53,14 +53,9 @@ public class GuiMixin {
         return value - Raised.getDistance();
     }
 
-    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V", ordinal = 0), index = 1)
-    private double modifyActionbar(double value) {
-        return value - (double)Raised.getDistance();
-    }
-
-    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V", ordinal = 2), index = 1)
-    private double modifyChat(double value) {
-        return value - (double)Raised.getDistance() - (double)Raised.getOffset();
+    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(FFF)V", ordinal = 0), index = 1)
+    private float modifyActionbar(float value) {
+        return value - (float)Raised.getDistance();
     }
 
 }
