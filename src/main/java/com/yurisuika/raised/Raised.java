@@ -58,7 +58,14 @@ public class Raised implements ClientModInitializer {
     public static File file = new File(FabricLoader.getInstance().getConfigDir().toFile(), "raised.json");
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public static RaisedConfig config = new RaisedConfig();
+    public static Config config = new Config();
+
+    public static class Config {
+
+        public int distance = 2;
+        public int offset = 0;
+
+    }
 
     public static void saveConfig() {
         try {
@@ -70,7 +77,7 @@ public class Raised implements ClientModInitializer {
         }
     }
 
-    static void loadConfig() {
+    public static void loadConfig() {
         try {
             if (file.exists()) {
                 StringBuilder contentBuilder = new StringBuilder();
@@ -79,9 +86,9 @@ public class Raised implements ClientModInitializer {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                config = gson.fromJson(contentBuilder.toString(), RaisedConfig.class);
+                config = gson.fromJson(contentBuilder.toString(), Config.class);
             } else {
-                config = new RaisedConfig();
+                config = new Config();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,11 +96,11 @@ public class Raised implements ClientModInitializer {
         setConfig(config);
     }
 
-    public static void setConfig(RaisedConfig config) {
+    public static void setConfig(Config config) {
         Raised.config = config;
     }
 
-    public static RaisedConfig getConfig() {
+    public static Config getConfig() {
         return config;
     }
 
