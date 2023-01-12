@@ -24,8 +24,8 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
             "com.yurisuika.raised.mixin.mods.CreateMixin$ToolSelectionScreenMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
             "com.yurisuika.raised.mixin.mods.CreateMixin$TrainHUDMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
             "com.yurisuika.raised.mixin.mods.DetailArmorBarMixin$ArmorBarRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("detailab") != null,
-            "com.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("healthoverlay") != null,
-            "com.yurisuika.raised.mixin.mods.InventorioMixin$HotbarHUDRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventorio") != null
+            "com.yurisuika.raised.mixin.mods.InventorioMixin$HotbarHUDRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventorio") != null,
+            "com.yurisuika.raised.mixin.mods.InventoryProfilesNext$LockSlotsHandlerMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventoryprofilesnext")  != null
     );
 
     private static final Map<String, Supplier<Boolean>> CONDITIONS2 = ImmutableMap.of(

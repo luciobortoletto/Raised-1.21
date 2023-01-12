@@ -19,8 +19,8 @@
     "mods.CreateMixin$ToolSelectionScreenMixin",
     "mods.CreateMixin$TrainHUDMixin",
     "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
-    "mods.HealthOverlayMixin$HeartRendererMixin",
     "mods.InventorioMixin$HotbarHUDRendererMixin",
+    "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin",
     "mods.LevelHeartsMixin$IngameGuiMixin",
     "mods.QuarkMixin$HotbarChangerModuleMixin",
     "mods.QuarkMixin$UsageTickerModuleMixin"
