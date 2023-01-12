@@ -12,14 +12,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ForgeIngameGuiMixin {
 
     @Shadow
-    public static int left_height = 39 + Raised.getDistance();
+    public static int left_height = 39 + Raised.getHud();
     @Shadow
-    public static int right_height = 39 + Raised.getDistance();
+    public static int right_height = 39 + Raised.getHud();
 
     @Inject(method = "render", at = @At("TAIL"))
     public void injectHeight(CallbackInfo ci) {
-        right_height = 39 + Raised.getDistance();
-        left_height = 39 + Raised.getDistance();
+        right_height = 39 + Raised.getHud();
+        left_height = 39 + Raised.getHud();
     }
 
 }

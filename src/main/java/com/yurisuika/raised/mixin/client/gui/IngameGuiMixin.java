@@ -10,7 +10,7 @@ public class IngameGuiMixin {
 
     @ModifyArg(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/IngameGui;blit(Lcom/mojang/blaze3d/matrix/MatrixStack;IIIIII)V"), index = 2)
     private int modifyHotbarDistance(int value) {
-        return value - Raised.getDistance();
+        return value - Raised.getHud();
     }
 
     @ModifyArg(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/IngameGui;blit(Lcom/mojang/blaze3d/matrix/MatrixStack;IIIIII)V", ordinal = 1), index = 6)
@@ -20,47 +20,47 @@ public class IngameGuiMixin {
 
     @ModifyArg(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/IngameGui;renderSlot(IIFLnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;)V"), index = 1)
     private int modifyItemDistance(int value) {
-        return value - Raised.getDistance();
+        return value - Raised.getHud();
     }
 
     @ModifyVariable(method = "renderJumpMeter", at = @At(value = "STORE"), ordinal = 3)
     private int modifyJumpBarDistance(int value) {
-        return value - Raised.getDistance();
+        return value - Raised.getHud();
     }
 
     @ModifyArg(method = "renderExperienceBar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/IngameGui;blit(Lcom/mojang/blaze3d/matrix/MatrixStack;IIIIII)V"), index = 2)
     private int modifyExperienceBarDistance(int value) {
-        return value - Raised.getDistance();
+        return value - Raised.getHud();
     }
 
     @ModifyArg(method = "renderExperienceBar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/FontRenderer;draw(Lcom/mojang/blaze3d/matrix/MatrixStack;Ljava/lang/String;FFI)I"), index = 3)
     private float modifyXpTextDistance(float value) {
-        return value - (float)Raised.getDistance();
+        return value - (float)Raised.getHud();
     }
 
     @ModifyVariable(method = "renderSelectedItemName", at = @At(value = "STORE"), ordinal = 2)
     private int modifyHeldItemTooltipDistance(int value) {
-        return value - Raised.getDistance();
+        return value - Raised.getHud();
     }
 
     @ModifyVariable(method = "renderPlayerHealth", at = @At(value = "STORE"), ordinal = 5)
     private int modifyStatusBarsDistance(int value) {
-        return value - Raised.getDistance();
+        return value - Raised.getHud();
     }
 
     @ModifyVariable(method = "renderVehicleHealth", at = @At(value = "STORE"), ordinal = 2)
     private int modifyMountHealthDistance(int value) {
-        return value - Raised.getDistance();
+        return value - Raised.getHud();
     }
 
     @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;translatef(FFF)V", ordinal = 0), index = 1)
     private float modifyActionbar(float value) {
-        return value - (float)Raised.getDistance();
+        return value - (float)Raised.getHud();
     }
 
     @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;translatef(FFF)V", ordinal = 2), index = 1)
     private float modifyChat(float value) {
-        return value - (float)Raised.getDistance() - (float)Raised.getOffset();
+        return value - (float)Raised.getHud() - (float)Raised.getChat();
     }
 
 }

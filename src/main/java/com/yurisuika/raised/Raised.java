@@ -2,11 +2,15 @@ package com.yurisuika.raised;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.yurisuika.raised.command.impl.RaisedCommand;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -28,11 +32,34 @@ public class Raised {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public static final KeyBinding down = new KeyBinding("raised.down", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_KP_SUBTRACT, "raised.title");
-    public static final KeyBinding up = new KeyBinding("raised.up", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_KP_ADD, "raised.title");
-    public static final KeyBinding offsetDown = new KeyBinding("raised.offset.down", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_KP_DIVIDE, "raised.title");
-    public static final KeyBinding offsetUp = new KeyBinding("raised.offset.up", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_KP_MULTIPLY, "raised.title");
-    public static final KeyBinding reset = new KeyBinding("raised.reset", KeyConflictContext.IN_GAME, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_KP_ENTER, "raised.title");
+    public static final KeyBinding hudDown = new KeyBinding(
+            "key.raised..hud.down",
+            KeyConflictContext.IN_GAME,
+            InputMappings.Type.KEYSYM,
+            GLFW.GLFW_KEY_KP_SUBTRACT,
+            "key.categories.raised"
+    );
+    public static final KeyBinding hudUp = new KeyBinding(
+            "key.raised.hud.up",
+            KeyConflictContext.IN_GAME,
+            InputMappings.Type.KEYSYM,
+            GLFW.GLFW_KEY_KP_ADD,
+            "key.categories.raised"
+    );
+    public static final KeyBinding chatDown = new KeyBinding(
+            "key.raised.chat.down",
+            KeyConflictContext.IN_GAME,
+            InputMappings.Type.KEYSYM,
+            GLFW.GLFW_KEY_KP_DIVIDE,
+            "key.categories.raised"
+    );
+    public static final KeyBinding chatUp = new KeyBinding(
+            "key.raised.chat.up",
+            KeyConflictContext.IN_GAME,
+            InputMappings.Type.KEYSYM,
+            GLFW.GLFW_KEY_KP_MULTIPLY,
+            "key.categories.raised"
+    );
 
     public static File file = new File(FMLPaths.CONFIGDIR.get().toFile(), "raised.json");
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -41,8 +68,9 @@ public class Raised {
 
     public static class Config {
 
-        public int distance = 2;
-        public int offset = 0;
+        public boolean enabled = true;
+        public int hud = 2;
+        public int chat = 0;
 
     }
 
@@ -85,46 +113,52 @@ public class Raised {
         return config;
     }
 
-    public static void setDistance(int change) {
-        config.distance += change;
+    public static void setEnabled(boolean value) {
+        config.enabled = value;
         saveConfig();
     }
 
-    public static void setOffset(int change) {
-        config.offset += change;
+    public static void setHud(int value) {
+        config.hud = config.enabled ? value : 0;
         saveConfig();
     }
 
-    public static void setReset() {
-        config.distance = 2;
-        config.offset = 0;
+    public static void setChat(int value) {
+        config.chat = config.enabled ? value : 0;
         saveConfig();
     }
 
-    public static int getDistance() {
-        return config.distance;
+    public static int getHud() {
+        return config.hud;
     }
 
-    public static int getOffset() {
-        return config.offset;
+    public static int getChat() {
+        return config.chat;
     }
 
     public void input(InputEvent.KeyInputEvent event) {
-        if (down.consumeClick()) {
-            setDistance(-1);
+        if (hudDown.consumeClick()) {
+            setHud(config.hud - 1);
         }
-        if (up.consumeClick()) {
-            setDistance(1);
+        if (hudUp.consumeClick()) {
+            setHud(config.hud + 1);
         }
-        if (offsetDown.consumeClick()) {
-            setOffset(-1);
+        if (chatDown.consumeClick()) {
+            setChat(config.chat - 1);
         }
-        if (offsetUp.consumeClick()) {
-            setOffset(1);
+        if (chatUp.consumeClick()) {
+            setChat(config.chat + 1);
         }
-        if (reset.consumeClick()) {
-            Raised.setReset();
+    }
+
+    @Mod.EventBusSubscriber(modid = "raised", value = Dist.CLIENT)
+    public static class ClientForgeEvents {
+
+        @SubscribeEvent
+        public static void onCommandsRegister(RegisterCommandsEvent event) {
+            RaisedCommand.register(event.getDispatcher());
         }
+
     }
 
     public Raised() {
@@ -138,11 +172,10 @@ public class Raised {
 
         loadConfig();
 
-        ClientRegistry.registerKeyBinding(down);
-        ClientRegistry.registerKeyBinding(up);
-        ClientRegistry.registerKeyBinding(offsetDown);
-        ClientRegistry.registerKeyBinding(offsetUp);
-        ClientRegistry.registerKeyBinding(reset);
+        ClientRegistry.registerKeyBinding(hudDown);
+        ClientRegistry.registerKeyBinding(hudUp);
+        ClientRegistry.registerKeyBinding(chatDown);
+        ClientRegistry.registerKeyBinding(chatUp);
     }
 
 }

@@ -12,7 +12,7 @@ public class SpectatorGuiMixin {
 
     @ModifyArg(method = "renderPage", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/SpectatorGui;blit(Lcom/mojang/blaze3d/matrix/MatrixStack;IIIIII)V"), index = 2)
     private int modifySpectatorMenu(int value) {
-        return value - Raised.getDistance();
+        return value - Raised.getHud();
     }
 
     @ModifyArg(method = "renderPage", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/SpectatorGui;blit(Lcom/mojang/blaze3d/matrix/MatrixStack;IIIIII)V", ordinal = 1), index = 6)
@@ -22,12 +22,12 @@ public class SpectatorGuiMixin {
 
     @ModifyArg(method = "renderPage", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/SpectatorGui;renderSlot(Lcom/mojang/blaze3d/matrix/MatrixStack;IIFFLnet/minecraft/client/gui/spectator/ISpectatorMenuObject;)V"), index = 3)
     private float modifySpectatorCommand(float value) {
-        return value - Raised.getDistance();
+        return value - Raised.getHud();
     }
 
     @ModifyVariable(method = "renderTooltip", at = @At(value = "STORE"), ordinal = 2)
     private int modifyText(int value) {
-        return value - Raised.getDistance();
+        return value - Raised.getHud();
     }
 
 }
