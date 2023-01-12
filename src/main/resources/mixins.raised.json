@@ -14,6 +14,7 @@
     "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
     "mods.HealthOverlayMixin$HeartRendererMixin",
     "mods.InventorioMixin$HotbarHUDRendererMixin",
+    "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin",
     "mods.LevelHeartsMixin$IngameGuiMixin"
   ],
   "injectors": {

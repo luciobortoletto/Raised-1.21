@@ -19,6 +19,7 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
             "com.yurisuika.raised.mixin.mods.DetailArmorBarMixin$ArmorBarRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("detailab") != null,
             "com.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("healthoverlay") != null,
             "com.yurisuika.raised.mixin.mods.InventorioMixin$HotbarHUDRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventorio") != null,
+            "com.yurisuika.raised.mixin.mods.InventoryProfilesNext$LockSlotsHandlerMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventoryprofilesnext") != null,
             "com.yurisuika.raised.mixin.mods.LevelHeartsMixin$IngameGuiMixin", () -> FMLLoader.getLoadingModList().getModFileById("levelhearts") != null
     );
 
