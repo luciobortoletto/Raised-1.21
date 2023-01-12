@@ -12,7 +12,8 @@
     "mods.AppleskinMixin$HUDOverlayHandlerMixin",
     "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
     "mods.HealthOverlayMixin$HeartRendererMixin",
-    "mods.InventorioMixin$HotbarHUDRendererMixin"
+    "mods.InventorioMixin$HotbarHUDRendererMixin",
+    "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
