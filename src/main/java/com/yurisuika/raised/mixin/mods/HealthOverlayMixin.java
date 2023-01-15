@@ -9,7 +9,7 @@ import terrails.healthoverlay.utilities.Vec2i;
 
 public class HealthOverlayMixin {
 
-    @Mixin(HeartRenderer.class)
+    @Mixin(value = HeartRenderer.class, remap = false)
     public static class HeartRendererMixin {
 
         @Redirect(method = "renderPlayerHearts", at = @At(value = "INVOKE", target = "Lterrails/healthoverlay/utilities/Vec2i;getY()I"))
