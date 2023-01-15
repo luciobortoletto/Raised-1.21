@@ -1,7 +1,6 @@
 package com.yurisuika.raised.server.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
 import net.minecraft.text.TranslatableText;
@@ -14,16 +13,6 @@ public class RaisedCommand {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
         dispatcher.register(literal("raised")
                 .then(literal("config")
-                        .then(literal("enable")
-                                .then(argument("value", BoolArgumentType.bool())
-                                        .executes(context -> {
-                                            setEnabled(BoolArgumentType.getBool(context, "value"));
-                                            String key = config.enabled ? "commands.raised.config.enabled" : "commands.raised.config.disabled";
-                                            context.getSource().sendFeedback(new TranslatableText(key));
-                                            return 1;
-                                        })
-                                )
-                        )
                         .then(literal("reload")
                                 .executes(context -> {
                                     loadConfig();
@@ -33,7 +22,6 @@ public class RaisedCommand {
                         )
                         .then(literal("reset")
                                 .executes(context -> {
-                                    setEnabled(true);
                                     setHud(2);
                                     setChat(0);
                                     context.getSource().sendFeedback(new TranslatableText("commands.raised.config.reset"));
