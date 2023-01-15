@@ -14,16 +14,6 @@ public class RaisedCommand {
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
         dispatcher.register(literal("raised")
                 .then(literal("config")
-                        .then(literal("enable")
-                                .then(argument("value", BoolArgumentType.bool())
-                                        .executes(context -> {
-                                            setEnabled(BoolArgumentType.getBool(context, "value"));
-                                            String key = config.enabled ? "commands.raised.config.enabled" : "commands.raised.config.disabled";
-                                            context.getSource().sendSuccess(new TranslationTextComponent(key), false);
-                                            return 1;
-                                        })
-                                )
-                        )
                         .then(literal("reload")
                                 .executes(context -> {
                                     loadConfig();
@@ -33,7 +23,6 @@ public class RaisedCommand {
                         )
                         .then(literal("reset")
                                 .executes(context -> {
-                                    setEnabled(true);
                                     setHud(2);
                                     setChat(0);
                                     context.getSource().sendSuccess(new TranslationTextComponent("commands.raised.config.reset"), false);

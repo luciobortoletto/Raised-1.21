@@ -68,7 +68,6 @@ public class Raised {
 
     public static class Config {
 
-        public boolean enabled = true;
         public int hud = 2;
         public int chat = 0;
 
@@ -113,18 +112,13 @@ public class Raised {
         return config;
     }
 
-    public static void setEnabled(boolean value) {
-        config.enabled = value;
-        saveConfig();
-    }
-
     public static void setHud(int value) {
-        config.hud = config.enabled ? value : 0;
+        config.hud = value;
         saveConfig();
     }
 
     public static void setChat(int value) {
-        config.chat = config.enabled ? value : 0;
+        config.chat = value;
         saveConfig();
     }
 
