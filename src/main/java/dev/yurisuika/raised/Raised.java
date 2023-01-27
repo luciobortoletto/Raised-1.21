@@ -1,8 +1,8 @@
-package com.yurisuika.raised;
+package dev.yurisuika.raised;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.yurisuika.raised.command.impl.RaisedCommand;
+import dev.yurisuika.raised.command.impl.RaisedCommand;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.api.distmarker.Dist;

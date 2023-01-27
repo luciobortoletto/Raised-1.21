@@ -1,4 +1,4 @@
-package com.yurisuika.raised.command.impl;
+package dev.yurisuika.raised.command.impl;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
@@ -6,7 +6,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.minecraft.command.CommandSource;
 import net.minecraft.util.text.TranslationTextComponent;
 
-import static com.yurisuika.raised.Raised.*;
+import static dev.yurisuika.raised.Raised.*;
 import static net.minecraft.command.Commands.*;
 
 public class RaisedCommand {

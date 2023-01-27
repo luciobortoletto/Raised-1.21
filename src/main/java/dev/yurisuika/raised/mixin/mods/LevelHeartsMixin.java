@@ -1,7 +1,7 @@
-package com.yurisuika.raised.mixin.mods;
+package dev.yurisuika.raised.mixin.mods;
 
 import com.firecontroller1847.levelhearts.gui.IngameGui;
-import com.yurisuika.raised.Raised;
+import dev.yurisuika.raised.Raised;
 import net.minecraft.client.MainWindow;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
