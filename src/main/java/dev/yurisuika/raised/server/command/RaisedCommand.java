@@ -1,11 +1,11 @@
-package com.yurisuika.raised.server.command;
+package dev.yurisuika.raised.server.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
 import net.minecraft.text.TranslatableText;
 
-import static com.yurisuika.raised.Raised.*;
+import static dev.yurisuika.raised.Raised.*;
 import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.*;
 
 public class RaisedCommand {
