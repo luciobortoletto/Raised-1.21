@@ -12,17 +12,17 @@ public class LevelHeartsMixin {
     @Mixin(value = IngameGui.class, remap = false)
     public static class IngameGuiMixin {
 
-        @Redirect(method = "redrawAir", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/Window;getGuiScaledHeight()I"))
+        @Redirect(method = "redrawAir", at = @At(value = "INVOKE", target = "net/minecraft/client/util/Window.getScaledHeight()I"))
         private int redirectRedrawAir(Window instance) {
             return instance.getScaledHeight() - Raised.getHud();
         }
 
-        @Redirect(method = "redrawArmor", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/Window;getGuiScaledHeight()I"))
+        @Redirect(method = "redrawArmor", at = @At(value = "INVOKE", target = "net/minecraft/client/util/Window.getScaledHeight()I"))
         private int redirectRedrawArmor(Window instance) {
             return instance.getScaledHeight() - Raised.getHud();
         }
 
-        @Redirect(method = "redrawHealth", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/Window;getGuiScaledHeight()I"))
+        @Redirect(method = "redrawHealth", at = @At(value = "INVOKE", target = "net/minecraft/client/util/Window.getScaledHeight()I"))
         private int redirectRedrawHealth(Window instance) {
             return instance.getScaledHeight() - Raised.getHud();
         }
