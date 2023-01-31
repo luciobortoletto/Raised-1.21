@@ -8,10 +8,9 @@
   ],
   "client": [
     "client.gui.ForgeIngameGuiMixin",
-    "client.gui.ForgeIngameGuiRemapFalseMixin",
-    "client.gui.IngameGuiMixin",
-    "client.gui.NewChatGuiMixin",
-    "client.gui.SpectatorGuiMixin",
+    "client.gui.hud.ChatHudMixin",
+    "client.gui.hud.InGameHudMixin",
+    "client.gui.hud.SpectatorHudMixin",
     "mods.AppleskinMixin$HUDOverlayHandlerMixin",
     "mods.BotaniaMixin$HUDHandlerMixin",
     "mods.BotaniaMixin$ItemFlightTiaraMixin",

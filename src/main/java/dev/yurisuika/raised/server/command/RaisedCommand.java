@@ -1,23 +1,22 @@
-package dev.yurisuika.raised.command.impl;
+package dev.yurisuika.raised.server.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-import net.minecraft.command.CommandSource;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.TranslatableText;
 
 import static dev.yurisuika.raised.Raised.*;
-import static net.minecraft.command.Commands.*;
+import static net.minecraft.server.command.CommandManager.*;
 
 public class RaisedCommand {
 
-    public static void register(CommandDispatcher<CommandSource> dispatcher) {
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("raised")
                 .then(literal("config")
                         .then(literal("reload")
                                 .executes(context -> {
                                     loadConfig();
-                                    context.getSource().sendSuccess(new TranslationTextComponent("commands.raised.config.reload"), false);
+                                    context.getSource().sendFeedback(new TranslatableText("commands.raised.config.reload"), false);
                                     return 1;
                                 })
                         )
@@ -25,7 +24,7 @@ public class RaisedCommand {
                                 .executes(context -> {
                                     setHud(2);
                                     setChat(0);
-                                    context.getSource().sendSuccess(new TranslationTextComponent("commands.raised.config.reset"), false);
+                                    context.getSource().sendFeedback(new TranslatableText("commands.raised.config.reset"), false);
                                     return 1;
                                 })
                         )
@@ -33,13 +32,13 @@ public class RaisedCommand {
                 .then(literal("query")
                         .then(literal("hud")
                                 .executes(context -> {
-                                    context.getSource().sendSuccess(new TranslationTextComponent("commands.raised.query.hud", config.hud), false);
+                                    context.getSource().sendFeedback(new TranslatableText("commands.raised.query.hud", config.hud), false);
                                     return 1;
                                 })
                         )
                         .then(literal("chat")
                                 .executes(context -> {
-                                    context.getSource().sendSuccess(new TranslationTextComponent("commands.raised.query.chat", config.chat), false);
+                                    context.getSource().sendFeedback(new TranslatableText("commands.raised.query.chat", config.chat), false);
                                     return 1;
                                 })
                         )
@@ -49,7 +48,7 @@ public class RaisedCommand {
                                 .then(argument("value", IntegerArgumentType.integer())
                                         .executes(context -> {
                                             setHud(IntegerArgumentType.getInteger(context, "value"));
-                                            context.getSource().sendSuccess(new TranslationTextComponent("commands.raised.set.hud", config.hud), false);
+                                            context.getSource().sendFeedback(new TranslatableText("commands.raised.set.hud", config.hud), false);
                                             return 1;
                                         })
                                 )
@@ -58,7 +57,7 @@ public class RaisedCommand {
                                 .then(argument("value", IntegerArgumentType.integer())
                                         .executes(context -> {
                                             setChat(IntegerArgumentType.getInteger(context, "value"));
-                                            context.getSource().sendSuccess(new TranslationTextComponent("commands.raised.set.chat", config.chat), false);
+                                            context.getSource().sendFeedback(new TranslatableText("commands.raised.set.chat", config.chat), false);
                                             return 1;
                                         })
                                 )
@@ -66,5 +65,5 @@ public class RaisedCommand {
                 )
         );
     }
-    
+
 }
