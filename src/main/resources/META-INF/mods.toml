@@ -4,7 +4,7 @@ license = "GNU Lesser General Public License v3.0"
 
 [[mods]]
 modId = "raised"
-version= " ${file.jarVersion}"
+version = "${version}"
 displayName = "Raised"
 displayURL = "https://github.com/yurisuika/Raised"
 issueTrackerURL = "https://github.com/yurisuika/Raised/issues"
