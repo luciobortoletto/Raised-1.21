@@ -25,7 +25,7 @@ public class SpectatorHudMixin {
         return value - Raised.getHud();
     }
 
-    @ModifyVariable(method = "render", at = @At(value = "STORE"), ordinal = 2)
+    @ModifyVariable(method = "render(Lnet/minecraft/client/util/math/MatrixStack;)V", at = @At(value = "STORE"), ordinal = 2)
     private int modifyText(int value) {
         return value - Raised.getHud();
     }
