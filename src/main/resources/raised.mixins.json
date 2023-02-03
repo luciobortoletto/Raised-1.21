@@ -19,7 +19,7 @@
     "mods.CreateMixin$ToolboxHandlerClientMixin",
     "mods.CreateMixin$ToolSelectionScreenMixin",
     "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
-    "mods.HealthOverlayMixin$HeartRendererMixin",
+    "mods.HealthOverlayMixin$HealthRendererMixin",
     "mods.InventorioMixin$HotbarHUDRendererMixin",
     "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin",
     "mods.LevelHeartsMixin$IngameGuiMixin",

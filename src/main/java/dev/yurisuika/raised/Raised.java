@@ -16,9 +16,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -30,7 +30,7 @@ import java.util.stream.Stream;
 @Mod("raised")
 public class Raised {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger("raised");
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public static final KeyBinding hudDown = new KeyBinding(
             "key.raised.hud.down",

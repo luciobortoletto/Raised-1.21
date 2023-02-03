@@ -27,7 +27,7 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
             "dev.yurisuika.raised.mixin.mods.CreateMixin$ToolboxHandlerClientMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
             "dev.yurisuika.raised.mixin.mods.CreateMixin$ToolSelectionScreenMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
             "dev.yurisuika.raised.mixin.mods.DetailArmorBarMixin$ArmorBarRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("detailab") != null,
-            "dev.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("healthoverlay") != null,
+            "dev.yurisuika.raised.mixin.mods.HealthOverlayMixin$HealthRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("healthoverlay") != null,
             "dev.yurisuika.raised.mixin.mods.InventorioMixin$HotbarHUDRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventorio") != null
     );
 
