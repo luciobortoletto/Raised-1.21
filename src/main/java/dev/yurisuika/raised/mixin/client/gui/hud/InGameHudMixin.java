@@ -3,7 +3,9 @@ package dev.yurisuika.raised.mixin.client.gui.hud;
 import dev.yurisuika.raised.Raised;
 import net.minecraft.client.gui.hud.InGameHud;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(value = InGameHud.class, priority = -1)
 public class InGameHudMixin {
@@ -60,7 +62,7 @@ public class InGameHudMixin {
 
     @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;translatef(FFF)V", ordinal = 2), index = 1)
     private float modifyChat(float value) {
-        return value - (float)Raised.getHud() - (float)Raised.getChat();
+        return value - (float)Raised.getChat();
     }
 
 }
