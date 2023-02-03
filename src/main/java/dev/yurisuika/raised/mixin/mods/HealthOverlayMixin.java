@@ -14,7 +14,7 @@ public class HealthOverlayMixin {
     @Mixin(HealthRenderer.class)
     public static class HealthRendererMixin {
 
-        @Redirect(method = "render", at = @At(value = "INVOKE", target = "net/minecraft/client/util/Window.getScaledHeight()I"))
+        @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/Window;getScaledHeight()I"))
         private static int redirectRender(Window instance) {
             return instance.getScaledHeight() - Raised.getHud();
         }
