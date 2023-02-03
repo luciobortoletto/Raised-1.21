@@ -1,4 +1,4 @@
-package dev.yurisuika.raised.mixin.client.gui;
+package dev.yurisuika.raised.mixin.client.gui.overlay;
 
 import dev.yurisuika.raised.Raised;
 import net.minecraftforge.client.gui.overlay.ForgeGui;

@@ -7,7 +7,7 @@
   "mixins": [
   ],
   "client": [
-    "client.gui.ForgeGuiMixin",
+    "client.gui.overlay.ForgeGuiMixin",
     "client.gui.hud.ChatHudMixin",
     "client.gui.hud.InGameHudMixin",
     "client.gui.hud.SpectatorHudMixin",
