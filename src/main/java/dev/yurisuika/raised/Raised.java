@@ -13,8 +13,6 @@ import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.lwjgl.glfw.GLFW;
 
@@ -154,15 +152,12 @@ public class Raised {
     }
 
     public Raised() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        MinecraftForge.EVENT_BUS.register(this);
-    }
-
-    public void setup(final FMLClientSetupEvent event) {
         if (!file.exists()) {
             saveConfig();
         }
         loadConfig();
+
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
 }
