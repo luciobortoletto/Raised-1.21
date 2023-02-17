@@ -16,8 +16,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
@@ -30,40 +28,8 @@ import java.util.stream.Stream;
 @Mod("raised")
 public class Raised {
 
-    public static final Logger LOGGER = LogManager.getLogger();
-
-    public static final KeyBinding hudDown = new KeyBinding(
-            "key.raised.hud.down",
-            KeyConflictContext.IN_GAME,
-            InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_KP_SUBTRACT,
-            "key.categories.raised"
-    );
-    public static final KeyBinding hudUp = new KeyBinding(
-            "key.raised.hud.up",
-            KeyConflictContext.IN_GAME,
-            InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_KP_ADD,
-            "key.categories.raised"
-    );
-    public static final KeyBinding chatDown = new KeyBinding(
-            "key.raised.chat.down",
-            KeyConflictContext.IN_GAME,
-            InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_KP_DIVIDE,
-            "key.categories.raised"
-    );
-    public static final KeyBinding chatUp = new KeyBinding(
-            "key.raised.chat.up",
-            KeyConflictContext.IN_GAME,
-            InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_KP_MULTIPLY,
-            "key.categories.raised"
-    );
-
     public static File file = new File(FMLPaths.CONFIGDIR.get().toFile(), "raised.json");
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
     public static Config config = new Config();
 
     public static class Config {
@@ -130,6 +96,35 @@ public class Raised {
         return config.chat;
     }
 
+    public static final KeyBinding hudDown = new KeyBinding(
+            "key.raised.hud.down",
+            KeyConflictContext.IN_GAME,
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_KP_SUBTRACT,
+            "key.categories.raised"
+    );
+    public static final KeyBinding hudUp = new KeyBinding(
+            "key.raised.hud.up",
+            KeyConflictContext.IN_GAME,
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_KP_ADD,
+            "key.categories.raised"
+    );
+    public static final KeyBinding chatDown = new KeyBinding(
+            "key.raised.chat.down",
+            KeyConflictContext.IN_GAME,
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_KP_DIVIDE,
+            "key.categories.raised"
+    );
+    public static final KeyBinding chatUp = new KeyBinding(
+            "key.raised.chat.up",
+            KeyConflictContext.IN_GAME,
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_KP_MULTIPLY,
+            "key.categories.raised"
+    );
+
     @Mod.EventBusSubscriber(modid = "raised", value = Dist.CLIENT)
     public static class ClientForgeEvents {
 
@@ -150,7 +145,7 @@ public class Raised {
         }
 
         @SubscribeEvent
-        public static void onCommandsRegister(RegisterCommandsEvent event) {
+        public static void registerCommands(RegisterCommandsEvent event) {
             RaisedCommand.register(event.getDispatcher());
         }
 
@@ -162,8 +157,9 @@ public class Raised {
     }
 
     public void setup(final FMLClientSetupEvent event) {
-        LOGGER.info("Loading Raised!");
-
+        if (!file.exists()) {
+            saveConfig();
+        }
         loadConfig();
 
         ClientRegistry.registerKeyBinding(hudDown);
