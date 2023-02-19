@@ -134,7 +134,7 @@ public class Raised {
 
         @SubscribeEvent
         public static void registerCommands(RegisterCommandsEvent event) {
-            RaisedCommand.register(event.getDispatcher());
+            RaisedCommand.register(event.getDispatcher(), event.getEnvironment());
         }
 
     }
