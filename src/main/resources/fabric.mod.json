@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "raised",
+  "version": "${version}",
+
+  "name": "Raised",
+  "description": "Raises the hotbar so the selector is not cut off!",
+  "authors": [
+    "yurisuika"
+  ],
+  "contributors": [
+    "intact",
+    "Cccc-owo"
+  ],
+  "contact": {
+    "homepage": "https://yurisuika.dev",
+    "sources": "https://github.com/yurisuika/Raised",
+    "issues": "https://github.com/yurisuika/Raised/issues"
+  },
+
+  "license": "GNU Lesser General Public License v3.0",
+  "icon": "assets/raised/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.yurisuika.raised.Raised"
+    ]
+  },
+  "mixins": [
+    "raised.mixins.json"
+  ],
+
+  "accessWidener" : "raised.accesswidener",
+
+  "depends": {
+    "fabricloader": ">=0.12.0",
+    "minecraft": "~1.19.3",
+    "java": ">=17"
+  }
+}

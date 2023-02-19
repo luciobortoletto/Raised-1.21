@@ -2,22 +2,22 @@ package dev.yurisuika.raised.server.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.command.CommandRegistryAccess;
-import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 
 import static dev.yurisuika.raised.Raised.*;
-import static net.minecraft.server.command.CommandManager.*;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
 
 public class RaisedCommand {
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {
+    public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandRegistryAccess registryAccess) {
         dispatcher.register(literal("raised")
                 .then(literal("config")
                         .then(literal("reload")
                                 .executes(context -> {
                                     loadConfig();
-                                    context.getSource().sendMessage(Text.translatable("commands.raised.config.reload"));
+                                    context.getSource().sendFeedback(Text.translatable("commands.raised.config.reload"));
                                     return 1;
                                 })
                         )
@@ -25,7 +25,7 @@ public class RaisedCommand {
                                 .executes(context -> {
                                     setHud(2);
                                     setChat(0);
-                                    context.getSource().sendMessage(Text.translatable("commands.raised.config.reset"));
+                                    context.getSource().sendFeedback(Text.translatable("commands.raised.config.reset"));
                                     return 1;
                                 })
                         )
@@ -33,13 +33,13 @@ public class RaisedCommand {
                 .then(literal("query")
                         .then(literal("hud")
                                 .executes(context -> {
-                                    context.getSource().sendMessage(Text.translatable("commands.raised.query.hud", config.hud));
+                                    context.getSource().sendFeedback(Text.translatable("commands.raised.query.hud", config.hud));
                                     return 1;
                                 })
                         )
                         .then(literal("chat")
                                 .executes(context -> {
-                                    context.getSource().sendMessage(Text.translatable("commands.raised.query.chat", config.chat));
+                                    context.getSource().sendFeedback(Text.translatable("commands.raised.query.chat", config.chat));
                                     return 1;
                                 })
                         )
@@ -49,7 +49,7 @@ public class RaisedCommand {
                                 .then(argument("value", IntegerArgumentType.integer())
                                         .executes(context -> {
                                             setHud(IntegerArgumentType.getInteger(context, "value"));
-                                            context.getSource().sendMessage(Text.translatable("commands.raised.set.hud", config.hud));
+                                            context.getSource().sendFeedback(Text.translatable("commands.raised.set.hud", config.hud));
                                             return 1;
                                         })
                                 )
@@ -58,7 +58,7 @@ public class RaisedCommand {
                                 .then(argument("value", IntegerArgumentType.integer())
                                         .executes(context -> {
                                             setChat(IntegerArgumentType.getInteger(context, "value"));
-                                            context.getSource().sendMessage(Text.translatable("commands.raised.set.chat", config.chat));
+                                            context.getSource().sendFeedback(Text.translatable("commands.raised.set.chat", config.chat));
                                             return 1;
                                         })
                                 )

@@ -1,5 +1,5 @@
 plugins {
-    id "dev.architectury.loom" version "1.0-SNAPSHOT"
+    id "fabric-loom" version "1.0-SNAPSHOT"
     id "maven-publish"
 }
 
@@ -17,42 +17,34 @@ repositories {
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    forge "net.minecraftforge:forge:${project.forge_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modCompileOnly "curse.maven:botania-225643:3936568"
-    modCompileOnly "curse.maven:create-328085:4371809"
-    modCompileOnly "curse.maven:detail-armor-bar-forge-520755:3920487"
-    modCompileOnly "curse.maven:health-overlay-368223:4291564"
-    modCompileOnly "curse.maven:inventorio-forge-497122:3963529"
-    modCompileOnly "curse.maven:inventory-profiles-next-495267:4263995"
-    modCompileOnly "curse.maven:levelhearts-273640:3697146"
-    modCompileOnly "curse.maven:quark-243121:3961436"
+    modCompileOnly "curse.maven:appleskin-248787:3927567"
+    modCompileOnly "curse.maven:botania-fabric-421839:4371118"
+    modCompileOnly "curse.maven:create-fabric-624165:4394141"
+    modCompileOnly "curse.maven:detail-armor-bar-506898:3823985"
+    modCompileOnly "curse.maven:health-overlay-fabric-313219:4403399"
+    modCompileOnly "curse.maven:inventorio-491073:4066027"
+    modCompileOnly "curse.maven:inventory-profiles-next-495267:4370583"
 }
 
 processResources {
     inputs.property "version", project.version
 
-    filesMatching("META-INF/mods.toml") {
+    filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-    options.release = 17
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    it.options.release = 17
 }
 
 loom {
-    forge {
-        mixinConfigs = [
-                "${project.archives_base_name}.mixins.json"
-        ]
-
-        dataGen {
-            mod project.mod_id
-        }
-    }
+    accessWidenerPath = file("src/main/resources/${project.archives_base_name}.accesswidener")
 
     mixin {
         defaultRefmapName = "${project.archives_base_name}.refmap.json"
@@ -65,10 +57,10 @@ java {
 
 jar {
     from("LICENSE")
-    jar.archiveAppendix.set("forge-${project.minecraft_version}")
-    sourcesJar.archiveAppendix.set("forge-${project.minecraft_version}")
-    remapJar.archiveAppendix.set("forge-${project.minecraft_version}")
-    remapSourcesJar.archiveAppendix.set("forge-${project.minecraft_version}")
+    jar.archiveAppendix.set("fabric-${project.minecraft_version}")
+    sourcesJar.archiveAppendix.set("fabric-${project.minecraft_version}")
+    remapJar.archiveAppendix.set("fabric-${project.minecraft_version}")
+    remapSourcesJar.archiveAppendix.set("fabric-${project.minecraft_version}")
 }
 
 publishing {

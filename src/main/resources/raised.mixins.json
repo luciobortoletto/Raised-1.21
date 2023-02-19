@@ -7,12 +7,12 @@
   "mixins": [
   ],
   "client": [
-    "client.gui.overlay.ForgeGuiMixin",
     "client.gui.hud.ChatHudMixin",
     "client.gui.hud.InGameHudMixin",
     "client.gui.hud.SpectatorHudMixin",
+    "mods.AppleskinMixin$HUDOverlayHandlerMixin",
     "mods.BotaniaMixin$HUDHandlerMixin",
-    "mods.BotaniaMixin$ItemFlightTiaraMixin",
+    "mods.BotaniaMixin$FlugelTiaraItemMixin",
     "mods.CreateMixin$CopperBacktankArmorLayerMixin",
     "mods.CreateMixin$SchematicHotbarSlotOverlayMixin",
     "mods.CreateMixin$ToolboxHandlerClientMixin",
@@ -21,10 +21,7 @@
     "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
     "mods.HealthOverlayMixin$HeartRendererMixin",
     "mods.InventorioMixin$HotbarHUDRendererMixin",
-    "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin",
-    "mods.LevelHeartsMixin$IngameGuiMixin",
-    "mods.QuarkMixin$HotbarChangerModuleMixin",
-    "mods.QuarkMixin$UsageTickerModuleMixin"
+    "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

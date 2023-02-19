@@ -3,27 +3,22 @@ package dev.yurisuika.raised;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dev.yurisuika.raised.server.command.RaisedCommand;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RegisterClientCommandsEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.client.settings.KeyConflictContext;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.loading.FMLPaths;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
 
-@Mod("raised")
-public class Raised {
+public class Raised implements ClientModInitializer {
 
-    public static File file = new File(FMLPaths.CONFIGDIR.get().toFile(), "raised.json");
+    public static File file = new File(FabricLoader.getInstance().getConfigDir().toFile(), "raised.json");
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public static Config config = new Config();
 
@@ -68,11 +63,13 @@ public class Raised {
     public static void setHud(int value) {
         config.hud = value;
         saveConfig();
+        putObjects();
     }
 
     public static void setChat(int value) {
         config.chat = value;
         saveConfig();
+        putObjects();
     }
 
     public static int getHud() {
@@ -83,81 +80,66 @@ public class Raised {
         return config.chat;
     }
 
-    public static final KeyBinding hudDown = new KeyBinding(
+    public static void putObjects() {
+        FabricLoader.getInstance().getObjectShare().put("raised:hud", config.hud);
+        FabricLoader.getInstance().getObjectShare().put("raised:chat", config.chat);
+    }
+
+    public static final KeyBinding hudDown = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.raised.hud.down",
-            KeyConflictContext.IN_GAME,
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_KP_SUBTRACT,
             "key.categories.raised"
-    );
-    public static final KeyBinding hudUp = new KeyBinding(
+    ));
+    public static final KeyBinding hudUp = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.raised.hud.up",
-            KeyConflictContext.IN_GAME,
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_KP_ADD,
             "key.categories.raised"
-    );
-    public static final KeyBinding chatDown = new KeyBinding(
+    ));
+    public static final KeyBinding chatDown = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.raised.chat.down",
-            KeyConflictContext.IN_GAME,
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_KP_DIVIDE,
             "key.categories.raised"
-    );
-    public static final KeyBinding chatUp = new KeyBinding(
+    ));
+    public static final KeyBinding chatUp = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.raised.chat.up",
-            KeyConflictContext.IN_GAME,
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_KP_MULTIPLY,
             "key.categories.raised"
-    );
+    ));
 
-    @Mod.EventBusSubscriber(modid = "raised", value = Dist.CLIENT)
-    public static class ClientForgeEvents {
-
-        @SubscribeEvent
-        public static void keyInput(InputEvent.Key event) {
-            if (hudDown.wasPressed()) {
-                Raised.setHud(config.hud - 1);
-            }
-            if (hudUp.wasPressed()) {
-                Raised.setHud(config.hud + 1);
-            }
-            if (chatDown.wasPressed()) {
-                Raised.setChat(config.chat - 1);
-            }
-            if (chatUp.wasPressed()) {
-                Raised.setChat(config.chat + 1);
-            }
-        }
-
-        @SubscribeEvent
-        public static void registerClientCommands(RegisterClientCommandsEvent event) {
-            RaisedCommand.register(event.getDispatcher(), event.getBuildContext());
-        }
-
-    }
-
-    @Mod.EventBusSubscriber(modid = "raised", bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModBusEvents {
-
-        @SubscribeEvent
-        public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
-            event.register(hudDown);
-            event.register(hudUp);
-            event.register(chatDown);
-            event.register(chatUp);
-        }
-
-    }
-
-    public Raised() {
+    @Override
+    public void onInitializeClient() {
         if (!file.exists()) {
             saveConfig();
         }
         loadConfig();
+        putObjects();
 
-        MinecraftForge.EVENT_BUS.register(this);
+        ClientCommandRegistrationCallback.EVENT.register(RaisedCommand::register);
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (hudDown.wasPressed()) {
+                setHud(config.hud - 1);
+            }
+        });
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (hudUp.wasPressed()) {
+                setHud(config.hud + 1);
+            }
+        });
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (chatDown.wasPressed()) {
+                setChat(config.chat - 1);
+            }
+        });
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (chatUp.wasPressed()) {
+                setChat(config.chat + 1);
+            }
+        });
     }
 
 }
