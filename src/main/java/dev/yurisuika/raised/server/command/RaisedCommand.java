@@ -17,7 +17,7 @@ public class RaisedCommand {
                         .then(literal("reload")
                                 .executes(context -> {
                                     loadConfig();
-                                    context.getSource().sendFeedback(Text.translatable("commands.raised.config.reload"), false);
+                                    context.getSource().sendMessage(Text.translatable("commands.raised.config.reload"));
                                     return 1;
                                 })
                         )
@@ -25,7 +25,7 @@ public class RaisedCommand {
                                 .executes(context -> {
                                     setHud(2);
                                     setChat(0);
-                                    context.getSource().sendFeedback(Text.translatable("commands.raised.config.reset"), false);
+                                    context.getSource().sendMessage(Text.translatable("commands.raised.config.reset"));
                                     return 1;
                                 })
                         )
@@ -33,13 +33,13 @@ public class RaisedCommand {
                 .then(literal("query")
                         .then(literal("hud")
                                 .executes(context -> {
-                                    context.getSource().sendFeedback(Text.translatable("commands.raised.query.hud", config.hud), false);
+                                    context.getSource().sendMessage(Text.translatable("commands.raised.query.hud", config.hud));
                                     return 1;
                                 })
                         )
                         .then(literal("chat")
                                 .executes(context -> {
-                                    context.getSource().sendFeedback(Text.translatable("commands.raised.query.chat", config.chat), false);
+                                    context.getSource().sendMessage(Text.translatable("commands.raised.query.chat", config.chat));
                                     return 1;
                                 })
                         )
@@ -49,7 +49,7 @@ public class RaisedCommand {
                                 .then(argument("value", IntegerArgumentType.integer())
                                         .executes(context -> {
                                             setHud(IntegerArgumentType.getInteger(context, "value"));
-                                            context.getSource().sendFeedback(Text.translatable("commands.raised.set.hud", config.hud), false);
+                                            context.getSource().sendMessage(Text.translatable("commands.raised.set.hud", config.hud));
                                             return 1;
                                         })
                                 )
@@ -58,7 +58,7 @@ public class RaisedCommand {
                                 .then(argument("value", IntegerArgumentType.integer())
                                         .executes(context -> {
                                             setChat(IntegerArgumentType.getInteger(context, "value"));
-                                            context.getSource().sendFeedback(Text.translatable("commands.raised.set.chat", config.chat), false);
+                                            context.getSource().sendMessage(Text.translatable("commands.raised.set.chat", config.chat));
                                             return 1;
                                         })
                                 )
