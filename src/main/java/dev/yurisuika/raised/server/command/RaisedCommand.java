@@ -10,7 +10,7 @@ import static net.minecraft.server.command.CommandManager.*;
 
 public class RaisedCommand {
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, RegistrationEnvironment environment) {
         dispatcher.register(literal("raised")
                 .then(literal("config")
                         .then(literal("reload")
