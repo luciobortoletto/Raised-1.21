@@ -19,9 +19,4 @@ public class ChatHudMixin {
         return value + (double)Raised.getChat();
     }
 
-    @ModifyVariable(method = "render", at = @At(value = "STORE"), ordinal = 6)
-    private int modifyChat(int value) {
-        return value - Raised.getChat();
-    }
-
 }
