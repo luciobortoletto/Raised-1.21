@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "44,)"
+loaderVersion = "45,)"
 license = "GNU Lesser General Public License v3.0"
 
 [[mods]]
@@ -18,14 +18,14 @@ Raises the hotbar so the selector is not cut off!
 [[dependencies.raised]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19.3]"
+versionRange = "[1.19.4,1.20)"
 ordering = "NONE"
 side = "CLIENT"
 
 [[dependencies.raised]]
 modId = "forge"
 mandatory = true
-versionRange = "[44,)"
+versionRange = "[45,)"
 ordering = "NONE"
 side = "CLIENT"
 
