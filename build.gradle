@@ -25,7 +25,7 @@ dependencies {
     modCompileOnly "curse.maven:detail-armor-bar-forge-520755:3470828"
     modCompileOnly "curse.maven:health-overlay-368223:3441946"
     modCompileOnly "curse.maven:inventorio-forge-497122:3967909"
-    modCompileOnly "curse.maven:inventory-profiles-next-495267:4263992"
+    modCompileOnly "curse.maven:inventory-profiles-next-495267:4591810"
     modCompileOnly "curse.maven:levelhearts-273640:3542875"
     modCompileOnly "curse.maven:quark-243121:3642325"
 }
