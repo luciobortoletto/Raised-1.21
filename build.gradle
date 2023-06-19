@@ -23,7 +23,7 @@ dependencies {
 
     modCompileOnly "curse.maven:appleskin-248787:3927567"
     modCompileOnly "curse.maven:botania-fabric-421839:4371118"
-    modCompileOnly "curse.maven:create-fabric-624165:4394141"
+    modCompileOnly "curse.maven:create-fabric-624165:4537370"
     modCompileOnly "curse.maven:detail-armor-bar-506898:3823985"
     modCompileOnly "curse.maven:farmers-delight-fabric-482834:4111426"
     modCompileOnly "curse.maven:health-overlay-fabric-313219:4403399"
