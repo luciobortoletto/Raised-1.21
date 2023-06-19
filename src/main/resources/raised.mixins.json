@@ -13,6 +13,7 @@
     "mods.AppleskinMixin$HUDOverlayHandlerMixin",
     "mods.BotaniaMixin$FlugelTiaraItemMixin",
     "mods.BotaniaMixin$HUDHandlerMixin",
+    "mods.ColorfulHeartsMixin$HeartRendererMixin",
     "mods.CreateMixin$CopperBacktankArmorLayerMixin",
     "mods.CreateMixin$SchematicHotbarSlotOverlayMixin",
     "mods.CreateMixin$ToolboxHandlerClientMixin",
@@ -21,7 +22,6 @@
     "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
     "mods.FarmersDelightMixin$ComfortHealthOverlayMixin",
     "mods.FarmersDelightMixin$NourishmentHungerOverlayMixin",
-    "mods.HealthOverlayMixin$HeartRendererMixin",
     "mods.InventorioMixin$HotbarHUDRendererMixin",
     "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin"
   ],
