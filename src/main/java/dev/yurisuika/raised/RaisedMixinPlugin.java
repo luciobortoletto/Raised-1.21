@@ -17,6 +17,10 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
             "dev.yurisuika.raised.mixin.mods.DetailArmorBarMixin$ArmorBarRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("detailab") != null
     );
 
+    private static final Map<String, Supplier<Boolean>> HEALTHOVERLAY = ImmutableMap.of(
+            "dev.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("healthoverlay") != null
+    );
+
     private static final Map<String, Supplier<Boolean>> INVENTORIO = ImmutableMap.of(
             "dev.yurisuika.raised.mixin.mods.InventorioMixin$HotbarHUDRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventorio") != null
     );
@@ -27,7 +31,7 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return DETAILARMORBAR.getOrDefault(mixinClassName, () -> true).get() && INVENTORIO.getOrDefault(mixinClassName, () -> true).get() && INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get();
+        return DETAILARMORBAR.getOrDefault(mixinClassName, () -> true).get() && HEALTHOVERLAY.getOrDefault(mixinClassName, () -> true).get() && INVENTORIO.getOrDefault(mixinClassName, () -> true).get() && INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get();
     }
 
     @Override

@@ -12,6 +12,7 @@
     "client.gui.hud.InGameHudMixin",
     "client.gui.hud.SpectatorHudMixin",
     "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
+    "mods.HealthOverlayMixin$HeartRendererMixin",
     "mods.InventorioMixin$HotbarHUDRendererMixin",
     "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin"
   ],

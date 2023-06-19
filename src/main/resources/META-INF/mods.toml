@@ -37,6 +37,13 @@ ordering = "NONE"
 side = "CLIENT"
 
 [[dependencies.raised]]
+modId = "healthoverlay"
+mandatory = false
+versionRange = "[8,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.raised]]
 modId = "inventorio"
 mandatory = false
 versionRange = "[1,)"

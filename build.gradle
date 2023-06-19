@@ -21,6 +21,7 @@ dependencies {
     forge "net.minecraftforge:forge:${project.forge_version}"
 
     modCompileOnly "curse.maven:detail-armor-bar-forge-520755:3920487"
+    modCompileOnly "curse.maven:health-overlay-368223:4291564"
     modCompileOnly "curse.maven:inventorio-forge-497122:4276101"
     modCompileOnly "curse.maven:inventory-profiles-next-495267:4469003"
 }
