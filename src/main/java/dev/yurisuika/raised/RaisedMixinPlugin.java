@@ -22,10 +22,6 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
             "dev.yurisuika.raised.mixin.mods.BotaniaMixin$FlugelTiaraItemMixin", () -> FabricLoader.getInstance().isModLoaded("botania")
     );
 
-    private static final Map<String, Supplier<Boolean>> COLORFULHEARTS = ImmutableMap.of(
-            "dev.yurisuika.raised.mixin.mods.ColorfulHeartsMixin$HeartRendererMixin", () -> FabricLoader.getInstance().isModLoaded("colorfulhearts")
-    );
-
     private static final Map<String, Supplier<Boolean>> CREATE = ImmutableMap.of(
             "dev.yurisuika.raised.mixin.mods.CreateMixin$CopperBacktankArmorLayerMixin", () -> FabricLoader.getInstance().isModLoaded("create"),
             "dev.yurisuika.raised.mixin.mods.CreateMixin$SchematicHotbarSlotOverlayMixin", () -> FabricLoader.getInstance().isModLoaded("create"),
@@ -53,7 +49,7 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return APPLESKIN.getOrDefault(mixinClassName, () -> true).get() && BOTANIA.getOrDefault(mixinClassName, () -> true).get() && COLORFULHEARTS.getOrDefault(mixinClassName, () -> true).get() && CREATE.getOrDefault(mixinClassName, () -> true).get() && DETAILARMORBAR.getOrDefault(mixinClassName, () -> true).get() && FARMERSDELIGHT.getOrDefault(mixinClassName, () -> true).get() && INVENTORIO.getOrDefault(mixinClassName, () -> true).get() && INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get();
+        return APPLESKIN.getOrDefault(mixinClassName, () -> true).get() && BOTANIA.getOrDefault(mixinClassName, () -> true).get() && CREATE.getOrDefault(mixinClassName, () -> true).get() && DETAILARMORBAR.getOrDefault(mixinClassName, () -> true).get() && FARMERSDELIGHT.getOrDefault(mixinClassName, () -> true).get() && INVENTORIO.getOrDefault(mixinClassName, () -> true).get() && INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get();
     }
 
     @Override
