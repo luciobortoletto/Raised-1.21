@@ -20,14 +20,10 @@ dependencies {
 
     forge "net.minecraftforge:forge:${project.forge_version}"
 
-    modCompileOnly "curse.maven:botania-225643:4371117"
-    modCompileOnly "curse.maven:create-328085:4550987"
+    modCompileOnly "curse.maven:colorful-hearts-854213:4536098"
     modCompileOnly "curse.maven:detail-armor-bar-forge-520755:3920487"
-    modCompileOnly "curse.maven:health-overlay-368223:4291564"
     modCompileOnly "curse.maven:inventorio-forge-497122:4276101"
-    modCompileOnly "curse.maven:inventory-profiles-next-495267:4370590"
-    modCompileOnly "curse.maven:levelhearts-273640:3931722"
-    modCompileOnly "curse.maven:quark-243121:4366541"
+    modCompileOnly "curse.maven:inventory-profiles-next-495267:4591812"
 }
 
 processResources {
