@@ -13,19 +13,29 @@ import java.util.function.Supplier;
 
 public final class RaisedMixinPlugin implements IMixinConfigPlugin {
 
-    private static final Supplier<Boolean> TRUE = () -> true;
+    private static final Map<String, Supplier<Boolean>> APPLESKIN = ImmutableMap.of(
+            "dev.yurisuika.raised.mixin.mods.AppleskinMixin$HUDOverlayHandlerMixin", () -> FabricLoader.getInstance().isModLoaded("appleskin")
+    );
 
-    private static final Map<String, Supplier<Boolean>> CONDITIONS = ImmutableMap.of(
-            "dev.yurisuika.raised.mixin.mods.AppleskinMixin$HUDOverlayHandlerMixin", () -> FabricLoader.getInstance().isModLoaded("appleskin"),
-            "dev.yurisuika.raised.mixin.mods.DetailArmorBarMixin$ArmorBarRendererMixin", () -> FabricLoader.getInstance().isModLoaded("detailab"),
-            "dev.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FabricLoader.getInstance().isModLoaded("healthoverlay"),
-            "dev.yurisuika.raised.mixin.mods.InventorioMixin$HotbarHUDRendererMixin", () -> FabricLoader.getInstance().isModLoaded("inventorio"),
+    private static final Map<String, Supplier<Boolean>> DETAILARMORBAR = ImmutableMap.of(
+            "dev.yurisuika.raised.mixin.mods.DetailArmorBarMixin$ArmorBarRendererMixin", () -> FabricLoader.getInstance().isModLoaded("detailab")
+    );
+
+    private static final Map<String, Supplier<Boolean>> HEALTHOVERLAY = ImmutableMap.of(
+            "dev.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FabricLoader.getInstance().isModLoaded("healthoverlay")
+    );
+
+    private static final Map<String, Supplier<Boolean>> INVENTORIO = ImmutableMap.of(
+            "dev.yurisuika.raised.mixin.mods.InventorioMixin$HotbarHUDRendererMixin", () -> FabricLoader.getInstance().isModLoaded("inventorio")
+    );
+
+    private static final Map<String, Supplier<Boolean>> INVENTORYPROFILESNEXT = ImmutableMap.of(
             "dev.yurisuika.raised.mixin.mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin", () -> FabricLoader.getInstance().isModLoaded("inventoryprofilesnext")
     );
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return CONDITIONS.getOrDefault(mixinClassName, TRUE).get();
+        return APPLESKIN.getOrDefault(mixinClassName, () -> true).get() && DETAILARMORBAR.getOrDefault(mixinClassName, () -> true).get() && HEALTHOVERLAY.getOrDefault(mixinClassName, () -> true).get() && INVENTORIO.getOrDefault(mixinClassName, () -> true).get() && INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get();
     }
 
     @Override
