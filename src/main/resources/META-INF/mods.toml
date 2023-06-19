@@ -37,6 +37,13 @@ ordering = "NONE"
 side = "CLIENT"
 
 [[dependencies.raised]]
+modId = "colorfulhearts"
+mandatory = false
+versionRange = "[1,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.raised]]
 modId = "create"
 mandatory = false
 versionRange = "[0.5.1,)"
@@ -47,13 +54,6 @@ side = "CLIENT"
 modId = "detailab"
 mandatory = false
 versionRange = "[2,)"
-ordering = "NONE"
-side = "CLIENT"
-
-[[dependencies.raised]]
-modId = "healthoverlay"
-mandatory = false
-versionRange = "[7,)"
 ordering = "NONE"
 side = "CLIENT"
 
