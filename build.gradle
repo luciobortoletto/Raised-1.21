@@ -25,7 +25,7 @@ dependencies {
     modCompileOnly "curse.maven:detail-armor-bar-506898:3470826"
     modCompileOnly "curse.maven:health-overlay-fabric-313219:3441883"
     modCompileOnly "curse.maven:inventorio-491073:3967908"
-    modCompileOnly "curse.maven:inventory-profiles-next-495267:4263988"
+    modCompileOnly "curse.maven:inventory-profiles-next-495267:4591806"
 }
 
 processResources {
