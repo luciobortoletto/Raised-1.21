@@ -21,6 +21,7 @@
     "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
     "mods.FarmersDelightMixin$ComfortHealthOverlayMixin",
     "mods.FarmersDelightMixin$NourishmentHungerOverlayMixin",
+    "mods.HealthOverlayMixin$HeartRendererMixin",
     "mods.InventorioMixin$HotbarHUDRendererMixin",
     "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin"
   ],
