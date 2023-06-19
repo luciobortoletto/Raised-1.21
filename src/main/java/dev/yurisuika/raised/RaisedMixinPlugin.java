@@ -18,10 +18,6 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
             "dev.yurisuika.raised.mixin.mods.BotaniaMixin$FlugelTiaraItemMixin", () -> FMLLoader.getLoadingModList().getModFileById("botania") != null
     );
 
-    private static final Map<String, Supplier<Boolean>> COLORFULHEARTS = ImmutableMap.of(
-            "dev.yurisuika.raised.mixin.mods.ColorfulHeartsMixin$HeartRendererMixin", () -> FMLLoader.getLoadingModList().getModFileById("colorfulhearts") != null
-    );
-
     private static final Map<String, Supplier<Boolean>> CREATE = ImmutableMap.of(
             "dev.yurisuika.raised.mixin.mods.CreateMixin$RemainingAirOverlayMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
             "dev.yurisuika.raised.mixin.mods.CreateMixin$SchematicHotbarSlotOverlayMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
@@ -53,7 +49,7 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return BOTANIA.getOrDefault(mixinClassName, () -> true).get() && COLORFULHEARTS.getOrDefault(mixinClassName, () -> true).get() && CREATE.getOrDefault(mixinClassName, () -> true).get() && DETAILARMORBAR.getOrDefault(mixinClassName, () -> true).get() && INVENTORIO.getOrDefault(mixinClassName, () -> true).get() && INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get() && LEVELHEARTS.getOrDefault(mixinClassName, () -> true).get() && QUARK.getOrDefault(mixinClassName, () -> true).get();
+        return BOTANIA.getOrDefault(mixinClassName, () -> true).get() && CREATE.getOrDefault(mixinClassName, () -> true).get() && DETAILARMORBAR.getOrDefault(mixinClassName, () -> true).get() && INVENTORIO.getOrDefault(mixinClassName, () -> true).get() && INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get() && LEVELHEARTS.getOrDefault(mixinClassName, () -> true).get() && QUARK.getOrDefault(mixinClassName, () -> true).get();
     }
 
     @Override
