@@ -30,13 +30,6 @@ ordering = "NONE"
 side = "CLIENT"
 
 [[dependencies.raised]]
-modId = "colorfulhearts"
-mandatory = false
-versionRange = "[3,)"
-ordering = "NONE"
-side = "CLIENT"
-
-[[dependencies.raised]]
 modId = "detailab"
 mandatory = false
 versionRange = "[2,)"

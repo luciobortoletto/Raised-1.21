@@ -20,7 +20,6 @@ dependencies {
 
     forge "net.minecraftforge:forge:${project.forge_version}"
 
-    modCompileOnly "curse.maven:colorful-hearts-854213:4536098"
     modCompileOnly "curse.maven:detail-armor-bar-forge-520755:3920487"
     modCompileOnly "curse.maven:inventorio-forge-497122:4276101"
     modCompileOnly "curse.maven:inventory-profiles-next-495267:4591812"
