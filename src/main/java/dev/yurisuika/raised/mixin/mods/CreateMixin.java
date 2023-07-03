@@ -1,8 +1,8 @@
 package dev.yurisuika.raised.mixin.mods;
 
-import com.simibubi.create.content.contraptions.components.structureMovement.interaction.controls.TrainHUD;
-import com.simibubi.create.content.curiosities.armor.CopperBacktankArmorLayer;
-import com.simibubi.create.content.curiosities.toolbox.ToolboxHandlerClient;
+import com.simibubi.create.content.equipment.armor.RemainingAirOverlay;
+import com.simibubi.create.content.trains.TrainHUD;
+import com.simibubi.create.content.equipment.toolbox.ToolboxHandlerClient;
 import com.simibubi.create.content.schematics.client.SchematicHotbarSlotOverlay;
 import com.simibubi.create.content.schematics.client.ToolSelectionScreen;
 import dev.yurisuika.raised.Raised;
@@ -14,12 +14,12 @@ import org.spongepowered.asm.mixin.injection.*;
 public class CreateMixin {
 
     @Pseudo
-    @Mixin(CopperBacktankArmorLayer.class)
-    public static class CopperBacktankArmorLayerMixin {
+    @Mixin(RemainingAirOverlay.class)
+    public static class RemainingAirOverlayMixin {
 
-        @Redirect(method = "renderRemainingAirOverlay", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/Window;getScaledHeight()I"))
-        private static int redirectRenderRemainingAirOverlay(Window instance) {
-            return instance.getScaledHeight() - Raised.getHud();
+        @ModifyVariable(method = "render", at = @At("HEAD"), ordinal = 1, argsOnly = true)
+        private static int modifyRender(int value) {
+            return value - Raised.getHud();
         }
 
     }
