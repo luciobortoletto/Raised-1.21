@@ -23,6 +23,7 @@ dependencies {
     modCompileOnly "curse.maven:detail-armor-bar-forge-520755:3920487"
     modCompileOnly "curse.maven:inventorio-forge-497122:4276101"
     modCompileOnly "curse.maven:inventory-profiles-next-495267:4591812"
+    modCompileOnly "curse.maven:levelhearts-273640:3931722"
 }
 
 processResources {

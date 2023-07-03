@@ -13,7 +13,8 @@
     "client.gui.hud.SpectatorHudMixin",
     "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
     "mods.InventorioMixin$HotbarHUDRendererMixin",
-    "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin"
+    "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin",
+    "mods.LevelHeartsMixin$IngameGuiMixin"
   ],
   "injectors": {
     "defaultRequire": 1
