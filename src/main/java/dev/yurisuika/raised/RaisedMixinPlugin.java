@@ -25,9 +25,13 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
             "dev.yurisuika.raised.mixin.mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventoryprofilesnext")  != null
     );
 
+    private static final Map<String, Supplier<Boolean>> LEVELHEARTS = ImmutableMap.of(
+            "dev.yurisuika.raised.mixin.mods.LevelHeartsMixin$IngameGuiMixin", () -> FMLLoader.getLoadingModList().getModFileById("levelhearts") != null
+    );
+
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return DETAILARMORBAR.getOrDefault(mixinClassName, () -> true).get() && INVENTORIO.getOrDefault(mixinClassName, () -> true).get() && INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get();
+        return DETAILARMORBAR.getOrDefault(mixinClassName, () -> true).get() && INVENTORIO.getOrDefault(mixinClassName, () -> true).get() && INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get() && LEVELHEARTS.getOrDefault(mixinClassName, () -> true).get();
     }
 
     @Override
