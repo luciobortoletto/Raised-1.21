@@ -13,7 +13,7 @@
     "mods.AppleskinMixin$HUDOverlayHandlerMixin",
     "mods.BotaniaMixin$FlugelTiaraItemMixin",
     "mods.BotaniaMixin$HUDHandlerMixin",
-    "mods.CreateMixin$CopperBacktankArmorLayerMixin",
+    "mods.CreateMixin$RemainingAirOverlayMixin",
     "mods.CreateMixin$SchematicHotbarSlotOverlayMixin",
     "mods.CreateMixin$ToolboxHandlerClientMixin",
     "mods.CreateMixin$ToolSelectionScreenMixin",

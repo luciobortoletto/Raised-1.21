@@ -23,7 +23,7 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
     );
 
     private static final Map<String, Supplier<Boolean>> CREATE = ImmutableMap.of(
-            "dev.yurisuika.raised.mixin.mods.CreateMixin$CopperBacktankArmorLayerMixin", () -> FabricLoader.getInstance().isModLoaded("create"),
+            "dev.yurisuika.raised.mixin.mods.CreateMixin$RemainingAirOverlayMixin", () -> FabricLoader.getInstance().isModLoaded("create"),
             "dev.yurisuika.raised.mixin.mods.CreateMixin$SchematicHotbarSlotOverlayMixin", () -> FabricLoader.getInstance().isModLoaded("create"),
             "dev.yurisuika.raised.mixin.mods.CreateMixin$ToolboxHandlerClientMixin", () -> FabricLoader.getInstance().isModLoaded("create"),
             "dev.yurisuika.raised.mixin.mods.CreateMixin$ToolSelectionScreenMixin", () -> FabricLoader.getInstance().isModLoaded("create"),
