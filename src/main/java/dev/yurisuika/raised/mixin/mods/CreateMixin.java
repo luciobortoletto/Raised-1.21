@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class CreateMixin {
 
     @Pseudo
-    @Mixin(RemainingAirOverlay.class)
+    @Mixin(value = RemainingAirOverlay.class, remap = false)
     public static class RemainingAirOverlayMixin {
 
         @ModifyVariable(method = "render", at = @At("HEAD"), ordinal = 1, argsOnly = true)
@@ -27,7 +27,7 @@ public class CreateMixin {
     }
 
     @Pseudo
-    @Mixin(SchematicHotbarSlotOverlay.class)
+    @Mixin(value = SchematicHotbarSlotOverlay.class, remap = false)
     public static class SchematicHotbarSlotOverlayMixin {
 
         @Redirect(method = "renderOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/Window;getScaledHeight()I"))
@@ -38,7 +38,7 @@ public class CreateMixin {
     }
 
     @Pseudo
-    @Mixin(ToolboxHandlerClient.class)
+    @Mixin(value = ToolboxHandlerClient.class, remap = false)
     public static class ToolboxHandlerClientMixin {
 
         @ModifyVariable(method = "renderOverlay", at = @At("HEAD"), ordinal = 1, argsOnly = true)
@@ -49,7 +49,7 @@ public class CreateMixin {
     }
 
     @Pseudo
-    @Mixin(ToolSelectionScreen.class)
+    @Mixin(value = ToolSelectionScreen.class, remap = false)
     public static class ToolSelectionScreenMixin {
 
         @Redirect(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/Window;getScaledHeight()I"))
@@ -60,7 +60,7 @@ public class CreateMixin {
     }
 
     @Pseudo
-    @Mixin(TrainHUD.class)
+    @Mixin(value = TrainHUD.class, remap = false)
     public static class TrainHUDMixin {
 
         @ModifyVariable(method = "renderOverlay", at = @At("HEAD"), ordinal = 1, argsOnly = true)
