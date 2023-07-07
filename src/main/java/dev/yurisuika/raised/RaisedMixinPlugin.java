@@ -13,6 +13,11 @@ import java.util.function.Supplier;
 
 public final class RaisedMixinPlugin implements IMixinConfigPlugin {
 
+    private static final Map<String, Supplier<Boolean>> BOTANIA = ImmutableMap.of(
+            "dev.yurisuika.raised.mixin.mods.BotaniaMixin$HUDHandlerMixin", () -> FMLLoader.getLoadingModList().getModFileById("botania") != null,
+            "dev.yurisuika.raised.mixin.mods.BotaniaMixin$FlugelTiaraItemMixin", () -> FMLLoader.getLoadingModList().getModFileById("botania") != null
+    );
+
     private static final Map<String, Supplier<Boolean>> CREATE = ImmutableMap.of(
             "dev.yurisuika.raised.mixin.mods.CreateMixin$RemainingAirOverlayMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
             "dev.yurisuika.raised.mixin.mods.CreateMixin$SchematicHotbarSlotOverlayMixin", () -> FMLLoader.getLoadingModList().getModFileById("create") != null,
@@ -37,9 +42,14 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
             "dev.yurisuika.raised.mixin.mods.LevelHeartsMixin$IngameGuiMixin", () -> FMLLoader.getLoadingModList().getModFileById("levelhearts") != null
     );
 
+    private static final Map<String, Supplier<Boolean>> QUARK = ImmutableMap.of(
+            "dev.yurisuika.raised.mixin.mods.QuarkMixin$HotbarChangerModuleMixin", () -> FMLLoader.getLoadingModList().getModFileById("quark") != null,
+            "dev.yurisuika.raised.mixin.mods.QuarkMixin$UsageTickerModuleMixin", () -> FMLLoader.getLoadingModList().getModFileById("quark") != null
+    );
+
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return CREATE.getOrDefault(mixinClassName, () -> true).get() && DETAILARMORBAR.getOrDefault(mixinClassName, () -> true).get() && INVENTORIO.getOrDefault(mixinClassName, () -> true).get() && INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get() && LEVELHEARTS.getOrDefault(mixinClassName, () -> true).get();
+        return BOTANIA.getOrDefault(mixinClassName, () -> true).get() && CREATE.getOrDefault(mixinClassName, () -> true).get() && DETAILARMORBAR.getOrDefault(mixinClassName, () -> true).get() && INVENTORIO.getOrDefault(mixinClassName, () -> true).get() && INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get() && LEVELHEARTS.getOrDefault(mixinClassName, () -> true).get() && QUARK.getOrDefault(mixinClassName, () -> true).get();
     }
 
     @Override

@@ -11,6 +11,8 @@
     "client.gui.hud.ChatHudMixin",
     "client.gui.hud.InGameHudMixin",
     "client.gui.hud.SpectatorHudMixin",
+    "mods.BotaniaMixin$HUDHandlerMixin",
+    "mods.BotaniaMixin$FlugelTiaraItemMixin",
     "mods.CreateMixin$RemainingAirOverlayMixin",
     "mods.CreateMixin$SchematicHotbarSlotOverlayMixin",
     "mods.CreateMixin$ToolboxHandlerClientMixin",
@@ -19,7 +21,9 @@
     "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
     "mods.InventorioMixin$HotbarHUDRendererMixin",
     "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin",
-    "mods.LevelHeartsMixin$IngameGuiMixin"
+    "mods.LevelHeartsMixin$IngameGuiMixin",
+    "mods.QuarkMixin$HotbarChangerModuleMixin",
+    "mods.QuarkMixin$UsageTickerModuleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

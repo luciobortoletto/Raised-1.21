@@ -20,11 +20,13 @@ dependencies {
 
     forge "net.minecraftforge:forge:${project.forge_version}"
 
+    modCompileOnly "curse.maven:botania-225643:4371117"
     compileOnly "curse.maven:create-328085:4626108"
     modCompileOnly "curse.maven:detail-armor-bar-forge-520755:3920487"
     modCompileOnly "curse.maven:inventorio-forge-497122:4619077"
     modCompileOnly "curse.maven:inventory-profiles-next-495267:4591814"
     modCompileOnly "curse.maven:levelhearts-273640:4622415"
+    modCompileOnly "curse.maven:quark-243121:4587248"
 }
 
 processResources {
