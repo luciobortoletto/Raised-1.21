@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "raised",
+  "id": "raised-detailarmorbar",
   "version": "${version}",
 
-  "name": "Raised",
-  "description": "Raises the hotbar so the selector is not cut off!",
+  "name": "Raised + Detail Armor Bar",
+  "description": "Adds support for Detail Armor Bar to Raised!",
   "authors": [
     "yurisuika"
   ],
@@ -22,18 +22,17 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "dev.yurisuika.raised.Raised"
     ]
   },
   "mixins": [
-    "raised.mixins.json"
+    "raised-detailarmorbar.mixins.json"
   ],
 
-  "accessWidener" : "raised.accesswidener",
+  "accessWidener" : "raised-detailarmorbar.accesswidener",
 
   "depends": {
     "fabricloader": ">=0.12.0",
-    "minecraft": "1.19.3",
+    "minecraft": ">=1.19.3",
     "java": ">=17"
   }
 }

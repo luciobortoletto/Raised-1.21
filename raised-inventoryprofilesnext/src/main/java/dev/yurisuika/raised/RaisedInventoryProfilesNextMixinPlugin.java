@@ -11,23 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public final class RaisedMixinPlugin implements IMixinConfigPlugin {
-
-    private static final Map<String, Supplier<Boolean>> APPLESKIN = ImmutableMap.of(
-            "dev.yurisuika.raised.mixin.mods.AppleskinMixin$HUDOverlayHandlerMixin", () -> FabricLoader.getInstance().isModLoaded("appleskin")
-    );
-
-    private static final Map<String, Supplier<Boolean>> DETAILARMORBAR = ImmutableMap.of(
-            "dev.yurisuika.raised.mixin.mods.DetailArmorBarMixin$ArmorBarRendererMixin", () -> FabricLoader.getInstance().isModLoaded("detailab")
-    );
-
-    private static final Map<String, Supplier<Boolean>> HEALTHOVERLAY = ImmutableMap.of(
-            "dev.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FabricLoader.getInstance().isModLoaded("healthoverlay")
-    );
-
-    private static final Map<String, Supplier<Boolean>> INVENTORIO = ImmutableMap.of(
-            "dev.yurisuika.raised.mixin.mods.InventorioMixin$HotbarHUDRendererMixin", () -> FabricLoader.getInstance().isModLoaded("inventorio")
-    );
+public final class RaisedInventoryProfilesNextMixinPlugin implements IMixinConfigPlugin {
 
     private static final Map<String, Supplier<Boolean>> INVENTORYPROFILESNEXT = ImmutableMap.of(
             "dev.yurisuika.raised.mixin.mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin", () -> FabricLoader.getInstance().isModLoaded("inventoryprofilesnext")
@@ -35,7 +19,7 @@ public final class RaisedMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return APPLESKIN.getOrDefault(mixinClassName, () -> true).get() && DETAILARMORBAR.getOrDefault(mixinClassName, () -> true).get() && HEALTHOVERLAY.getOrDefault(mixinClassName, () -> true).get() && INVENTORIO.getOrDefault(mixinClassName, () -> true).get() && INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get();
+        return INVENTORYPROFILESNEXT.getOrDefault(mixinClassName, () -> true).get();
     }
 
     @Override
