@@ -25,10 +25,10 @@
     ]
   },
   "mixins": [
-    "raised-appleskin.mixins.json"
+    "raised-healthoverlay.mixins.json"
   ],
 
-  "accessWidener" : "raised-appleskin.accesswidener",
+  "accessWidener" : "raised-healthoverlay.accesswidener",
 
   "depends": {
     "fabricloader": ">=0.12.0",
