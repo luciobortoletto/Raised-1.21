@@ -5,3 +5,8 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+include "raised-appleskin"
+include "raised-detailarmorbar"
+include "raised-inventorio"
+include "raised-inventoryprofilesnext"
