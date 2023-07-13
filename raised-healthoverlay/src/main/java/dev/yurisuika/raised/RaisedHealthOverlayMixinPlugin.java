@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public final class RaisedAppleskinMixinPlugin implements IMixinConfigPlugin {
+public final class RaisedHealthOverlayMixinPlugin implements IMixinConfigPlugin {
 
   private static final Map<String, Supplier<Boolean>> HEALTHOVERLAY = ImmutableMap.of(
           "dev.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FabricLoader.getInstance().isModLoaded("healthoverlay")
