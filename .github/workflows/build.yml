@@ -25,13 +25,13 @@ jobs:
           if-no-files-found: error
       - uses: actions/upload-artifact@v3
         with:
-          name: Raised + Health Overlay
-          path: raised-healthoverlay/build/libs/
+          name: Raised + Detail Armor Bar
+          path: raised-detailarmorbar/build/libs/
           if-no-files-found: error
       - uses: actions/upload-artifact@v3
         with:
-          name: Raised + Detail Armor Bar
-          path: raised-detailarmorbar/build/libs/
+          name: Raised + Health Overlay
+          path: raised-healthoverlay/build/libs/
           if-no-files-found: error
       - uses: actions/upload-artifact@v3
         with:
