@@ -10,14 +10,9 @@
     "client.gui.overlay.ForgeGuiMixin",
     "client.gui.hud.ChatHudMixin",
     "client.gui.hud.InGameHudMixin",
-    "client.gui.hud.SpectatorHudMixin",
-    "mods.DetailArmorBarMixin$ArmorBarRendererMixin",
-    "mods.HealthOverlayMixin$HeartRendererMixin",
-    "mods.InventorioMixin$HotbarHUDRendererMixin",
-    "mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin"
+    "client.gui.hud.SpectatorHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "plugin": "dev.yurisuika.raised.RaisedMixinPlugin"
+  }
 }
