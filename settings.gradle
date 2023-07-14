@@ -5,3 +5,10 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+include "raised-appleskin"
+include "raised-botania"
+include "raised-detailarmorbar"
+include "raised-healthoverlay"
+include "raised-inventorio"
+include "raised-inventoryprofilesnext"
