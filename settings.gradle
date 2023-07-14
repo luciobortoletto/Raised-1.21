@@ -8,8 +8,8 @@ pluginManagement {
     }
 }
 
-include "raised-detailarmorbar"
-include "raised-healthoverlay"
-include "raised-inventorio"
-include "raised-inventoryprofilesnext"
-include "raised-levelhearts"
+include "raisedxdetailarmorbar"
+include "raisedxhealthoverlay"
+include "raisedxinventorio"
+include "raisedxinventoryprofilesnext"
+include "raisedxlevelhearts"
