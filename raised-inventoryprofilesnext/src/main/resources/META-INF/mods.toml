@@ -1,0 +1,44 @@
+modLoader = "javafml"
+loaderVersion = "41,)"
+license = "GNU Lesser General Public License v3.0"
+
+[[mods]]
+modId = "raised-inventoryprofilesnext"
+version = "${version}"
+displayName = "Raised + Inventory Profiles Next"
+displayTest = "IGNORE_ALL_VERSION"
+displayURL = "https://github.com/yurisuika/Raised"
+issueTrackerURL = "https://github.com/yurisuika/Raised/issues"
+logoFile = "icon.png"
+authors = "yurisuika"
+description = '''
+Adds support for Inventory Profiles Next to Raised!
+'''
+
+[[dependencies.raised-inventoryprofilesnext]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19.1,1.19.2]"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.raised-inventoryprofilesnext]]
+modId = "forge"
+mandatory = true
+versionRange = "[41,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.raised-inventoryprofilesnext]]
+modId = "raised"
+mandatory = true
+versionRange = "[2,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.raised-inventoryprofilesnext]]
+modId = "inventoryprofilesnext"
+mandatory = true
+versionRange = "[1,)"
+ordering = "NONE"
+side = "CLIENT"
