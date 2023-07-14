@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public final class RaisedInventoryProfilesNextMixinPlugin implements IMixinConfigPlugin {
 
     private static final Map<String, Supplier<Boolean>> INVENTORYPROFILESNEXT = ImmutableMap.of(
-            "dev.yurisuika.raised.mixin.mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventoryprofilesnext")  != null
+            "dev.yurisuika.raised.mixin.mods.InventoryProfilesNextMixin$LockSlotsHandlerMixin", () -> FMLLoader.getLoadingModList().getModFileById("inventoryprofilesnext") != null
     );
 
     @Override
