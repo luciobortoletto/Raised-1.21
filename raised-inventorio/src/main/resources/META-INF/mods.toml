@@ -3,28 +3,42 @@ loaderVersion = "37,)"
 license = "GNU Lesser General Public License v3.0"
 
 [[mods]]
-modId = "raised"
+modId = "raised-inventorio"
 version = "${version}"
-displayName = "Raised"
+displayName = "Raised + Inventorio"
 displayTest = "IGNORE_ALL_VERSION"
 displayURL = "https://github.com/yurisuika/Raised"
 issueTrackerURL = "https://github.com/yurisuika/Raised/issues"
 logoFile = "icon.png"
 authors = "yurisuika"
 description = '''
-Raises the hotbar so the selector is not cut off!
+Adds support for Inventorio to Raised!
 '''
 
-[[dependencies.raised]]
+[[dependencies.raised-inventorio]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.17,1.18)"
 ordering = "NONE"
 side = "CLIENT"
 
-[[dependencies.raised]]
+[[dependencies.raised-inventorio]]
 modId = "forge"
 mandatory = true
 versionRange = "[37,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.raised-inventorio]]
+modId = "raised"
+mandatory = true
+versionRange = "[2,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.raised-inventorio]]
+modId = "inventorio"
+mandatory = true
+versionRange = "[1,)"
 ordering = "NONE"
 side = "CLIENT"
