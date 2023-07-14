@@ -8,7 +8,7 @@ pluginManagement {
     }
 }
 
-include "raised-create"
-include "raised-inventorio"
-include "raised-inventoryprofilesnext"
-include "raised-levelhearts"
+include "raisedxcreate"
+include "raisedxinventorio"
+include "raisedxinventoryprofilesnext"
+include "raisedxlevelhearts"
