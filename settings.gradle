@@ -6,8 +6,8 @@ pluginManagement {
     }
 }
 
-include "raised-appleskin"
-include "raised-detailarmorbar"
-include "raised-healthoverlay"
-include "raised-inventorio"
-include "raised-inventoryprofilesnext"
+include "raisedxappleskin"
+include "raisedxdetailarmorbar"
+include "raisedxhealthoverlay"
+include "raisedxinventorio"
+include "raisedxinventoryprofilesnext"
