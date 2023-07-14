@@ -8,6 +8,6 @@ pluginManagement {
     }
 }
 
-include "raised-healthoverlay"
-include "raised-inventorio"
-include "raised-inventoryprofilesnext"
+include "raisedxhealthoverlay"
+include "raisedxinventorio"
+include "raisedxinventoryprofilesnext"
