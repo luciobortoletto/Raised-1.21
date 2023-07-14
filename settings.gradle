@@ -8,6 +8,6 @@ pluginManagement {
     }
 }
 
-include "raised-inventorio"
-include "raised-inventoryprofilesnext"
-include "raised-levelhearts"
+include "raisedxinventorio"
+include "raisedxinventoryprofilesnext"
+include "raisedxlevelhearts"
