@@ -18,3 +18,18 @@ jobs:
           name: Raised
           path: build/libs/
           if-no-files-found: error
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Raised + Inventorio
+          path: raised-inventorio/build/libs/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Raised + Inventory Profiles Next
+          path: raised-inventoryprofilesnext/build/libs/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Raised + LevelHearts
+          path: raised-levelhearts/build/libs/
+          if-no-files-found: error
