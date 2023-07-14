@@ -6,10 +6,10 @@ pluginManagement {
     }
 }
 
-include "raised-appleskin"
-include "raised-botania"
-include "raised-create"
-include "raised-detailarmorbar"
-include "raised-healthoverlay"
-include "raised-inventorio"
-include "raised-inventoryprofilesnext"
+include "raisedxappleskin"
+include "raisedxbotania"
+include "raisedxcreate"
+include "raisedxdetailarmorbar"
+include "raisedxhealthoverlay"
+include "raisedxinventorio"
+include "raisedxinventoryprofilesnext"
