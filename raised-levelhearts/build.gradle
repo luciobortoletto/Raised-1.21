@@ -19,6 +19,10 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 
     forge "net.minecraftforge:forge:${project.forge_version}"
+
+    modCompileOnly "curse.maven:levelhearts-273640:4622415"
+
+    implementation rootProject
 }
 
 processResources {

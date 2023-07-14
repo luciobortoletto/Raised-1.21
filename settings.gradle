@@ -3,6 +3,12 @@ pluginManagement {
         maven { url "https://maven.fabricmc.net/" }
         maven { url "https://maven.architectury.dev/" }
         maven { url "https://files.minecraftforge.net/maven/" }
+        mavenCentral()
         gradlePluginPortal()
     }
 }
+
+include "raised-create"
+include "raised-inventorio"
+include "raised-inventoryprofilesnext"
+include "raised-levelhearts"

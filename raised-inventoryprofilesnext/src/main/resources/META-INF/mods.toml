@@ -3,28 +3,42 @@ loaderVersion = "46,)"
 license = "GNU Lesser General Public License v3.0"
 
 [[mods]]
-modId = "raised"
+modId = "raised-inventoryprofilesnext"
 version = "${version}"
-displayName = "Raised"
+displayName = "Raised + Inventory Profiles Next"
 displayTest = "IGNORE_ALL_VERSION"
 displayURL = "https://github.com/yurisuika/Raised"
 issueTrackerURL = "https://github.com/yurisuika/Raised/issues"
 logoFile = "icon.png"
 authors = "yurisuika"
 description = '''
-Raises the hotbar so the selector is not cut off!
+Adds support for Inventory Profiles Next to Raised!
 '''
 
-[[dependencies.raised]]
+[[dependencies.raised-inventoryprofilesnext]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.20,1.21)"
 ordering = "NONE"
 side = "CLIENT"
 
-[[dependencies.raised]]
+[[dependencies.raised-inventoryprofilesnext]]
 modId = "forge"
 mandatory = true
 versionRange = "[46,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.raised-inventoryprofilesnext]]
+modId = "raised"
+mandatory = true
+versionRange = "[2,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.raised-inventoryprofilesnext]]
+modId = "inventoryprofilesnext"
+mandatory = true
+versionRange = "[1,)"
 ordering = "NONE"
 side = "CLIENT"
