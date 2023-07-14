@@ -39,6 +39,6 @@ side = "CLIENT"
 [[dependencies.raised-botania]]
 modId = "botania"
 mandatory = true
-versionRange = "[420,)"
+versionRange = "[1,)"
 ordering = "NONE"
 side = "CLIENT"
