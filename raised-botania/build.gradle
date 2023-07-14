@@ -19,6 +19,10 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 
     forge "net.minecraftforge:forge:${project.forge_version}"
+
+    modCompileOnly "curse.maven:botania-225643:4066054"
+
+    implementation rootProject
 }
 
 processResources {
