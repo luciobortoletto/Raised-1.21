@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "raisedxcreate",
+  "version": "${version}",
+
+  "name": "Raised x Create",
+  "description": "Adds support for Create to Raised!",
+  "authors": [
+    "yurisuika"
+  ],
+  "contributors": [
+  ],
+  "contact": {
+    "homepage": "https://yurisuika.dev",
+    "sources": "https://github.com/yurisuika/Raised",
+    "issues": "https://github.com/yurisuika/Raised/issues"
+  },
+
+  "license": "GNU Lesser General Public License v3.0",
+  "icon": "assets/raisedxcreate/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+    ]
+  },
+  "mixins": [
+    "raisedxcreate.mixins.json"
+  ],
+
+  "accessWidener" : "raisedxcreate.accesswidener",
+
+  "depends": {
+    "fabricloader": ">=0.14.21",
+    "minecraft": ">=1.20",
+    "java": ">=17"
+  }
+}
