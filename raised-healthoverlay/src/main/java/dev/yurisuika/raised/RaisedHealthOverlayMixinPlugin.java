@@ -13,9 +13,9 @@ import java.util.function.Supplier;
 
 public final class RaisedHealthOverlayMixinPlugin implements IMixinConfigPlugin {
 
-  private static final Map<String, Supplier<Boolean>> HEALTHOVERLAY = ImmutableMap.of(
-          "dev.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FabricLoader.getInstance().isModLoaded("healthoverlay")
-  );
+    private static final Map<String, Supplier<Boolean>> HEALTHOVERLAY = ImmutableMap.of(
+            "dev.yurisuika.raised.mixin.mods.HealthOverlayMixin$HeartRendererMixin", () -> FabricLoader.getInstance().isModLoaded("healthoverlay")
+    );
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
