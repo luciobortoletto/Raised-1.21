@@ -13,10 +13,10 @@ import java.util.function.Supplier;
 
 public final class RaisedBotaniaMixinPlugin implements IMixinConfigPlugin {
 
-  private static final Map<String, Supplier<Boolean>> BOTANIA = ImmutableMap.of(
-          "dev.yurisuika.raised.mixin.mods.BotaniaMixin$HUDHandlerMixin", () -> FabricLoader.getInstance().isModLoaded("botania"),
-          "dev.yurisuika.raised.mixin.mods.BotaniaMixin$FlugelTiaraItemMixin", () -> FabricLoader.getInstance().isModLoaded("botania")
-  );
+    private static final Map<String, Supplier<Boolean>> BOTANIA = ImmutableMap.of(
+            "dev.yurisuika.raised.mixin.mods.BotaniaMixin$HUDHandlerMixin", () -> FabricLoader.getInstance().isModLoaded("botania"),
+            "dev.yurisuika.raised.mixin.mods.BotaniaMixin$FlugelTiaraItemMixin", () -> FabricLoader.getInstance().isModLoaded("botania")
+    );
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
