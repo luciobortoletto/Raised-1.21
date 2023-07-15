@@ -7,7 +7,7 @@
   "mixins": [
   ],
   "client": [
-    "mods.HealthOverlayMixin$HealthRendererMixin"
+    "mods.HealthOverlayMixin$HeartRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
