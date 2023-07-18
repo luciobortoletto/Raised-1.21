@@ -26,9 +26,4 @@ public class ForgeGuiMixin {
         return value - Raised.getChat();
     }
 
-    @ModifyVariable(method = "renderRecordOverlay", at = @At(value = "HEAD"), ordinal = 1, argsOnly = true)
-    private int modifyActionbar(int value) {
-        return value - Raised.getHud();
-    }
-
 }

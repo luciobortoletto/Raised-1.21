@@ -5,7 +5,6 @@ import net.minecraft.client.gui.hud.InGameHud;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(value = InGameHud.class, priority = -1)
 public class InGameHudMixin {
@@ -37,11 +36,6 @@ public class InGameHudMixin {
 
     @ModifyArg(method = "renderExperienceBar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawText(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIZ)I"), index = 3)
     private int modifyXpText(int value) {
-        return value - Raised.getHud();
-    }
-
-    @ModifyVariable(method = "renderHeldItemTooltip", at = @At(value = "STORE"), ordinal = 2)
-    private int modifyHeldItemTooltip(int value) {
         return value - Raised.getHud();
     }
 
