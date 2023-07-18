@@ -26,4 +26,9 @@ public class ForgeGuiMixin {
         return value - Raised.getChat();
     }
 
+    @Redirect(method = "renderRecordOverlay", at = @At(value = "INVOKE", target = "Ljava/lang/Math;max(II)I"))
+    private int modifyActionbarShift(int a, int b) {
+        return a + 9;
+    }
+
 }

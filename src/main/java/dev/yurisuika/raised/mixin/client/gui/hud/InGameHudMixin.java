@@ -5,6 +5,7 @@ import net.minecraft.client.gui.hud.InGameHud;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(value = InGameHud.class, priority = -1)
 public class InGameHudMixin {
@@ -37,6 +38,11 @@ public class InGameHudMixin {
     @ModifyArg(method = "renderExperienceBar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawText(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIZ)I"), index = 3)
     private int modifyXpText(int value) {
         return value - Raised.getHud();
+    }
+
+    @Redirect(method = "renderSelectedItemName", at = @At(value = "INVOKE", target = "Ljava/lang/Math;max(II)I"))
+    private int modifySelectedItemNameShift(int a, int b) {
+        return a + 9;
     }
 
     @ModifyArg(method = "renderStatusBars", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIII)V"), index = 2)
