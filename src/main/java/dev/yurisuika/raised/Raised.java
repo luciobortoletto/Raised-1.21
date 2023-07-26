@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dev.yurisuika.raised.server.command.RaisedCommand;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -120,16 +122,8 @@ public class Raised implements ClientModInitializer {
             "key.categories.raised"
     ));
 
-    @Override
-    public void onInitializeClient() {
-        if (!file.exists()) {
-            saveConfig();
-        }
-        loadConfig();
-        putObjects();
-
-        RaisedCommand.register(ClientCommandManager.DISPATCHER);
-
+    @Environment(EnvType.CLIENT)
+    public static void registerClientTickEvents() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (hudDown.wasPressed()) {
                 setHud(config.hud - 1);
@@ -150,6 +144,23 @@ public class Raised implements ClientModInitializer {
                 setChat(config.chat + 1);
             }
         });
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void registerCommands() {
+        RaisedCommand.register(ClientCommandManager.DISPATCHER);
+    }
+
+    @Override
+    public void onInitializeClient() {
+        if (!file.exists()) {
+            saveConfig();
+        }
+        loadConfig();
+        putObjects();
+
+        registerClientTickEvents();
+        registerCommands();
     }
 
 }
