@@ -11,3 +11,4 @@ pluginManagement {
 include "raisedxhealthoverlay"
 include "raisedxinventorio"
 include "raisedxinventoryprofilesnext"
+include "raisedxtoughasnails"
