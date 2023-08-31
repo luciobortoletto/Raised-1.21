@@ -11,3 +11,4 @@ pluginManagement {
 include "raisedxinventorio"
 include "raisedxinventoryprofilesnext"
 include "raisedxlevelhearts"
+include "raisedxtoughasnails"
