@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static dev.yurisuika.raised.client.option.RaisedConfig.*;
 
-@Mixin(value = SpectatorHud.class, priority = -1)
+@Mixin(value = SpectatorHud.class, priority = -999999999)
 public abstract class SpectatorHudMixin {
 
     // SPECTATOR MENU

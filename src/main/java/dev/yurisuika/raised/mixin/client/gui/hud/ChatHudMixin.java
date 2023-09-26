@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import static dev.yurisuika.raised.client.option.RaisedConfig.*;
 
-@Mixin(value = ChatHud.class, priority = -1)
+@Mixin(value = ChatHud.class, priority = -999999999)
 public abstract class ChatHudMixin {
 
     // CHAT CLICK

@@ -56,7 +56,6 @@ public class RaisedGui extends ForgeGui {
             MOUNT_HEALTH.type(),
             JUMP_BAR.type(),
             EXPERIENCE_BAR.type(),
-            EXPERIENCE_BAR.type(),
             ITEM_NAME.type(),
             SLEEP_FADE.type(),
             POTION_ICONS.type(),
