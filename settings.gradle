@@ -5,10 +5,3 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-
-include "raisedxappleskin"
-include "raisedxarmorchroma"
-include "raisedxdetailarmorbar"
-include "raisedxhealthoverlay"
-include "raisedxinventorio"
-include "raisedxinventoryprofilesnext"
