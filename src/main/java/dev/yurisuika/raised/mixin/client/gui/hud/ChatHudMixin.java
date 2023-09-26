@@ -6,17 +6,21 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(value = ChatHud.class, priority = -1)
-public class ChatHudMixin {
+import static dev.yurisuika.raised.client.option.RaisedConfig.*;
 
+@Mixin(value = ChatHud.class, priority = -1)
+public abstract class ChatHudMixin {
+
+    // CHAT CLICK
     @ModifyVariable(method = "mouseClicked", at = @At(value = "HEAD"), ordinal = 1, argsOnly = true)
     private double modifyMouseClick(double value) {
-        return value + Raised.getChat();
+        return value + getChat();
     }
 
+    // CHAT TOOLTIP
     @ModifyVariable(method = "getText", at = @At(value = "HEAD"), ordinal = 1, argsOnly = true)
     private double modifyChatTooltip(double value) {
-        return value + Raised.getChat();
+        return value + getChat();
     }
 
 }

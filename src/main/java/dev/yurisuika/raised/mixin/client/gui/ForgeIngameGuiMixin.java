@@ -1,34 +1,55 @@
 package dev.yurisuika.raised.mixin.client.gui;
 
-import dev.yurisuika.raised.Raised;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraftforge.client.gui.ForgeIngameGui;
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static dev.yurisuika.raised.client.option.RaisedConfig.*;
 
 @Mixin(value = ForgeIngameGui.class, priority = -1)
-public class ForgeIngameGuiMixin {
+public abstract class ForgeIngameGuiMixin {
 
-    @Redirect(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraftforge/client/gui/ForgeIngameGui;right_height:I", opcode = Opcodes.PUTSTATIC))
-    private void redirectRight(int value) {
-        ForgeIngameGui.right_height = value + Raised.getHud();
+    // SPECTATOR MENU
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;render(Lnet/minecraft/client/util/math/MatrixStack;F)V", ordinal = 0, shift = At.Shift.BEFORE))
+    private void translateSpectatorMenuStart(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+        matrices.translate(0, -getHud(), 0);
+    }
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;render(Lnet/minecraft/client/util/math/MatrixStack;F)V", ordinal = 0, shift = At.Shift.AFTER))
+    private void translateSpectatorMenuEnd(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+        matrices.translate(0, +getHud(), 0);
     }
 
-    @Redirect(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraftforge/client/gui/ForgeIngameGui;left_height:I", opcode = Opcodes.PUTSTATIC))
-    private void redirectLeft(int value) {
-        ForgeIngameGui.left_height = value + Raised.getHud();
+    // HELD ITEM TOOLTIP
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/gui/ForgeIngameGui;renderHeldItemTooltip(Lnet/minecraft/client/util/math/MatrixStack;)V", ordinal = 0, shift = At.Shift.BEFORE))
+    private void heldItemTooltipStart(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+        matrices.translate(0, -getHud(), 0);
+    }
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/gui/ForgeIngameGui;renderHeldItemTooltip(Lnet/minecraft/client/util/math/MatrixStack;)V", ordinal = 0, shift = At.Shift.AFTER))
+    private void heldItemTooltipEnd(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+        matrices.translate(0, +getHud(), 0);
     }
 
-    @ModifyVariable(method = "renderChat", at = @At(value = "HEAD"), ordinal = 1, argsOnly = true)
-    private int modifyChat(int value) {
-        return value - Raised.getChat();
+    // SPECTATOR TOOLTIP
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;render(Lnet/minecraft/client/util/math/MatrixStack;)V", ordinal = 0, shift = At.Shift.BEFORE))
+    private void translateSpectatorHudStart(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+        matrices.translate(0, -getHud(), 0);
+    }
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;render(Lnet/minecraft/client/util/math/MatrixStack;)V", ordinal = 0, shift = At.Shift.AFTER))
+    private void translateSpectatorHudEnd(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+        matrices.translate(0, +getHud(), 0);
     }
 
-    @ModifyVariable(method = "renderRecordOverlay", at = @At(value = "HEAD"), ordinal = 1, argsOnly = true)
-    private int modifyActionbar(int value) {
-        return value - Raised.getHud();
+    // OVERLAY MESSAGE
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/gui/ForgeIngameGui;renderRecordOverlay(IIFLnet/minecraft/client/util/math/MatrixStack;)V", ordinal = 0, shift = At.Shift.BEFORE))
+    private void overlayMessageStart(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+        matrices.translate(0, -getHud(), 0);
+    }
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/gui/ForgeIngameGui;renderRecordOverlay(IIFLnet/minecraft/client/util/math/MatrixStack;)V", ordinal = 0, shift = At.Shift.AFTER))
+    private void overlayMessageEnd(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+        matrices.translate(0, +getHud(), 0);
     }
 
 }
