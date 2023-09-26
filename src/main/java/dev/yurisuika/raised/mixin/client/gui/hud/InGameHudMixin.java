@@ -14,11 +14,11 @@ import static dev.yurisuika.raised.client.option.RaisedConfig.*;
 public abstract class InGameHudMixin {
 
     // HELD ITEM TOOLTIP
-    @Inject(method = "renderHeldItemTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderSelectedItemName(Lnet/minecraft/client/gui/DrawContext;I)V", ordinal = 0, shift = At.Shift.BEFORE))
+    @Inject(method = "renderHeldItemTooltip", at = @At("HEAD"))
     private void heldItemTooltipStart(DrawContext context, CallbackInfo ci) {
         context.getMatrices().translate(0, -getHud(), 0);
     }
-    @Inject(method = "renderHeldItemTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderSelectedItemName(Lnet/minecraft/client/gui/DrawContext;I)V", ordinal = 0, shift = At.Shift.AFTER))
+    @Inject(method = "renderHeldItemTooltip", at = @At("TAIL"))
     private void heldItemTooltipEnd(DrawContext context, CallbackInfo ci) {
         context.getMatrices().translate(0, +getHud(), 0);
     }
