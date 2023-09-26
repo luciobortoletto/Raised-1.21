@@ -7,10 +7,10 @@
   "mixins": [
   ],
   "client": [
-    "client.gui.overlay.ForgeGuiMixin",
     "client.gui.hud.ChatHudMixin",
     "client.gui.hud.InGameHudMixin",
-    "client.gui.hud.SpectatorHudMixin"
+    "client.gui.hud.SpectatorHudMixin",
+    "client.gui.overlay.ForgeGuiMixin"
   ],
   "injectors": {
     "defaultRequire": 1

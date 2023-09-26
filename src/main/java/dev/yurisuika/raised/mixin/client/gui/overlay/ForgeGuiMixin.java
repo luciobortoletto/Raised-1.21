@@ -1,34 +1,25 @@
 package dev.yurisuika.raised.mixin.client.gui.overlay;
 
-import dev.yurisuika.raised.Raised;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static dev.yurisuika.raised.client.option.RaisedConfig.*;
 
 @Mixin(value = ForgeGui.class, priority = -1)
-public class ForgeGuiMixin {
+public abstract class ForgeGuiMixin {
 
-    @Redirect(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraftforge/client/gui/overlay/ForgeGui;rightHeight:I", opcode = Opcodes.PUTFIELD))
-    private void redirectRight(ForgeGui instance, int value) {
-        instance.rightHeight = value + Raised.getHud();
+    // OVERLAY MESSAGE
+    @Inject(method = "renderRecordOverlay", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;push()V", ordinal = 0, shift = At.Shift.BEFORE))
+    private void overlayMessageStart(int width, int height, float partialTick, DrawContext guiGraphics, CallbackInfo ci) {
+        guiGraphics.getMatrices().translate(0, -getHud(), 0);
     }
-
-    @Redirect(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraftforge/client/gui/overlay/ForgeGui;leftHeight:I", opcode = Opcodes.PUTFIELD))
-    private void redirectLeft(ForgeGui instance, int value) {
-        instance.leftHeight = value + Raised.getHud();
-    }
-
-    @ModifyVariable(method = "renderChat", at = @At(value = "HEAD"), ordinal = 1, argsOnly = true)
-    private int modifyChat(int value) {
-        return value - Raised.getChat();
-    }
-
-    @Redirect(method = "renderRecordOverlay", at = @At(value = "INVOKE", target = "Ljava/lang/Math;max(II)I"))
-    private int modifyActionbarShift(int a, int b) {
-        return a + 9;
+    @Inject(method = "renderRecordOverlay", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V", ordinal = 0, shift = At.Shift.AFTER))
+    private void overlayMessageEnd(int width, int height, float partialTick, DrawContext guiGraphics, CallbackInfo ci) {
+        guiGraphics.getMatrices().translate(0, +getHud(), 0);
     }
 
 }

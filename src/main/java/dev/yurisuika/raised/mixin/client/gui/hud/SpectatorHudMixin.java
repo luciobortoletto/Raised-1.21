@@ -1,32 +1,35 @@
 package dev.yurisuika.raised.mixin.client.gui.hud;
 
-import dev.yurisuika.raised.Raised;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.SpectatorHud;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static dev.yurisuika.raised.client.option.RaisedConfig.*;
 
 @Mixin(value = SpectatorHud.class, priority = -1)
-public class SpectatorHudMixin {
+public abstract class SpectatorHudMixin {
 
-    @ModifyArg(method = "renderSpectatorMenu(Lnet/minecraft/client/gui/DrawContext;FIILnet/minecraft/client/gui/hud/spectator/SpectatorMenuState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIII)V"), index = 2)
-    private int modifySpectatorMenu(int value) {
-        return value - Raised.getHud();
+    // SPECTATOR MENU
+    @Inject(method = "renderSpectatorMenu(Lnet/minecraft/client/gui/DrawContext;)V", at = @At("HEAD"))
+    private void translateSpectatorMenuStart(DrawContext context, CallbackInfo ci) {
+        context.getMatrices().translate(0, -getHud(), 0);
+    }
+    @Inject(method = "renderSpectatorMenu(Lnet/minecraft/client/gui/DrawContext;)V", at = @At("TAIL"))
+    private void translateSpectatorMenuEnd(DrawContext context, CallbackInfo ci) {
+        context.getMatrices().translate(0, +getHud(), 0);
     }
 
-    @ModifyArg(method = "renderSpectatorMenu(Lnet/minecraft/client/gui/DrawContext;FIILnet/minecraft/client/gui/hud/spectator/SpectatorMenuState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIII)V", ordinal = 1), index = 6)
-    private int modifySpectatorMenuSelector(int value) {
-        return value + 2;
+    // SPECTATOR MENU TOOLTIP
+    @Inject(method = "render", at = @At("HEAD"))
+    private void heldItemTooltipStart(DrawContext context, CallbackInfo ci) {
+        context.getMatrices().translate(0, -getHud(), 0);
     }
-
-    @ModifyArg(method = "renderSpectatorMenu(Lnet/minecraft/client/gui/DrawContext;FIILnet/minecraft/client/gui/hud/spectator/SpectatorMenuState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;renderSpectatorCommand(Lnet/minecraft/client/gui/DrawContext;IIFFLnet/minecraft/client/gui/hud/spectator/SpectatorMenuCommand;)V"), index = 3)
-    private float modifySpectatorCommand(float value) {
-        return value - Raised.getHud();
-    }
-
-    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTextWithShadow(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;III)I"), index = 3)
-    private int modifyText(int value) {
-        return value - Raised.getHud();
+    @Inject(method = "render", at = @At("TAIL"))
+    private void heldItemTooltipEnd(DrawContext context, CallbackInfo ci) {
+        context.getMatrices().translate(0, +getHud(), 0);
     }
 
 }
