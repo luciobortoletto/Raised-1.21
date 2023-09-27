@@ -14,22 +14,21 @@ import static dev.yurisuika.raised.client.option.RaisedConfig.*;
 import static net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType.*;
 
 public class RaisedGui extends ForgeIngameGui {
-    
-    private final List<RenderGameOverlayEvent.ElementType> hud = Lists.newArrayList(
+
+    public final List<RenderGameOverlayEvent.ElementType> hud = Lists.newArrayList(
             ARMOR,
             HEALTH,
             FOOD,
             AIR,
             HOTBAR,
             EXPERIENCE,
-            TEXT,
             HEALTHMOUNT,
             JUMPBAR
     );
-    private final List<RenderGameOverlayEvent.ElementType> chat = Lists.newArrayList(
+    public final List<RenderGameOverlayEvent.ElementType> chat = Lists.newArrayList(
             CHAT
     );
-    private final List<RenderGameOverlayEvent.ElementType> other = Lists.newArrayList(
+    public final List<RenderGameOverlayEvent.ElementType> all = Lists.newArrayList(
             ALL
     );
 
@@ -37,45 +36,74 @@ public class RaisedGui extends ForgeIngameGui {
         super(MinecraftClient.getInstance());
     }
 
-    // START TRANSLATION OF EVENTS
+    // HUD
+    // START TRANSLATION OF HUD EVENTS
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void translatePreHighest(RenderGameOverlayEvent.Pre event) {
-        if (other.contains(event.getType()) && getSupport().pre) {
+    public void startHudTranslate(RenderGameOverlayEvent.Pre event) {
+        if (hud.contains(event.getType())) {
             RenderSystem.translatef(0, -getHud(), 0);
-        } else if (hud.contains(event.getType())) {
-            RenderSystem.translatef(0, -getHud(), 0);
-        } else if (chat.contains(event.getType())) {
+        }
+    }
+    // END TRANSLATION OF HUD EVENTS (CANCELLED)
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    public void endHudTranslate(RenderGameOverlayEvent.Pre event) {
+        if (hud.contains(event.getType()) && event.isCanceled()) {
+            RenderSystem.translatef(0, +getHud(), 0);
+        }
+    }
+    // END TRANSLATION OF HUD EVENTS
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    public void endHudTranslate(RenderGameOverlayEvent.Post event) {
+        if (hud.contains(event.getType())) {
+            RenderSystem.translatef(0, +getHud(), 0);
+        }
+    }
+
+    // CHAT
+    // START TRANSLATION OF CHAT EVENTS
+    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+    public void startChatTranslate(RenderGameOverlayEvent.Chat event) {
+        if (chat.contains(event.getType())) {
             RenderSystem.translatef(0, -getChat(), +300);
         }
     }
+    // END TRANSLATION OF CHAT EVENTS
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    public void endChatTranslate(RenderGameOverlayEvent.Chat event) {
+        if (chat.contains(event.getType())) {
+            RenderSystem.translatef(0, +getChat(), -300);
+        }
+    }
 
-    // START TRANSLATION OF EVENTS
+    // PRE MOD
+    // START TRANSLATION OF PRE MOD EVENTS
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void translatePostHighest(RenderGameOverlayEvent.Post event) {
-        if (other.contains(event.getType()) && getSupport().post) {
+    public void startPreModTranslate(RenderGameOverlayEvent.Pre event) {
+        if (all.contains(event.getType()) && getSupport().pre) {
             RenderSystem.translatef(0, -getHud(), 0);
         }
     }
-
-    // END TRANSLATION OF EVENTS
-    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-    public void translatePreLowest(RenderGameOverlayEvent.Pre event) {
-        if (other.contains(event.getType()) && getSupport().pre) {
-            RenderSystem.translatef(0, +getHud(), 0);
-        } else if (hud.contains(event.getType()) && event.isCanceled()) {
+    // END TRANSLATION OF PRE MOD EVENTS
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void endPreModTranslate(RenderGameOverlayEvent.Pre event) {
+        if (all.contains(event.getType()) && getSupport().pre) {
             RenderSystem.translatef(0, +getHud(), 0);
         }
     }
 
-    // END TRANSLATION OF EVENTS
+    // POST MOD
+    // START TRANSLATION OF POST MOD EVENTS
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void startPostModTranslate(RenderGameOverlayEvent.Post event) {
+        if (all.contains(event.getType()) && getSupport().post) {
+            RenderSystem.translatef(0, -getHud(), 0);
+        }
+    }
+    // END TRANSLATION OF POST MOD EVENTS
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void translatePostLowest(RenderGameOverlayEvent.Post event) {
-        if (other.contains(event.getType()) && getSupport().post) {
+    public void endPostModTranslate(RenderGameOverlayEvent.Post event) {
+        if (all.contains(event.getType()) && getSupport().post) {
             RenderSystem.translatef(0, +getHud(), 0);
-        } else if (hud.contains(event.getType())) {
-            RenderSystem.translatef(0, +getHud(), 0);
-        } else if (chat.contains(event.getType())) {
-            RenderSystem.translatef(0, +getChat(), -300);
         }
     }
 

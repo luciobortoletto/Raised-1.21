@@ -21,7 +21,7 @@ public class Raised {
     public static class ClientForgeEvents {
 
         @SubscribeEvent
-        public static void onKeyInput(InputEvent.KeyInputEvent event) {
+        public static void keyInput(InputEvent.KeyInputEvent event) {
             if (hudDown.wasPressed()) {
                 setHud(config.value.hud - 1);
             }
