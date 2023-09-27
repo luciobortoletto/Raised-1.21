@@ -8,9 +8,7 @@
   ],
   "client": [
     "client.gui.hud.ChatHudMixin",
-    "client.gui.hud.InGameHudMixin",
-    "client.gui.hud.SpectatorHudMixin",
-    "client.gui.overlay.ForgeGuiMixin"
+    "client.gui.hud.InGameHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1
