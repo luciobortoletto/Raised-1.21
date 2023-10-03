@@ -15,7 +15,7 @@ import static net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType
 
 public class RaisedGui extends ForgeIngameGui {
 
-    public final List<RenderGameOverlayEvent.ElementType> hud = Lists.newArrayList(
+    public static List<RenderGameOverlayEvent.ElementType> hud = Lists.newArrayList(
             ARMOR,
             HEALTH,
             FOOD,
@@ -25,10 +25,10 @@ public class RaisedGui extends ForgeIngameGui {
             HEALTHMOUNT,
             JUMPBAR
     );
-    public final List<RenderGameOverlayEvent.ElementType> chat = Lists.newArrayList(
+    public static List<RenderGameOverlayEvent.ElementType> chat = Lists.newArrayList(
             CHAT
     );
-    public final List<RenderGameOverlayEvent.ElementType> all = Lists.newArrayList(
+    public static List<RenderGameOverlayEvent.ElementType> all = Lists.newArrayList(
             ALL
     );
 
