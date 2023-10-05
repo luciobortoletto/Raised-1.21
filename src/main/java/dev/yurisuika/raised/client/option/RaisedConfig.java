@@ -21,10 +21,7 @@ public class RaisedConfig {
                 0
         );
         public Toggle toggle = new Toggle(
-                new Toggle.Support(
-                        true,
-                        true
-                ),
+                true,
                 false
         );
 
@@ -42,24 +39,12 @@ public class RaisedConfig {
 
         public static class Toggle {
 
-            public Support support;
+            public boolean support;
             public boolean sync;
 
-            public Toggle(Support support, boolean sync) {
+            public Toggle(boolean support, boolean sync) {
                 this.support = support;
                 this.sync = sync;
-            }
-
-            public static class Support {
-
-                public boolean pre;
-                public boolean post;
-
-                public Support(boolean pre, boolean post) {
-                    this.pre = pre;
-                    this.post = post;
-                }
-
             }
 
         }
@@ -107,9 +92,8 @@ public class RaisedConfig {
         saveConfig();
     }
 
-    public static void setSupport(boolean pre, boolean post) {
-        config.toggle.support.pre = pre;
-        config.toggle.support.post = post;
+    public static void setSupport(boolean value) {
+        config.toggle.support = value;
         saveConfig();
     }
 
@@ -130,7 +114,7 @@ public class RaisedConfig {
         }
     }
 
-    public static Config.Toggle.Support getSupport() {
+    public static boolean getSupport() {
         return config.toggle.support;
     }
 
