@@ -18,7 +18,7 @@ public abstract class InGameHudMixin {
         // HEAD
         @Inject(method = "render", at = @At("HEAD"))
         private void headStart(DrawContext context, float tickDelta, CallbackInfo ci) {
-            if (getSupport().pre) {
+            if (getSupport()) {
                 context.getMatrices().translate(0, -getHud(), 0);
             }
         }
@@ -126,7 +126,7 @@ public abstract class InGameHudMixin {
         // TAIL
         @Inject(method = "render", at = @At("TAIL"))
         private void tailStart(DrawContext context, float tickDelta, CallbackInfo ci) {
-            if (getSupport().post) {
+            if (getSupport()) {
                 context.getMatrices().translate(0, -getHud(), 0);
             }
         }
@@ -142,10 +142,10 @@ public abstract class InGameHudMixin {
     @Mixin(value = InGameHud.class, priority = 999999999)
     public abstract static class Post {
 
-        //HEAD
+        // HEAD
         @Inject(method = "render", at = @At("HEAD"))
         private void headEnd(DrawContext context, float tickDelta, CallbackInfo ci) {
-            if (getSupport().pre) {
+            if (getSupport()) {
                 context.getMatrices().translate(0, +getHud(), 0);
             }
         }
@@ -153,7 +153,7 @@ public abstract class InGameHudMixin {
         // TAIL
         @Inject(method = "render", at = @At("TAIL"))
         private void tailEnd(DrawContext context, float tickDelta, CallbackInfo ci) {
-            if (getSupport().post) {
+            if (getSupport()) {
                 context.getMatrices().translate(0, +getHud(), 0);
             }
         }
