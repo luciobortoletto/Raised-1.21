@@ -36,21 +36,18 @@ public class RaisedGui extends ForgeGui {
     }
 
     // HUD
-    // START TRANSLATION OF HUD EVENTS
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void startHudTranslate(RenderGuiOverlayEvent.Pre event) {
         if (hud.contains(event.getOverlay().id())) {
             event.getGuiGraphics().getMatrices().translate(0, -getHud(), 0);
         }
     }
-    // END TRANSLATION OF HUD EVENTS (CANCELLED)
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endHudTranslate(RenderGuiOverlayEvent.Pre event) {
         if (hud.contains(event.getOverlay().id()) && event.isCanceled()) {
             event.getGuiGraphics().getMatrices().translate(0, +getHud(), 0);
         }
     }
-    // END TRANSLATION OF HUD EVENTS
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endHudTranslate(RenderGuiOverlayEvent.Post event) {
         if (hud.contains(event.getOverlay().id())) {
@@ -59,14 +56,12 @@ public class RaisedGui extends ForgeGui {
     }
 
     // CHAT
-    // START TRANSLATION OF CHAT EVENTS
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void startChatTranslate(RenderGuiOverlayEvent.Pre event) {
         if (chat.contains(event.getOverlay().id())) {
             event.getGuiGraphics().getMatrices().translate(0, -getChat(), +300);
         }
     }
-    // END TRANSLATION OF CHAT EVENTS
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endChatTranslate(RenderGuiOverlayEvent.Post event) {
         if (chat.contains(event.getOverlay().id())) {
