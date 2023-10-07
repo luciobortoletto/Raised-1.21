@@ -17,7 +17,7 @@ public class RegisterGuiOverlaysEventMixin {
 
     // PRE MOD
     @Inject(method = "registerBelow", at = @At("HEAD"))
-    private void translateOverlayBelow(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
+    private void addOverlayBelow(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other) && getSupport()) {
             FMLLoader.getLoadingModList().getMods().forEach(mod -> {
                 hud.add(Identifier.tryParse(mod.getNamespace() + ":" + id));
@@ -27,7 +27,7 @@ public class RegisterGuiOverlaysEventMixin {
 
     // POST MOD
     @Inject(method = "registerAbove", at = @At("HEAD"))
-    private void translateOverlayAbove(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
+    private void addOverlayAbove(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other) && getSupport()) {
             FMLLoader.getLoadingModList().getMods().forEach(mod -> {
                 hud.add(Identifier.tryParse(mod.getNamespace() + ":" + id));
