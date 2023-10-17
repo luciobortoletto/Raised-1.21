@@ -139,7 +139,6 @@ public class RaisedConfig {
         return config.toggle.share;
     }
 
-
     public static boolean getSupport() {
         return config.toggle.support;
     }
