@@ -30,7 +30,7 @@ public class RaisedGui extends ForgeGui {
     public static List<Identifier> chat = Lists.newArrayList(
             CHAT_PANEL.id()
     );
-    public static List<Identifier> all = Lists.newArrayList(
+    public static List<Identifier> mod = Lists.newArrayList(
     );
 
     public RaisedGui() {
@@ -74,19 +74,19 @@ public class RaisedGui extends ForgeGui {
     // MOD
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void startModTranslate(RenderGuiOverlayEvent.Pre event) {
-        if (all.contains(event.getOverlay().id()) && getSupport()) {
+        if (mod.contains(event.getOverlay().id()) && getSupport()) {
             event.getGuiGraphics().getMatrices().translate(0, -getHud(), 0);
         }
     }
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endModTranslate(RenderGuiOverlayEvent.Pre event) {
-        if (all.contains(event.getOverlay().id()) && event.isCanceled() && getSupport()) {
+        if (mod.contains(event.getOverlay().id()) && event.isCanceled() && getSupport()) {
             event.getGuiGraphics().getMatrices().translate(0, +getHud(), 0);
         }
     }
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endModTranslate(RenderGuiOverlayEvent.Post event) {
-        if (all.contains(event.getOverlay().id()) && getSupport()) {
+        if (mod.contains(event.getOverlay().id()) && getSupport()) {
             event.getGuiGraphics().getMatrices().translate(0, +getHud(), 0);
         }
     }
