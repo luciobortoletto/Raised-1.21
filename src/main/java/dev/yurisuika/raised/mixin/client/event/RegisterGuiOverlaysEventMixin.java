@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static dev.yurisuika.raised.client.gui.RaisedGui.*;
-import static dev.yurisuika.raised.client.option.RaisedConfig.*;
 
 @Mixin(RegisterGuiOverlaysEvent.class)
 public class RegisterGuiOverlaysEventMixin {
@@ -18,7 +17,7 @@ public class RegisterGuiOverlaysEventMixin {
     // MOD BELOW
     @Inject(method = "registerBelow", at = @At("HEAD"))
     private void addOverlayBelow(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
-        if (hud.contains(other) && getSupport()) {
+        if (hud.contains(other)) {
             mod.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
@@ -26,7 +25,7 @@ public class RegisterGuiOverlaysEventMixin {
     // MOD ABOVE
     @Inject(method = "registerAbove", at = @At("HEAD"))
     private void addOverlayAbove(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
-        if (hud.contains(other) && getSupport()) {
+        if (hud.contains(other)) {
             mod.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
