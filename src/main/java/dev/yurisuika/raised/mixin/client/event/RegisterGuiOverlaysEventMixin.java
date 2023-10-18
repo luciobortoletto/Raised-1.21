@@ -19,7 +19,7 @@ public class RegisterGuiOverlaysEventMixin {
     @Inject(method = "registerBelow", at = @At("HEAD"))
     private void addOverlayBelow(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other) && getSupport()) {
-            all.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            mod.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
 
@@ -27,7 +27,7 @@ public class RegisterGuiOverlaysEventMixin {
     @Inject(method = "registerAbove", at = @At("HEAD"))
     private void addOverlayAbove(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other) && getSupport()) {
-            all.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            mod.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
 
