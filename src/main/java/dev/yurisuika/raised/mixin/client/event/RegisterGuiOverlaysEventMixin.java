@@ -3,7 +3,7 @@ package dev.yurisuika.raised.mixin.client.event;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
-import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.fml.ModLoadingContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,23 +15,19 @@ import static dev.yurisuika.raised.client.option.RaisedConfig.*;
 @Mixin(RegisterGuiOverlaysEvent.class)
 public class RegisterGuiOverlaysEventMixin {
 
-    // PRE MOD
+    // MOD BELOW
     @Inject(method = "registerBelow", at = @At("HEAD"))
     private void addOverlayBelow(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other) && getSupport()) {
-            FMLLoader.getLoadingModList().getMods().forEach(mod -> {
-                hud.add(Identifier.tryParse(mod.getNamespace() + ":" + id));
-            });
+            all.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
 
-    // POST MOD
+    // MOD ABOVE
     @Inject(method = "registerAbove", at = @At("HEAD"))
     private void addOverlayAbove(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other) && getSupport()) {
-            FMLLoader.getLoadingModList().getMods().forEach(mod -> {
-                hud.add(Identifier.tryParse(mod.getNamespace() + ":" + id));
-            });
+            all.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
 
