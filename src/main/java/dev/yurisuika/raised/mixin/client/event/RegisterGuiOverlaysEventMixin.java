@@ -21,7 +21,7 @@ public class RegisterGuiOverlaysEventMixin {
     private void addOverlayBelow(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other) && getSupport()) {
             FMLLoader.getLoadingModList().getMods().forEach(mod -> {
-                hud.add(Identifier.tryParse(mod.getNamespace() + ":" + id));
+                all.add(Identifier.tryParse(mod.getNamespace() + ":" + id));
                 LoggerFactory.getLogger("raised").info("Registering pre mod element: " + mod.getNamespace() + ":" + id);
             });
         }
@@ -32,7 +32,7 @@ public class RegisterGuiOverlaysEventMixin {
     private void addOverlayAbove(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other) && getSupport()) {
             FMLLoader.getLoadingModList().getMods().forEach(mod -> {
-                hud.add(Identifier.tryParse(mod.getNamespace() + ":" + id));
+                all.add(Identifier.tryParse(mod.getNamespace() + ":" + id));
                 LoggerFactory.getLogger("raised").info("Registering post mod element: " + mod.getNamespace() + ":" + id);
             });
         }
