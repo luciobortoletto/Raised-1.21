@@ -30,6 +30,8 @@ public class RaisedGui extends ForgeGui {
     public static List<Identifier> chat = Lists.newArrayList(
             CHAT_PANEL.id()
     );
+    public static List<Identifier> all = Lists.newArrayList(
+    );
 
     public RaisedGui() {
         super(MinecraftClient.getInstance());
@@ -66,6 +68,26 @@ public class RaisedGui extends ForgeGui {
     public void endChatTranslate(RenderGuiOverlayEvent.Post event) {
         if (chat.contains(event.getOverlay().id())) {
             event.getPoseStack().translate(0, +getChat(), -300);
+        }
+    }
+
+    // MOD
+    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+    public void startModTranslate(RenderGuiOverlayEvent.Pre event) {
+        if (all.contains(event.getOverlay().id()) && getSupport()) {
+            event.getPoseStack().translate(0, -getHud(), 0);
+        }
+    }
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    public void endModTranslate(RenderGuiOverlayEvent.Pre event) {
+        if (all.contains(event.getOverlay().id()) && event.isCanceled() && getSupport()) {
+            event.getPoseStack().translate(0, +getHud(), 0);
+        }
+    }
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    public void endModTranslate(RenderGuiOverlayEvent.Post event) {
+        if (all.contains(event.getOverlay().id()) && getSupport()) {
+            event.getPoseStack().translate(0, +getHud(), 0);
         }
     }
 
