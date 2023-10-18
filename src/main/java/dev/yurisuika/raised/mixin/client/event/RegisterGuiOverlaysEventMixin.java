@@ -22,7 +22,7 @@ public class RegisterGuiOverlaysEventMixin {
         if (hud.contains(other) && getSupport()) {
             String mod = ModLoadingContext.get().getActiveNamespace();
             all.add(Identifier.tryParse(mod + ":" + id));
-            LoggerFactory.getLogger("raised").info("Registering pre mod element: " + mod + ":" + id + " below " + other);
+            LoggerFactory.getLogger("raised").info("Registering mod element: " + mod + ":" + id + " below " + other);
         }
     }
 
@@ -32,7 +32,7 @@ public class RegisterGuiOverlaysEventMixin {
         if (hud.contains(other) && getSupport()) {
             String mod = ModLoadingContext.get().getActiveNamespace();
             all.add(Identifier.tryParse(mod + ":" + id));
-            LoggerFactory.getLogger("raised").info("Registering pre mod element: " + mod + ":" + id + " above " + other);
+            LoggerFactory.getLogger("raised").info("Registering mod element: " + mod + ":" + id + " above " + other);
         }
     }
 
