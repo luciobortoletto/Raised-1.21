@@ -61,13 +61,13 @@ public class RaisedGui extends ForgeGui {
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void startChatTranslate(RenderGuiOverlayEvent.Pre event) {
         if (chat.contains(event.getOverlay().id())) {
-            event.getGuiGraphics().getMatrices().translate(0, -getChat(), +300);
+            event.getGuiGraphics().getMatrices().translate(0, -(getSync() ? getHud() : getChat()), +300);
         }
     }
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endChatTranslate(RenderGuiOverlayEvent.Post event) {
         if (chat.contains(event.getOverlay().id())) {
-            event.getGuiGraphics().getMatrices().translate(0, +getChat(), -300);
+            event.getGuiGraphics().getMatrices().translate(0, +(getSync() ? getHud() : getChat()), -300);
         }
     }
 
