@@ -1,7 +1,10 @@
 package dev.yurisuika.raised;
 
 import dev.yurisuika.raised.client.gui.RaisedGui;
+import dev.yurisuika.raised.client.gui.screen.RaisedScreen;
 import dev.yurisuika.raised.server.command.RaisedCommand;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.Text;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterClientCommandsEvent;
@@ -22,23 +25,8 @@ public class Raised {
 
         @SubscribeEvent
         public static void keyInput(InputEvent.Key event) {
-            if (hudDown.wasPressed()) {
-                setHud(config.value.hud - 1);
-            }
-            if (hudReset.wasPressed()) {
-                setHud(2);
-            }
-            if (hudUp.wasPressed()) {
-                setHud(config.value.hud + 1);
-            }
-            if (chatDown.wasPressed()) {
-                setChat(config.value.chat - 1);
-            }
-            if (chatReset.wasPressed()) {
-                setChat(0);
-            }
-            if (chatUp.wasPressed()) {
-                setChat(config.value.chat + 1);
+            while (options.wasPressed()) {
+                MinecraftClient.getInstance().setScreen(new RaisedScreen(Text.translatable("options.raised.title")));
             }
         }
 
@@ -59,12 +47,7 @@ public class Raised {
 
         @SubscribeEvent
         public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
-            event.register(hudDown);
-            event.register(hudReset);
-            event.register(hudUp);
-            event.register(chatDown);
-            event.register(chatReset);
-            event.register(chatUp);
+            event.register(options);
         }
 
     }
