@@ -60,13 +60,13 @@ public class RaisedGui extends ForgeIngameGui {
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void startChatTranslate(RenderGameOverlayEvent.Pre event) {
         if (chat.contains(event.getType())) {
-            RenderSystem.translatef(0, -getChat(), +300);
+            RenderSystem.translatef(0, -(getSync() ? getHud() : getChat()), +300);
         }
     }
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endChatTranslate(RenderGameOverlayEvent.Post event) {
         if (chat.contains(event.getType())) {
-            RenderSystem.translatef(0, +getChat(), -300);
+            RenderSystem.translatef(0, +(getSync() ? getHud() : getChat()), -300);
         }
     }
 

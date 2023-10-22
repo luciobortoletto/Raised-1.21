@@ -92,12 +92,12 @@ public class RaisedConfig {
     }
 
     public static void setHud(int value) {
-        config.value.hud = Math.max(value, 0);
+        config.value.hud = value;
         saveConfig();
     }
 
     public static void setChat(int value) {
-        config.value.chat = Math.max(value, 0);
+        config.value.chat = value;
         saveConfig();
     }
 
@@ -116,11 +116,7 @@ public class RaisedConfig {
     }
 
     public static int getChat() {
-        if (getSync()) {
-            return config.value.hud;
-        } else {
-            return config.value.chat;
-        }
+        return config.value.chat;
     }
 
     public static boolean getSupport() {
