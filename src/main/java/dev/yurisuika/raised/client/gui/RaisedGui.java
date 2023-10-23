@@ -44,12 +44,14 @@ public class RaisedGui extends ForgeGui {
             event.getPoseStack().translate(0, -getHud(), 0);
         }
     }
+
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endHudTranslate(RenderGuiOverlayEvent.Pre event) {
         if (hud.contains(event.getOverlay().id()) && event.isCanceled()) {
             event.getPoseStack().translate(0, +getHud(), 0);
         }
     }
+
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endHudTranslate(RenderGuiOverlayEvent.Post event) {
         if (hud.contains(event.getOverlay().id())) {
@@ -64,6 +66,7 @@ public class RaisedGui extends ForgeGui {
             event.getPoseStack().translate(0, -(getSync() ? getHud() : getChat()), +300);
         }
     }
+
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endChatTranslate(RenderGuiOverlayEvent.Post event) {
         if (chat.contains(event.getOverlay().id())) {
@@ -78,12 +81,14 @@ public class RaisedGui extends ForgeGui {
             event.getPoseStack().translate(0, -getHud(), 0);
         }
     }
+
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endModTranslate(RenderGuiOverlayEvent.Pre event) {
         if (mod.contains(event.getOverlay().id()) && event.isCanceled() && getSupport()) {
             event.getPoseStack().translate(0, +getHud(), 0);
         }
     }
+
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endModTranslate(RenderGuiOverlayEvent.Post event) {
         if (mod.contains(event.getOverlay().id()) && getSupport()) {
