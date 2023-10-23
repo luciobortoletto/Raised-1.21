@@ -12,7 +12,7 @@ public abstract class InGameHudMixin {
     // HOTBAR SELECTOR
     @ModifyArg(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V", ordinal = 1), index = 0)
     private Identifier changeHotbarSelectorNamespace(Identifier texture) {
-        return new Identifier("raised:hud/hotbar");
+        return new Identifier("raised:hud/hotbar_selection");
     }
 
     @ModifyArg(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V", ordinal = 1), index = 4)
