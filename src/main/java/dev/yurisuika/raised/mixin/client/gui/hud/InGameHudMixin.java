@@ -29,6 +29,7 @@ public abstract class InGameHudMixin {
         private void startSpectatorMenuTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, -getHud(), 0);
         }
+
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;render(Lnet/minecraft/client/util/math/MatrixStack;F)V", shift = At.Shift.AFTER))
         private void endSpectatorMenuTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, +getHud(), 0);
@@ -39,6 +40,7 @@ public abstract class InGameHudMixin {
         private void startHotbarTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, -getHud(), 0);
         }
+
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbar(FLnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
         private void endHotbarTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, +getHud(), 0);
@@ -49,6 +51,7 @@ public abstract class InGameHudMixin {
         private void startStatusBarsTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, -getHud(), 0);
         }
+
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderStatusBars(Lnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
         private void endStatusBarsTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, +getHud(), 0);
@@ -59,6 +62,7 @@ public abstract class InGameHudMixin {
         private void startMountHealthTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, -getHud(), 0);
         }
+
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderMountHealth(Lnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
         private void endMountHealthTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, +getHud(), 0);
@@ -69,6 +73,7 @@ public abstract class InGameHudMixin {
         private void startMountJumpBarTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, -getHud(), 0);
         }
+
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderMountJumpBar(Lnet/minecraft/client/util/math/MatrixStack;I)V", shift = At.Shift.AFTER))
         private void endMountJumpBarTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, +getHud(), 0);
@@ -79,6 +84,7 @@ public abstract class InGameHudMixin {
         private void startExperienceBarTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, -getHud(), 0);
         }
+
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderExperienceBar(Lnet/minecraft/client/util/math/MatrixStack;I)V", shift = At.Shift.AFTER))
         private void endExperienceBarTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, +getHud(), 0);
@@ -89,6 +95,7 @@ public abstract class InGameHudMixin {
         private void startHeldItemTooltipTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, -getHud(), 0);
         }
+
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHeldItemTooltip(Lnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
         private void endHeldItemTooltipTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, +getHud(), 0);
@@ -99,6 +106,7 @@ public abstract class InGameHudMixin {
         private void startSpectatorHudTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, -getHud(), 0);
         }
+
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;render(Lnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
         private void endSpectatorHudTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, +getHud(), 0);
@@ -109,6 +117,7 @@ public abstract class InGameHudMixin {
         private void startOverlayMessageTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, -getHud(), 0);
         }
+
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V", ordinal = 0, shift = At.Shift.AFTER))
         private void endOverlayMessageTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, +getHud(), 0);
@@ -119,6 +128,7 @@ public abstract class InGameHudMixin {
         private void startChatTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, -(getSync() ? getHud() : getChat()), +300);
         }
+
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/ChatHud;render(Lnet/minecraft/client/util/math/MatrixStack;I)V", shift = At.Shift.AFTER))
         private void endChatTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             matrices.translate(0, +(getSync() ? getHud() : getChat()), -300);
