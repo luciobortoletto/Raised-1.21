@@ -1,7 +1,6 @@
 package dev.yurisuika.raised.client.gui.screen;
 
 import dev.yurisuika.raised.mixin.client.option.OptionInvoker;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.ClickableWidget;
@@ -28,11 +27,11 @@ public class RaisedScreen extends Screen {
     @Override
     public void init() {
         grid.add(new DoubleOption("options.raised.hud", 0, client.getWindow().getScaledHeight() / 2, 1.0F, gameOptions -> (double)getHud(), (gameOptions, value) -> setHud(value.intValue()), (gameOptions, option) -> {
-            option.setTooltip(MinecraftClient.getInstance().textRenderer.wrapLines(new TranslatableText("options.raised.hud.tooltip"), 200));
+            option.setTooltip(client.textRenderer.wrapLines(new TranslatableText("options.raised.hud.tooltip"), 200));
             return option.get(gameOptions) == 0 ? ((OptionInvoker)option).invokeGetGenericLabel(ScreenTexts.OFF) : ((OptionInvoker)option).invokeGetGenericLabel(new LiteralText(String.valueOf((int)option.get(gameOptions))));
         }).createButton(client.options, 16, 32, 200));
         grid.add(new DoubleOption("options.raised.chat", 0, client.getWindow().getScaledHeight() / 2, 1.0F, gameOptions -> (double)getChat(), (gameOptions, value) -> setChat(value.intValue()), (gameOptions, option) -> {
-            option.setTooltip(MinecraftClient.getInstance().textRenderer.wrapLines(new TranslatableText("options.raised.chat.tooltip"), 200));
+            option.setTooltip(client.textRenderer.wrapLines(new TranslatableText("options.raised.chat.tooltip"), 200));
             return option.get(gameOptions) == 0 ? ((OptionInvoker)option).invokeGetGenericLabel(ScreenTexts.OFF) : ((OptionInvoker)option).invokeGetGenericLabel(new LiteralText(String.valueOf((int)option.get(gameOptions))));
         }).createButton(client.options, 16, 56, 200));
         grid.add(new BooleanOption("options.raised.support", new TranslatableText("options.raised.support.tooltip"), gameOptions -> getSupport(), (gameOptions, value) -> setSupport(value)).createButton(client.options, 16, 80, 98));
