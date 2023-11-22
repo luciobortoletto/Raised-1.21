@@ -15,6 +15,8 @@ import static net.minecraftforge.client.gui.overlay.VanillaGuiOverlay.*;
 
 public class RaisedGui extends ForgeGui {
 
+    public boolean translated = false;
+
     public static List<Identifier> hud = Lists.newArrayList(
             HOTBAR.id(),
             PLAYER_HEALTH.id(),
@@ -37,25 +39,39 @@ public class RaisedGui extends ForgeGui {
         super(MinecraftClient.getInstance());
     }
 
+    public void start(RenderGuiOverlayEvent event) {
+        if(!translated) {
+            translated = true;
+            event.getPoseStack().translate(0, -getHud(), 0);
+        }
+    }
+
+    public void end(RenderGuiOverlayEvent event) {
+        if(translated) {
+            translated = false;
+            event.getPoseStack().translate(0, +getHud(), 0);
+        }
+    }
+
     // HUD
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void startHudTranslate(RenderGuiOverlayEvent.Pre event) {
         if (hud.contains(event.getOverlay().id())) {
-            event.getPoseStack().translate(0, -getHud(), 0);
+            start(event);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endHudTranslate(RenderGuiOverlayEvent.Pre event) {
         if (hud.contains(event.getOverlay().id()) && event.isCanceled()) {
-            event.getPoseStack().translate(0, +getHud(), 0);
+            end(event);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endHudTranslate(RenderGuiOverlayEvent.Post event) {
         if (hud.contains(event.getOverlay().id())) {
-            event.getPoseStack().translate(0, +getHud(), 0);
+            end(event);
         }
     }
 
@@ -78,21 +94,21 @@ public class RaisedGui extends ForgeGui {
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void startModTranslate(RenderGuiOverlayEvent.Pre event) {
         if (mod.contains(event.getOverlay().id()) && getSupport()) {
-            event.getPoseStack().translate(0, -getHud(), 0);
+            start(event);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endModTranslate(RenderGuiOverlayEvent.Pre event) {
         if (mod.contains(event.getOverlay().id()) && event.isCanceled() && getSupport()) {
-            event.getPoseStack().translate(0, +getHud(), 0);
+            end(event);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endModTranslate(RenderGuiOverlayEvent.Post event) {
         if (mod.contains(event.getOverlay().id()) && getSupport()) {
-            event.getPoseStack().translate(0, +getHud(), 0);
+            end(event);
         }
     }
 
