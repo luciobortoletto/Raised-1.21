@@ -15,6 +15,8 @@ import static net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType
 
 public class RaisedGui extends ForgeIngameGui {
 
+    public boolean translated = false;
+
     public static List<RenderGameOverlayEvent.ElementType> hud = Lists.newArrayList(
             ARMOR,
             HEALTH,
@@ -36,25 +38,39 @@ public class RaisedGui extends ForgeIngameGui {
         super(MinecraftClient.getInstance());
     }
 
+    public void start() {
+        if(!translated) {
+            translated = true;
+            RenderSystem.translatef(0, -getHud(), 0);
+        }
+    }
+
+    public void end() {
+        if(translated) {
+            translated = false;
+            RenderSystem.translatef(0, +getHud(), 0);
+        }
+    }
+
     // HUD
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void startHudTranslate(RenderGameOverlayEvent.Pre event) {
         if (hud.contains(event.getType())) {
-            RenderSystem.translatef(0, -getHud(), 0);
+            start();
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endHudTranslate(RenderGameOverlayEvent.Pre event) {
         if (hud.contains(event.getType()) && event.isCanceled()) {
-            RenderSystem.translatef(0, +getHud(), 0);
+            end();
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endHudTranslate(RenderGameOverlayEvent.Post event) {
         if (hud.contains(event.getType())) {
-            RenderSystem.translatef(0, +getHud(), 0);
+            end();
         }
     }
 
@@ -77,14 +93,14 @@ public class RaisedGui extends ForgeIngameGui {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void startPreModTranslate(RenderGameOverlayEvent.Pre event) {
         if (all.contains(event.getType()) && getSupport()) {
-            RenderSystem.translatef(0, -getHud(), 0);
+            start();
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void endPreModTranslate(RenderGameOverlayEvent.Pre event) {
         if (all.contains(event.getType()) && getSupport()) {
-            RenderSystem.translatef(0, +getHud(), 0);
+            end();
         }
     }
 
@@ -92,14 +108,14 @@ public class RaisedGui extends ForgeIngameGui {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void startPostModTranslate(RenderGameOverlayEvent.Post event) {
         if (all.contains(event.getType()) && getSupport()) {
-            RenderSystem.translatef(0, -getHud(), 0);
+            start();
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void endPostModTranslate(RenderGameOverlayEvent.Post event) {
         if (all.contains(event.getType()) && getSupport()) {
-            RenderSystem.translatef(0, +getHud(), 0);
+            end();
         }
     }
 
