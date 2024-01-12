@@ -88,7 +88,7 @@ public class RaisedGui extends ForgeIngameGui {
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endChatTranslate(RenderGameOverlayEvent.Pre event) {
-        if (chat.contains(event.getType())) {
+        if (chat.contains(event.getType()) && event.isCanceled()) {
             end(event, 0, getSync() ? getHud() : getChat(), 300);
         }
     }
