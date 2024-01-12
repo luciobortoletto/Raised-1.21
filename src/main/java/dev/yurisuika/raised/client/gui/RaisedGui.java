@@ -39,17 +39,17 @@ public class RaisedGui extends ForgeGui {
         super(MinecraftClient.getInstance());
     }
 
-    public void start(RenderGuiOverlayEvent event) {
+    public void start(RenderGuiOverlayEvent event, int x, int y, int z) {
         if(!translated) {
             translated = true;
-            event.getGuiGraphics().getMatrices().translate(0, -getHud(), 0);
+            event.getGuiGraphics().getMatrices().translate(x, -y, +z);
         }
     }
 
-    public void end(RenderGuiOverlayEvent event) {
+    public void end(RenderGuiOverlayEvent event, int x, int y, int z) {
         if(translated) {
             translated = false;
-            event.getGuiGraphics().getMatrices().translate(0, +getHud(), 0);
+            event.getGuiGraphics().getMatrices().translate(x, +y, -z);
         }
     }
 
@@ -57,21 +57,21 @@ public class RaisedGui extends ForgeGui {
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void startHudTranslate(RenderGuiOverlayEvent.Pre event) {
         if (hud.contains(event.getOverlay().id())) {
-            start(event);
+            start(event, 0, getHud(), 0);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endHudTranslate(RenderGuiOverlayEvent.Pre event) {
         if (hud.contains(event.getOverlay().id()) && event.isCanceled()) {
-            end(event);
+            end(event, 0, getHud(), 0);
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void endHudTranslate(RenderGuiOverlayEvent.Post event) {
         if (hud.contains(event.getOverlay().id())) {
-            end(event);
+            end(event, 0, getHud(), 0);
         }
     }
 
@@ -79,14 +79,21 @@ public class RaisedGui extends ForgeGui {
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void startChatTranslate(RenderGuiOverlayEvent.Pre event) {
         if (chat.contains(event.getOverlay().id())) {
-            event.getGuiGraphics().getMatrices().translate(0, -(getSync() ? getHud() : getChat()), +300);
+            start(event, 0, getSync() ? getHud() : getChat(), 300);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    public void endChatTranslate(RenderGuiOverlayEvent.Pre event) {
+        if (chat.contains(event.getOverlay().id()) && event.isCanceled()) {
+            end(event, 0, getSync() ? getHud() : getChat(), 300);
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void endChatTranslate(RenderGuiOverlayEvent.Post event) {
         if (chat.contains(event.getOverlay().id())) {
-            event.getGuiGraphics().getMatrices().translate(0, +(getSync() ? getHud() : getChat()), -300);
+            end(event, 0, getSync() ? getHud() : getChat(), 300);
         }
     }
 
@@ -94,21 +101,21 @@ public class RaisedGui extends ForgeGui {
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void startModTranslate(RenderGuiOverlayEvent.Pre event) {
         if (mod.contains(event.getOverlay().id()) && getSupport()) {
-            start(event);
+            start(event, 0, getHud(), 0);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void endModTranslate(RenderGuiOverlayEvent.Pre event) {
         if (mod.contains(event.getOverlay().id()) && event.isCanceled() && getSupport()) {
-            end(event);
+            end(event, 0, getHud(), 0);
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void endModTranslate(RenderGuiOverlayEvent.Post event) {
         if (mod.contains(event.getOverlay().id()) && getSupport()) {
-            end(event);
+            end(event, 0, getHud(), 0);
         }
     }
 
