@@ -22,30 +22,30 @@ public abstract class InGameHudMixin {
         @Inject(method = "render", at = @At("HEAD"))
         private void startHeadTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
             if (getSupport()) {
-                start(context,0, getHud(), 0);
+                start(context, 0, getHud(), 0);
             }
         }
 
         // SPECTATOR MENU
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;renderSpectatorMenu(Lnet/minecraft/client/gui/DrawContext;)V"))
         private void startSpectatorMenuTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            start(context,0, getHud(), 0);
+            start(context, 0, getHud(), 0);
         }
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;renderSpectatorMenu(Lnet/minecraft/client/gui/DrawContext;)V", shift = At.Shift.AFTER))
         private void endSpectatorMenuTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            end(context,0, getHud(), 0);
+            end(context, 0, getHud(), 0);
         }
 
         // HOTBAR
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbar(FLnet/minecraft/client/gui/DrawContext;)V"))
         private void startHotbarTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            start(context,0, getHud(), 0);
+            start(context, 0, getHud(), 0);
         }
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbar(FLnet/minecraft/client/gui/DrawContext;)V", shift = At.Shift.AFTER))
         private void endHotbarTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            end(context,0, getHud(), 0);
+            end(context, 0, getHud(), 0);
         }
 
         // STATUS BARS
@@ -56,73 +56,73 @@ public abstract class InGameHudMixin {
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderStatusBars(Lnet/minecraft/client/gui/DrawContext;)V", shift = At.Shift.AFTER))
         private void endStatusBarsTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            end(context,0, getHud(), 0);
+            end(context, 0, getHud(), 0);
         }
 
         // MOUNT HEALTH BAR
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderMountHealth(Lnet/minecraft/client/gui/DrawContext;)V"))
         private void startMountHealthTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            start(context,0, getHud(), 0);
+            start(context, 0, getHud(), 0);
         }
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderMountHealth(Lnet/minecraft/client/gui/DrawContext;)V", shift = At.Shift.AFTER))
         private void endMountHealthTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            end(context,0, getHud(), 0);
+            end(context, 0, getHud(), 0);
         }
 
         // MOUNT JUMP BAR
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderMountJumpBar(Lnet/minecraft/entity/JumpingMount;Lnet/minecraft/client/gui/DrawContext;I)V"))
         private void startMountJumpBarTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            start(context,0, getHud(), 0);
+            start(context, 0, getHud(), 0);
         }
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderMountJumpBar(Lnet/minecraft/entity/JumpingMount;Lnet/minecraft/client/gui/DrawContext;I)V", shift = At.Shift.AFTER))
         private void endMountJumpBarTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            end(context,0, getHud(), 0);
+            end(context, 0, getHud(), 0);
         }
 
         // EXPERIENCE BAR
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderExperienceBar(Lnet/minecraft/client/gui/DrawContext;I)V"))
         private void startExperienceBarTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            start(context,0, getHud(), 0);
+            start(context, 0, getHud(), 0);
         }
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderExperienceBar(Lnet/minecraft/client/gui/DrawContext;I)V", shift = At.Shift.AFTER))
         private void endExperienceBarTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            end(context,0, getHud(), 0);
+            end(context, 0, getHud(), 0);
         }
 
         // HELD ITEM TOOLTIP
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHeldItemTooltip(Lnet/minecraft/client/gui/DrawContext;)V"))
         private void startHeldItemTooltipTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            start(context,0, getHud(), 0);
+            start(context, 0, getHud(), 0);
         }
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHeldItemTooltip(Lnet/minecraft/client/gui/DrawContext;)V", shift = At.Shift.AFTER))
         private void endHeldItemTooltipTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            end(context,0, getHud(), 0);
+            end(context, 0, getHud(), 0);
         }
 
         // SPECTATOR TOOLTIP
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;render(Lnet/minecraft/client/gui/DrawContext;)V"))
         private void startSpectatorHudTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            start(context,0, getHud(), 0);
+            start(context, 0, getHud(), 0);
         }
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;render(Lnet/minecraft/client/gui/DrawContext;)V", shift = At.Shift.AFTER))
         private void endSpectatorHudTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            end(context,0, getHud(), 0);
+            end(context, 0, getHud(), 0);
         }
 
         // OVERLAY MESSAGE
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;push()V", ordinal = 0))
         private void startOverlayMessageTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            start(context,0, getHud(), 0);
+            start(context, 0, getHud(), 0);
         }
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V", ordinal = 0, shift = At.Shift.AFTER))
         private void endOverlayMessageTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            end(context,0, getHud(), 0);
+            end(context, 0, getHud(), 0);
         }
 
         // CHAT
@@ -140,7 +140,7 @@ public abstract class InGameHudMixin {
         @Inject(method = "render", at = @At("TAIL"))
         private void startTailTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
             if (getSupport()) {
-                start(context,0, getHud(), 0);
+                start(context, 0, getHud(), 0);
             }
         }
 
@@ -160,7 +160,7 @@ public abstract class InGameHudMixin {
         @Inject(method = "render", at = @At("HEAD"))
         private void endHeadTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
             if (getSupport()) {
-                end(context,0, getHud(), 0);
+                end(context, 0, getHud(), 0);
             }
         }
 
@@ -168,7 +168,7 @@ public abstract class InGameHudMixin {
         @Inject(method = "render", at = @At("TAIL"))
         private void endTailTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
             if (getSupport()) {
-                end(context,0, getHud(), 0);
+                end(context, 0, getHud(), 0);
             }
         }
 
