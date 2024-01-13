@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import static dev.yurisuika.raised.client.gui.RaisedGui.*;
 
 @Mixin(value = OverlayRegistry.class, remap = false)
-public class OverlayRegistryMixin {
+public abstract class OverlayRegistryMixin {
 
     // MOD BELOW
     @Inject(method = "registerOverlayBelow", at = @At("RETURN"))
