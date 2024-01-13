@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static dev.yurisuika.raised.client.gui.RaisedGui.*;
 
 @Mixin(RegisterGuiOverlaysEvent.class)
-public class RegisterGuiOverlaysEventMixin {
+public abstract  class RegisterGuiOverlaysEventMixin {
 
     // MOD BELOW
     @Inject(method = "registerBelow", at = @At("HEAD"))
