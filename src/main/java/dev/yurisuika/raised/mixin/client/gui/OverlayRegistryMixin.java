@@ -12,20 +12,32 @@ import static dev.yurisuika.raised.client.gui.RaisedGui.*;
 @Mixin(value = OverlayRegistry.class, remap = false)
 public abstract class OverlayRegistryMixin {
 
-    // MOD BELOW
+    // MOD ALL BELOW
+    @Inject(method = "registerOverlayBottom", at = @At("RETURN"))
+    private static void addOverlayBottom(String displayName, IIngameOverlay overlay, CallbackInfoReturnable<IIngameOverlay> cir) {
+        modAll.add(overlay);
+    }
+
+    // MOD HUD BELOW
     @Inject(method = "registerOverlayBelow", at = @At("RETURN"))
     private static void addOverlayBelow(IIngameOverlay other, String displayName, IIngameOverlay overlay, CallbackInfoReturnable<IIngameOverlay> cir) {
         if (hud.contains(other)) {
-            mod.add(overlay);
+            modHud.add(overlay);
         }
     }
 
-    // MOD ABOVE
+    // MOD HUD ABOVE
     @Inject(method = "registerOverlayAbove", at = @At("RETURN"))
     private static void addOverlayAbove(IIngameOverlay other, String displayName, IIngameOverlay overlay, CallbackInfoReturnable<IIngameOverlay> cir) {
         if (hud.contains(other)) {
-            mod.add(overlay);
+            modHud.add(overlay);
         }
+    }
+
+    // MOD ALL ABOVE
+    @Inject(method = "registerOverlayTop", at = @At("RETURN"))
+    private static void addOverlayTop(String displayName, IIngameOverlay overlay, CallbackInfoReturnable<IIngameOverlay> cir) {
+        modAll.add(overlay);
     }
 
 }
