@@ -35,7 +35,9 @@ public class RaisedGui extends ForgeIngameGui {
     public static List<RenderGameOverlayEvent.ElementType> all = Lists.newArrayList(
             ALL
     );
-    public static List<IIngameOverlay> mod = Lists.newArrayList(
+    public static List<IIngameOverlay> modHud = Lists.newArrayList(
+    );
+    public static List<IIngameOverlay> modAll = Lists.newArrayList(
     );
 
     public RaisedGui() {
@@ -100,54 +102,76 @@ public class RaisedGui extends ForgeIngameGui {
         }
     }
 
-    // PRE MOD
-    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void startPreModTranslate(RenderGameOverlayEvent.Pre event) {
+    // ALL (PRE)
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void startAllPreTranslate(RenderGameOverlayEvent.Pre event) {
         if (all.contains(event.getType()) && getSupport()) {
             start(event, 0, getHud(), 0);
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-    public void endPreModTranslate(RenderGameOverlayEvent.Pre event) {
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void endAllPreTranslate(RenderGameOverlayEvent.Pre event) {
         if (all.contains(event.getType()) && getSupport()) {
             end(event, 0, getHud(), 0);
         }
     }
 
-    // POST MOD
-    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void startPostModTranslate(RenderGameOverlayEvent.Post event) {
+    // ALL (POST)
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void startAllPostTranslate(RenderGameOverlayEvent.Post event) {
         if (all.contains(event.getType()) && getSupport()) {
             start(event, 0, getHud(), 0);
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-    public void endPostModTranslate(RenderGameOverlayEvent.Post event) {
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void endAllPostTranslate(RenderGameOverlayEvent.Post event) {
         if (all.contains(event.getType()) && getSupport()) {
             end(event, 0, getHud(), 0);
         }
     }
 
-    // MOD
+    // MOD HUD
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void startModTranslate(RenderGameOverlayEvent.PreLayer event) {
-        if (mod.contains(event.getOverlay()) && getSupport()) {
+    public void startModHudTranslate(RenderGameOverlayEvent.PreLayer event) {
+        if (modHud.contains(event.getOverlay())) {
             start(event, 0, getHud(), 0);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-    public void endModTranslate(RenderGameOverlayEvent.PreLayer event) {
-        if (mod.contains(event.getOverlay()) && event.isCanceled() && getSupport()) {
+    public void endModHudTranslate(RenderGameOverlayEvent.PreLayer event) {
+        if (modHud.contains(event.getOverlay()) && event.isCanceled()) {
             end(event, 0, getHud(), 0);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void endModTranslate(RenderGameOverlayEvent.PostLayer event) {
-        if (mod.contains(event.getOverlay()) && getSupport()) {
+    public void endModHudTranslate(RenderGameOverlayEvent.PostLayer event) {
+        if (modHud.contains(event.getOverlay())) {
+            end(event, 0, getHud(), 0);
+        }
+    }
+
+    // MOD ALL
+    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+    public void startModAllTranslate(RenderGameOverlayEvent.PreLayer event) {
+        if (modAll.contains(event.getOverlay()) && getSupport()) {
+            start(event, 0, getHud(), 0);
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    public void endModAllTranslate(RenderGameOverlayEvent.PreLayer event) {
+        if (modAll.contains(event.getOverlay()) && event.isCanceled() && getSupport()) {
+            end(event, 0, getHud(), 0);
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void endModAllTranslate(RenderGameOverlayEvent.PostLayer event) {
+        if (modAll.contains(event.getOverlay()) && getSupport()) {
             end(event, 0, getHud(), 0);
         }
     }
