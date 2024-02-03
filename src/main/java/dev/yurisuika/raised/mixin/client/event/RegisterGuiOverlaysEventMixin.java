@@ -11,23 +11,35 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static dev.yurisuika.raised.client.gui.RaisedGui.*;
 
-@Mixin(RegisterGuiOverlaysEvent.class)
+@Mixin(value = RegisterGuiOverlaysEvent.class, remap = false)
 public abstract  class RegisterGuiOverlaysEventMixin {
 
-    // MOD BELOW
+    // MOD ALL BELOW
+    @Inject(method = "registerBelowAll", at = @At("HEAD"))
+    private void addOverlayBelowAll(String id, IGuiOverlay overlay, CallbackInfo ci) {
+        modAll.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+    }
+
+    // MOD HUD BELOW
     @Inject(method = "registerBelow", at = @At("HEAD"))
     private void addOverlayBelow(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other)) {
-            mod.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            modHud.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
 
-    // MOD ABOVE
+    // MOD HUD ABOVE
     @Inject(method = "registerAbove", at = @At("HEAD"))
     private void addOverlayAbove(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other)) {
-            mod.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            modHud.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
+    }
+
+    // MOD ALL ABOVE
+    @Inject(method = "registerAboveAll", at = @At("HEAD"))
+    private void addOverlayAboveAll(String id, IGuiOverlay overlay, CallbackInfo ci) {
+        modAll.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
     }
 
 }

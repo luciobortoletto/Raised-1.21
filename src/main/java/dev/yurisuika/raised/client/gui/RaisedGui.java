@@ -32,7 +32,9 @@ public class RaisedGui extends ForgeGui {
     public static List<Identifier> chat = Lists.newArrayList(
             CHAT_PANEL.id()
     );
-    public static List<Identifier> mod = Lists.newArrayList(
+    public static List<Identifier> modHud = Lists.newArrayList(
+    );
+    public static List<Identifier> modAll = Lists.newArrayList(
     );
 
     public RaisedGui() {
@@ -97,24 +99,46 @@ public class RaisedGui extends ForgeGui {
         }
     }
 
-    // MOD
+    // MOD HUD
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void startModTranslate(RenderGuiOverlayEvent.Pre event) {
-        if (mod.contains(event.getOverlay().id()) && getSupport()) {
+    public void startModHudTranslate(RenderGuiOverlayEvent.Pre event) {
+        if (modHud.contains(event.getOverlay().id())) {
             start(event, 0, getHud(), 0);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-    public void endModTranslate(RenderGuiOverlayEvent.Pre event) {
-        if (mod.contains(event.getOverlay().id()) && event.isCanceled() && getSupport()) {
+    public void endModHudTranslate(RenderGuiOverlayEvent.Pre event) {
+        if (modHud.contains(event.getOverlay().id()) && event.isCanceled()) {
             end(event, 0, getHud(), 0);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void endModTranslate(RenderGuiOverlayEvent.Post event) {
-        if (mod.contains(event.getOverlay().id()) && getSupport()) {
+    public void endModHudTranslate(RenderGuiOverlayEvent.Post event) {
+        if (modHud.contains(event.getOverlay().id())) {
+            end(event, 0, getHud(), 0);
+        }
+    }
+
+    // MOD ALL
+    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+    public void startModAllTranslate(RenderGuiOverlayEvent.Pre event) {
+        if (modAll.contains(event.getOverlay().id()) && getSupport()) {
+            start(event, 0, getHud(), 0);
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    public void endModAllTranslate(RenderGuiOverlayEvent.Pre event) {
+        if (modAll.contains(event.getOverlay().id()) && event.isCanceled() && getSupport()) {
+            end(event, 0, getHud(), 0);
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void endModAllTranslate(RenderGuiOverlayEvent.Post event) {
+        if (modAll.contains(event.getOverlay().id()) && getSupport()) {
             end(event, 0, getHud(), 0);
         }
     }
