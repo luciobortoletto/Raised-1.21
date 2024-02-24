@@ -16,9 +16,17 @@ public abstract class InGameHudMixin {
     @Mixin(value = InGameHud.class, priority = -999999999)
     public static abstract class Pre {
 
-        // HEAD
+        // RENDER (HEAD)
         @Inject(method = "render", at = @At("HEAD"))
-        private void startHeadTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+        private void startRenderHeadTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+            if (getSupport()) {
+                start(matrices, 0, getHud(), 0);
+            }
+        }
+
+        // RENDER (TAIL)
+        @Inject(method = "render", at = @At("TAIL"))
+        private void startRenderTailTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             if (getSupport()) {
                 start(matrices, 0, getHud(), 0);
             }
@@ -134,14 +142,6 @@ public abstract class InGameHudMixin {
             end(matrices, 0, getSync() ? getHud() : getChat(), 300);
         }
 
-        // TAIL
-        @Inject(method = "render", at = @At("TAIL"))
-        private void startTailTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-            if (getSupport()) {
-                start(matrices, 0, getHud(), 0);
-            }
-        }
-
         // HOTBAR SELECTOR
         @ModifyArg(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;drawTexture(Lnet/minecraft/client/util/math/MatrixStack;IIIIII)V", ordinal = 1), index = 6)
         private int resizeHotbarSelector(int value) {
@@ -153,17 +153,17 @@ public abstract class InGameHudMixin {
     @Mixin(value = InGameHud.class, priority = 999999999)
     public abstract static class Post {
 
-        // HEAD
+        // RENDER (HEAD)
         @Inject(method = "render", at = @At("HEAD"))
-        private void endHeadTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+        private void endRenderHeadTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             if (getSupport()) {
                 end(matrices, 0, getHud(), 0);
             }
         }
 
-        // TAIL
+        // RENDER (TAIL)
         @Inject(method = "render", at = @At("TAIL"))
-        private void endTailTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+        private void endRenderTailTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             if (getSupport()) {
                 end(matrices, 0, getHud(), 0);
             }
