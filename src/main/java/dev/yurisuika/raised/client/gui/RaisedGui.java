@@ -42,14 +42,14 @@ public class RaisedGui extends ForgeGui {
     }
 
     public void start(RenderGuiOverlayEvent event, int x, int y, int z) {
-        if(!translated) {
+        if (!translated) {
             translated = true;
             event.getGuiGraphics().getMatrices().translate(x, -y, +z);
         }
     }
 
     public void end(RenderGuiOverlayEvent event, int x, int y, int z) {
-        if(translated) {
+        if (translated) {
             translated = false;
             event.getGuiGraphics().getMatrices().translate(x, +y, -z);
         }
