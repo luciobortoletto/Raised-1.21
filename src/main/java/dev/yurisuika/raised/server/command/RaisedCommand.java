@@ -34,29 +34,29 @@ public class RaisedCommand {
                                 })
                         )
                 )
-                .then(literal("value")
+                .then(literal("hud")
                         .then(literal("hud")
                                 .executes(context -> {
-                                    context.getSource().sendFeedback(Text.translatable("commands.raised.value.hud.query", config.value.hud));
+                                    context.getSource().sendFeedback(Text.translatable("commands.raised.hud.hud.query", config.value.hud));
                                     return 1;
                                 })
-                                .then(argument("value", IntegerArgumentType.integer(0))
+                                .then(argument("hud", IntegerArgumentType.integer(0))
                                         .executes(context -> {
-                                            setHud(IntegerArgumentType.getInteger(context, "value"));
-                                            context.getSource().sendFeedback(Text.translatable("commands.raised.value.hud.set", config.value.hud));
+                                            setHud(IntegerArgumentType.getInteger(context, "hud"));
+                                            context.getSource().sendFeedback(Text.translatable("commands.raised.hud.hud.set", config.value.hud));
                                             return 1;
                                         })
                                 )
                         )
                         .then(literal("chat")
                                 .executes(context -> {
-                                    context.getSource().sendFeedback(Text.translatable("commands.raised.value.chat.query", config.value.chat));
+                                    context.getSource().sendFeedback(Text.translatable("commands.raised.hud.chat.query", config.value.chat));
                                     return 1;
                                 })
-                                .then(argument("value", IntegerArgumentType.integer(0))
+                                .then(argument("hud", IntegerArgumentType.integer(0))
                                         .executes(context -> {
-                                            setChat(IntegerArgumentType.getInteger(context, "value"));
-                                            context.getSource().sendFeedback(Text.translatable("commands.raised.value.chat.set", config.value.chat));
+                                            setChat(IntegerArgumentType.getInteger(context, "hud"));
+                                            context.getSource().sendFeedback(Text.translatable("commands.raised.hud.chat.set", config.value.chat));
                                             return 1;
                                         })
                                 )
@@ -68,9 +68,9 @@ public class RaisedCommand {
                                     context.getSource().sendFeedback(Text.translatable("commands.raised.toggle.share.query", config.toggle.share));
                                     return 1;
                                 })
-                                .then(argument("value", BoolArgumentType.bool())
+                                .then(argument("hud", BoolArgumentType.bool())
                                         .executes(context -> {
-                                            setShare(BoolArgumentType.getBool(context, "value"));
+                                            setShare(BoolArgumentType.getBool(context, "hud"));
                                             context.getSource().sendFeedback(Text.translatable("commands.raised.toggle.share.set", config.toggle.share));
                                             return 1;
                                         })
@@ -81,9 +81,9 @@ public class RaisedCommand {
                                     context.getSource().sendFeedback(Text.translatable("commands.raised.toggle.support.query", config.toggle.support));
                                     return 1;
                                 })
-                                .then(argument("value", BoolArgumentType.bool())
+                                .then(argument("hud", BoolArgumentType.bool())
                                         .executes(context -> {
-                                            setSupport(BoolArgumentType.getBool(context, "value"));
+                                            setSupport(BoolArgumentType.getBool(context, "hud"));
                                             context.getSource().sendFeedback(Text.translatable("commands.raised.toggle.support.set", config.toggle.support));
                                             return 1;
                                         })
@@ -94,9 +94,9 @@ public class RaisedCommand {
                                     context.getSource().sendFeedback(Text.translatable("commands.raised.toggle.sync.query", config.toggle.sync));
                                     return 1;
                                 })
-                                .then(argument("value", BoolArgumentType.bool())
+                                .then(argument("hud", BoolArgumentType.bool())
                                         .executes(context -> {
-                                            setSync(BoolArgumentType.getBool(context, "value"));
+                                            setSync(BoolArgumentType.getBool(context, "hud"));
                                             context.getSource().sendFeedback(Text.translatable("commands.raised.toggle.sync.set", config.toggle.sync));
                                             return 1;
                                         })

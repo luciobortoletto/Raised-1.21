@@ -18,9 +18,17 @@ public abstract class InGameHudMixin {
     @Mixin(value = InGameHud.class, priority = -999999999)
     public abstract static class Pre {
 
-        // HEAD
+        // RENDER (HEAD)
         @Inject(method = "render", at = @At("HEAD"))
-        private void startHeadTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
+        private void startRenderHeadTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
+            if (getSupport()) {
+                start(context, 0, getHud(), 0);
+            }
+        }
+
+        // RENDER (TAIL)
+        @Inject(method = "render", at = @At("TAIL"))
+        private void startRenderTailTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
             if (getSupport()) {
                 start(context, 0, getHud(), 0);
             }
@@ -136,14 +144,6 @@ public abstract class InGameHudMixin {
             end(context, 0, getSync() ? getHud() : getChat(), 300);
         }
 
-        // TAIL
-        @Inject(method = "render", at = @At("TAIL"))
-        private void startTailTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
-            if (getSupport()) {
-                start(context, 0, getHud(), 0);
-            }
-        }
-
         // HOTBAR SELECTOR
         @ModifyArgs(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V", ordinal = 1))
         private void resizeHotbarSelector(Args args) {
@@ -156,17 +156,17 @@ public abstract class InGameHudMixin {
     @Mixin(value = InGameHud.class, priority = 999999999)
     public abstract static class Post {
 
-        // HEAD
+        // RENDER (HEAD)
         @Inject(method = "render", at = @At("HEAD"))
-        private void endHeadTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
+        private void endRenderHeadTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
             if (getSupport()) {
                 end(context, 0, getHud(), 0);
             }
         }
 
-        // TAIL
+        // RENDER (TAIL)
         @Inject(method = "render", at = @At("TAIL"))
-        private void endTailTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
+        private void endRenderTailTranslate(DrawContext context, float tickDelta, CallbackInfo ci) {
             if (getSupport()) {
                 end(context, 0, getHud(), 0);
             }
