@@ -45,14 +45,14 @@ public class RaisedGui extends ForgeIngameGui {
     }
 
     public void start(RenderGameOverlayEvent event, int x, int y, int z) {
-        if(!translated) {
+        if (!translated) {
             translated = true;
             event.getMatrixStack().translate(x, -y, +z);
         }
     }
 
     public void end(RenderGameOverlayEvent event, int x, int y, int z) {
-        if(translated) {
+        if (translated) {
             translated = false;
             event.getMatrixStack().translate(x, +y, -z);
         }
