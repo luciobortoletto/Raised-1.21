@@ -26,7 +26,7 @@ public class Raised {
         @SubscribeEvent
         public static void keyInput(InputEvent.KeyInputEvent event) {
             while (options.wasPressed()) {
-                MinecraftClient.getInstance().openScreen(new RaisedScreen(new TranslatableText("options.raised.title")));
+                MinecraftClient.getInstance().openScreen(new RaisedScreen.SliderScreen(new TranslatableText("options.raised.title")));
             }
         }
 

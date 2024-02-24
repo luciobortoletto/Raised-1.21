@@ -39,14 +39,14 @@ public class RaisedGui extends ForgeIngameGui {
     }
 
     public void start(int x, int y, int z) {
-        if(!translated) {
+        if (!translated) {
             translated = true;
             RenderSystem.translatef(x, -y, +z);
         }
     }
 
     public void end(int x, int y, int z) {
-        if(translated) {
+        if (translated) {
             translated = false;
             RenderSystem.translatef(x, +y, -z);
         }

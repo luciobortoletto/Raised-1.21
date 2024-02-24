@@ -1,9 +1,12 @@
 package dev.yurisuika.raised.client.gui.screen;
 
 import dev.yurisuika.raised.mixin.client.option.OptionInvoker;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
+import net.minecraft.client.gui.widget.CheckboxWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.option.BooleanOption;
 import net.minecraft.client.option.DoubleOption;
 import net.minecraft.client.util.OrderableTooltip;
@@ -11,42 +14,54 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 
 import static dev.yurisuika.raised.client.option.RaisedConfig.*;
+import static dev.yurisuika.raised.client.option.RaisedKeyBinding.*;
 
-public class RaisedScreen extends Screen {
+public abstract class RaisedScreen extends Screen {
 
-    ArrayList<ClickableWidget> grid = new ArrayList<>();
+    public ArrayList<ClickableWidget> grid = new ArrayList<>();
+    public CheckboxWidget checkbox;
+    public ClickableWidget support;
+    public ClickableWidget sync;
 
     public RaisedScreen(Text title) {
         super(title);
     }
 
-    @Override
-    public void init() {
-        grid.add(new DoubleOption("options.raised.hud", 0, client.getWindow().getScaledHeight() / 4, 1.0F, gameOptions -> (double)getHud(), (gameOptions, value) -> setHud(value.intValue()), (gameOptions, option) -> {
-            option.setTooltip(client.textRenderer.wrapLines(new TranslatableText("options.raised.hud.tooltip"), 200));
-            return option.get(gameOptions) == 0 ? ((OptionInvoker)option).invokeGetGenericLabel(ScreenTexts.OFF) : ((OptionInvoker)option).invokeGetGenericLabel(new LiteralText(String.valueOf((int)option.get(gameOptions))));
-        }).createButton(client.options, 16, 32, 200));
-        grid.add(new DoubleOption("options.raised.chat", 0, client.getWindow().getScaledHeight() / 4, 1.0F, gameOptions -> (double)getChat(), (gameOptions, value) -> setChat(value.intValue()), (gameOptions, option) -> {
-            option.setTooltip(client.textRenderer.wrapLines(new TranslatableText("options.raised.chat.tooltip"), 200));
-            return option.get(gameOptions) == 0 ? ((OptionInvoker)option).invokeGetGenericLabel(ScreenTexts.OFF) : ((OptionInvoker)option).invokeGetGenericLabel(new LiteralText(String.valueOf((int)option.get(gameOptions))));
-        }).createButton(client.options, 16, 56, 200));
-        grid.add(new BooleanOption("options.raised.support", new TranslatableText("options.raised.support.tooltip"), gameOptions -> getSupport(), (gameOptions, value) -> setSupport(value)).createButton(client.options, 16, 80, 98));
-        grid.add(new BooleanOption("options.raised.sync", new TranslatableText("options.raised.sync.tooltip"), gameOptions -> getSync(), (gameOptions, value) -> setSync(value)).createButton(client.options, 118, 80, 98));
-        for (ClickableWidget option : grid) {
-            addButton(option);
+    public void setScreenType() {
+        if (client.currentScreen instanceof SliderScreen) {
+            client.openScreen(new TextScreen(new TranslatableText("options.raised.title")));
+        } else if (client.currentScreen instanceof TextScreen) {
+            client.openScreen(new SliderScreen(new TranslatableText("options.raised.title")));
         }
     }
 
     @Override
+    public void init() {
+        checkbox = new CheckboxWidget((width / 2) - 100, 32, 200, 20, new TranslatableText("options.raised.checkbox").styled(style -> style.withFormatting(Formatting.WHITE)), client.currentScreen instanceof TextScreen);
+        support = new BooleanOption("options.raised.support", new TranslatableText("options.raised.support.tooltip"), gameOptions -> getSupport(), (gameOptions, value) -> setSupport(value)).createButton(client.options, (width / 2) - 100, 104, 98);
+        sync = new BooleanOption("options.raised.sync", new TranslatableText("options.raised.sync.tooltip"), gameOptions -> getSync(), (gameOptions, value) -> setSync(value)).createButton(client.options, (width / 2) + 2, 104, 98);
+    }
+
+    @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        if ((checkbox.isChecked() && client.currentScreen instanceof SliderScreen) || (!checkbox.isChecked() && client.currentScreen instanceof TextScreen)) {
+            setScreenType();
+        }
+
+        renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
-        drawTextWithShadow(matrices, this.textRenderer, new TranslatableText("options.raised.title"), 16, 16, -1);
+
+        if (checkbox != null && checkbox.isMouseOver(mouseX, mouseY)) {
+            renderOrderedTooltip(matrices, textRenderer.wrapLines(new TranslatableText("options.raised.checkbox.tooltip"), 200), mouseX, mouseY);
+        }
+
         for (ClickableWidget option : grid) {
-            if (option != null && option.isMouseOver(mouseX, mouseY) && ((OrderableTooltip)option).getOrderedTooltip().isPresent()) {
+            if (option != null && !(option instanceof CheckboxWidget || option instanceof TextFieldWidget) && option.isMouseOver(mouseX, mouseY) && ((OrderableTooltip)option).getOrderedTooltip().isPresent()) {
                 renderOrderedTooltip(matrices, ((OrderableTooltip)option).getOrderedTooltip().orElse(null), mouseX, mouseY);
             }
         }
@@ -54,11 +69,142 @@ public class RaisedScreen extends Screen {
 
     @Override
     public void renderBackground(MatrixStack matrices) {
+        fillGradient(matrices, (width / 2) - 108, 24, (width / 2) + 108, 24 + 108 , -1072689136, -804253680);
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        super.keyPressed(keyCode, scanCode, modifiers);
+        if (options.matchesKey(keyCode, scanCode)) {
+            onClose();
+            return true;
+        }
+        return true;
     }
 
     @Override
     public boolean isPauseScreen() {
         return false;
+    }
+
+    public static class SliderScreen extends RaisedScreen {
+
+        public ClickableWidget hud;
+        public ClickableWidget chat;
+
+        public SliderScreen(Text title) {
+            super(title);
+        }
+
+        @Override
+        public void init() {
+            super.init();
+
+            hud = new DoubleOption("options.raised.hud", 0, client.getWindow().getScaledHeight() / 4, 1.0F, gameOptions -> (double)getHud(), (gameOptions, value) -> setHud(value.intValue()), (gameOptions, option) -> {
+                option.setTooltip(client.textRenderer.wrapLines(new TranslatableText("options.raised.hud.tooltip"), 200));
+                return option.get(gameOptions) == 0 ? ((OptionInvoker)option).invokeGetGenericLabel(ScreenTexts.OFF) : ((OptionInvoker)option).invokeGetGenericLabel(new LiteralText(String.valueOf((int)option.get(gameOptions))));
+            }).createButton(client.options, (width / 2) - 100, 56, 200);
+            chat = new DoubleOption("options.raised.chat", 0, client.getWindow().getScaledHeight() / 4, 1.0F, gameOptions -> (double)getChat(), (gameOptions, value) -> setChat(value.intValue()), (gameOptions, option) -> {
+                option.setTooltip(client.textRenderer.wrapLines(new TranslatableText("options.raised.chat.tooltip"), 200));
+                return option.get(gameOptions) == 0 ? ((OptionInvoker)option).invokeGetGenericLabel(ScreenTexts.OFF) : ((OptionInvoker)option).invokeGetGenericLabel(new LiteralText(String.valueOf((int)option.get(gameOptions))));
+            }).createButton(client.options, (width / 2) - 100, 80, 200);
+
+            grid.add(checkbox);
+            grid.add(hud);
+            grid.add(chat);
+            grid.add(support);
+            grid.add(sync);
+
+            for (ClickableWidget option : grid) {
+                addButton(option);
+            }
+        }
+
+        @Override
+        public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+            int max = client.getWindow().getScaledHeight() / 4;
+            boolean changed = false;
+
+            if (getHud() > max) {
+                setHud(max);
+                changed = true;
+            }
+            if (getChat() > max) {
+                setChat(max);
+                changed = true;
+            }
+            if (changed) {
+                client.openScreen(new SliderScreen(new TranslatableText("options.raised.title")));
+            }
+
+            super.render(matrices, mouseX, mouseY, delta);
+        }
+
+        @Override
+        public void resize(MinecraftClient client, int width, int height) {
+            client.openScreen(new SliderScreen(new TranslatableText("options.raised.title")));
+        }
+
+    }
+
+    public static class TextScreen extends RaisedScreen {
+
+        public TextFieldWidget hud;
+        public TextFieldWidget chat;
+
+        public TextScreen(Text title) {
+            super(title);
+        }
+
+        @Override
+        public void init() {
+            super.init();
+
+            hud = new TextFieldWidget(textRenderer, (width / 2) - 25, 56, 50, 20, new TranslatableText("options.raised.hud"));
+            hud.setText(String.valueOf(getHud()));
+            hud.setMaxLength(7);
+            hud.setChangedListener(value -> {
+                if (value.matches("[0-9]+") || value.isEmpty()) {
+                    setHud(Integer.parseInt(value.isEmpty() ? "0" : value));
+                }
+            });
+            chat = new TextFieldWidget(textRenderer, (width / 2) - 25, 80, 50, 20, new TranslatableText("options.raised.chat"));
+            chat.setText(String.valueOf(getChat()));
+            chat.setMaxLength(7);
+            chat.setChangedListener(value -> {
+                if (value.matches("[0-9]+") || value.isEmpty()) {
+                    setChat(Integer.parseInt(value.isEmpty() ? "0" : value));
+                }
+            });
+
+            grid.add(checkbox);
+            grid.add(hud);
+            grid.add(chat);
+            grid.add(support);
+            grid.add(sync);
+
+            for (ClickableWidget option : grid) {
+                addButton(option);
+            }
+        }
+
+        @Override
+        public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+            super.render(matrices, mouseX, mouseY, delta);
+
+            if (hud != null && hud.isMouseOver(mouseX, mouseY)) {
+                renderOrderedTooltip(matrices, textRenderer.wrapLines(new TranslatableText("options.raised.hud.tooltip"), 200), mouseX, mouseY);
+            }
+            if (chat != null && chat.isMouseOver(mouseX, mouseY)) {
+                renderOrderedTooltip(matrices, textRenderer.wrapLines(new TranslatableText("options.raised.chat.tooltip"), 200), mouseX, mouseY);
+            }
+        }
+
+        @Override
+        public void resize(MinecraftClient client, int width, int height) {
+            client.openScreen(new TextScreen(new TranslatableText("options.raised.title")));
+        }
+
     }
 
 }

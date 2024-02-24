@@ -20,11 +20,14 @@
 
   "options.raised.title": "Raised Options",
 
+  "options.raised.checkbox": "Raised Options",
+  "options.raised.checkbox.tooltip": "Choose between control types.",
+
   "options.raised.hud": "HUD",
-  "options.raised.hud.tooltip": "Controls the HUD offset.\nMaximum value is a quarter of current scaled screen height.",
+  "options.raised.hud.tooltip": "Controls the HUD offset.\nMaximum slider value is a quarter of scaled screen height.",
 
   "options.raised.chat": "Chat",
-  "options.raised.chat.tooltip": "Controls the Chat offset.\nMaximum value is a quarter of current scaled screen height.",
+  "options.raised.chat.tooltip": "Controls the Chat offset.\nMaximum slider value is a quarter of scaled screen height.",
 
   "options.raised.support": "Support",
   "options.raised.support.tooltip": "Enables extended mod support.\nAdds support for mod elements not associated with vanilla HUD elements.",
