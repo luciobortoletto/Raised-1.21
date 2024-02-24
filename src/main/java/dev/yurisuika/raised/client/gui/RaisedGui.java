@@ -101,7 +101,7 @@ public class RaisedGui extends ForgeGui {
 
     // MOD HUD
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void startModTranslate(RenderGuiOverlayEvent.Pre event) {
+    public void startModHudTranslate(RenderGuiOverlayEvent.Pre event) {
         if (modHud.contains(event.getOverlay().id())) {
             start(event, 0, getHud(), 0);
         }

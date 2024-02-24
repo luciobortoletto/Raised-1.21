@@ -40,14 +40,19 @@ public abstract class RaisedScreen extends Screen {
         gridWidget.getMainPositioner().alignHorizontalCenter().margin(2, 0, 2, 4);
         adder = gridWidget.createAdder(2);
 
-        checkbox = CheckboxWidget.builder(Text.translatable("options.raised.checkbox").withColor(-1).formatted(Formatting.WHITE), textRenderer).option(SimpleOption.ofBoolean("options.raised.checkbox", SimpleOption.emptyTooltip(), client.currentScreen instanceof TextScreen, value -> setScreenType())).tooltip(Tooltip.of(Text.translatable("options.raised.checkbox.tooltip"))).build();
-        checkbox.setWidth(200);
+        checkbox = new CheckboxWidget(0, 0, 200, 20, Text.translatable("options.raised.checkbox").styled(style -> style.withFormatting(Formatting.WHITE)), client.currentScreen instanceof TextScreen);
+        checkbox.setTooltip(Tooltip.of(Text.translatable("options.raised.checkbox.tooltip")));
         support = SimpleOption.ofBoolean("options.raised.support", SimpleOption.constantTooltip(Text.translatable("options.raised.support.tooltip")), getSupport(), RaisedConfig::setSupport).createWidget(client.options, 0, 0, 98);
         sync = SimpleOption.ofBoolean("options.raised.sync", SimpleOption.constantTooltip(Text.translatable("options.raised.sync.tooltip")), getSync(), RaisedConfig::setSync).createWidget(client.options, 0, 0, 98);
     }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        if ((checkbox.isChecked() && client.currentScreen instanceof SliderScreen) || (!checkbox.isChecked() && client.currentScreen instanceof TextScreen)) {
+            setScreenType();
+        }
+
+        renderBackground(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
     }
 
@@ -133,7 +138,7 @@ public abstract class RaisedScreen extends Screen {
         public void init() {
             super.init();
 
-            hud = new TextFieldWidget(textRenderer, 50, 20, Text.translatable("options.raised.hud"));
+            hud = new TextFieldWidget(textRenderer, 0, 0, 50, 20, Text.translatable("options.raised.hud"));
             hud.setTooltip(Tooltip.of(Text.translatable("options.raised.hud.tooltip")));
             hud.setPlaceholder(Text.of(String.valueOf(0)));
             hud.setText(String.valueOf(getHud()));
@@ -143,7 +148,7 @@ public abstract class RaisedScreen extends Screen {
                     setHud(Integer.parseInt(value.isEmpty() ? "0" : value));
                 }
             });
-            chat = new TextFieldWidget(textRenderer, 50, 20, Text.translatable("options.raised.chat"));
+            chat = new TextFieldWidget(textRenderer, 0, 0, 50, 20, Text.translatable("options.raised.chat"));
             chat.setTooltip(Tooltip.of(Text.translatable("options.raised.chat.tooltip")));
             chat.setPlaceholder(Text.of(String.valueOf(0)));
             chat.setText(String.valueOf(getChat()));
