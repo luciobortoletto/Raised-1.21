@@ -45,14 +45,14 @@ public class RaisedGui extends ForgeIngameGui {
     }
 
     public void start(RenderGameOverlayEvent event, int x, int y, int z) {
-        if(!translated) {
+        if (!translated) {
             translated = true;
             event.getMatrixStack().translate(x, -y, +z);
         }
     }
 
     public void end(RenderGameOverlayEvent event, int x, int y, int z) {
-        if(translated) {
+        if (translated) {
             translated = false;
             event.getMatrixStack().translate(x, +y, -z);
         }
@@ -102,35 +102,35 @@ public class RaisedGui extends ForgeIngameGui {
         }
     }
 
-    // ALL (PRE)
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void startAllPreTranslate(RenderGameOverlayEvent.Pre event) {
-        if (all.contains(event.getType()) && getSupport()) {
-            start(event, 0, getHud(), 0);
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void endAllPreTranslate(RenderGameOverlayEvent.Pre event) {
-        if (all.contains(event.getType()) && getSupport()) {
-            end(event, 0, getHud(), 0);
-        }
-    }
-
-    // ALL (POST)
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void startAllPostTranslate(RenderGameOverlayEvent.Post event) {
-        if (all.contains(event.getType()) && getSupport()) {
-            start(event, 0, getHud(), 0);
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void endAllPostTranslate(RenderGameOverlayEvent.Post event) {
-        if (all.contains(event.getType()) && getSupport()) {
-            end(event, 0, getHud(), 0);
-        }
-    }
+//    // ALL (PRE)
+//    @SubscribeEvent(priority = EventPriority.HIGHEST)
+//    public void startAllPreTranslate(RenderGameOverlayEvent.Pre event) {
+//        if (all.contains(event.getType()) && getSupport()) {
+//            start(event, 0, getHud(), 0);
+//        }
+//    }
+//
+//    @SubscribeEvent(priority = EventPriority.LOWEST)
+//    public void endAllPreTranslate(RenderGameOverlayEvent.Pre event) {
+//        if (all.contains(event.getType()) && getSupport()) {
+//            end(event, 0, getHud(), 0);
+//        }
+//    }
+//
+//    // ALL (POST)
+//    @SubscribeEvent(priority = EventPriority.HIGHEST)
+//    public void startAllPostTranslate(RenderGameOverlayEvent.Post event) {
+//        if (all.contains(event.getType()) && getSupport()) {
+//            start(event, 0, getHud(), 0);
+//        }
+//    }
+//
+//    @SubscribeEvent(priority = EventPriority.LOWEST)
+//    public void endAllPostTranslate(RenderGameOverlayEvent.Post event) {
+//        if (all.contains(event.getType()) && getSupport()) {
+//            end(event, 0, getHud(), 0);
+//        }
+//    }
 
     // MOD HUD
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
