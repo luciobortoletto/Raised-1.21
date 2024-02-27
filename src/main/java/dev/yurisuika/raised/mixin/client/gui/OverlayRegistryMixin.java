@@ -48,31 +48,35 @@ public abstract class OverlayRegistryMixin {
 
     // MOD ALL BELOW
     @Inject(method = "registerOverlayBottom", at = @At("HEAD"))
-    private static void addOverlayBottom(String displayName, IIngameOverlay overlay, CallbackInfoReturnable<IIngameOverlay> cir) {
+    private static void addOverlayBelowAll(String displayName, IIngameOverlay overlay, CallbackInfoReturnable<IIngameOverlay> cir) {
         if (!vanilla.contains(displayName)) {
             modAll.add(overlay);
         }
     }
 
-    // MOD HUD BELOW
+    // MOD HUD/CHAT BELOW
     @Inject(method = "registerOverlayBelow", at = @At("RETURN"))
     private static void addOverlayBelow(IIngameOverlay other, String displayName, IIngameOverlay overlay, CallbackInfoReturnable<IIngameOverlay> cir) {
         if (hud.contains(other)) {
             modHud.add(overlay);
+        } else if (chat.contains(other)) {
+            modChat.add(overlay);
         }
     }
 
-    // MOD HUD ABOVE
+    // MOD HUD/CHAT ABOVE
     @Inject(method = "registerOverlayAbove", at = @At("RETURN"))
     private static void addOverlayAbove(IIngameOverlay other, String displayName, IIngameOverlay overlay, CallbackInfoReturnable<IIngameOverlay> cir) {
         if (hud.contains(other)) {
             modHud.add(overlay);
+        } else if (chat.contains(other)) {
+            modChat.add(overlay);
         }
     }
 
     // MOD ALL ABOVE
     @Inject(method = "registerOverlayTop", at = @At("HEAD"))
-    private static void addOverlayTop(String displayName, IIngameOverlay overlay, CallbackInfoReturnable<IIngameOverlay> cir) {
+    private static void addOverlayAboveAll(String displayName, IIngameOverlay overlay, CallbackInfoReturnable<IIngameOverlay> cir) {
         if (!vanilla.contains(displayName)) {
             modAll.add(overlay);
         }
