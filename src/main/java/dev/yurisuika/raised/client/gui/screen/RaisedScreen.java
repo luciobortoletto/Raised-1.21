@@ -43,7 +43,6 @@ public abstract class RaisedScreen extends Screen {
     @Override
     public void init() {
         checkbox = new CheckboxWidget((width / 2) - 100, 32, 200, 20, new TranslatableText("options.raised.checkbox").styled(style -> style.withFormatting(Formatting.WHITE)), client.currentScreen instanceof TextScreen);
-
         support = CyclingOption.create("options.raised.support", new TranslatableText("options.raised.support.tooltip"), gameOptions -> getSupport(), (gameOptions, option, value) -> setSupport(value)).createButton(client.options, (width / 2) - 100, 104, 98);
         sync = CyclingOption.create("options.raised.sync", new TranslatableText("options.raised.sync.tooltip"), gameOptions -> getSync(), (gameOptions, option, value) -> setSync(value)).createButton(client.options, (width / 2) + 2, 104, 98);
     }
