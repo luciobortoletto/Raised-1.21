@@ -20,19 +20,23 @@ public abstract class RegisterGuiOverlaysEventMixin {
         modAll.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
     }
 
-    // MOD HUD BELOW
+    // MOD HUD/CHAT BELOW
     @Inject(method = "registerBelow", at = @At("HEAD"))
     private void addOverlayBelow(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other)) {
             modHud.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (chat.contains(other)) {
+            modChat.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
 
-    // MOD HUD ABOVE
+    // MOD HUD/CHAT ABOVE
     @Inject(method = "registerAbove", at = @At("HEAD"))
     private void addOverlayAbove(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other)) {
             modHud.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (chat.contains(other)) {
+            modChat.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
 
