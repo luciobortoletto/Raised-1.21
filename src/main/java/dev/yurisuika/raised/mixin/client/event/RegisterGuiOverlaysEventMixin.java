@@ -14,29 +14,33 @@ import static dev.yurisuika.raised.client.gui.RaisedGui.*;
 @Mixin(value = RegisterGuiOverlaysEvent.class, remap = false)
 public abstract class RegisterGuiOverlaysEventMixin {
 
-    // MOD BELOW ALL
+    // MOD ALL BELOW
     @Inject(method = "registerBelowAll", at = @At("HEAD"))
     private void addOverlayBelowAll(String id, IGuiOverlay overlay, CallbackInfo ci) {
         modAll.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
     }
 
-    // MOD BELOW
+    // MOD HUD/CHAT BELOW
     @Inject(method = "registerBelow", at = @At("HEAD"))
     private void addOverlayBelow(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other)) {
             modHud.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (chat.contains(other)) {
+            modChat.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
 
-    // MOD ABOVE
+    // MOD HUD/CHAT ABOVE
     @Inject(method = "registerAbove", at = @At("HEAD"))
     private void addOverlayAbove(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (hud.contains(other)) {
             modHud.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (chat.contains(other)) {
+            modChat.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
 
-    // MOD ABOVE ALL
+    // MOD ALL ABOVE
     @Inject(method = "registerAboveAll", at = @At("HEAD"))
     private void addOverlayAboveAll(String id, IGuiOverlay overlay, CallbackInfo ci) {
         modAll.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));

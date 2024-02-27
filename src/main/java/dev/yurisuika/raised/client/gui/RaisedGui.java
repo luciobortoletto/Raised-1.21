@@ -34,6 +34,8 @@ public class RaisedGui extends ForgeGui {
     );
     public static List<Identifier> modHud = Lists.newArrayList(
     );
+    public static List<Identifier> modChat = Lists.newArrayList(
+    );
     public static List<Identifier> modAll = Lists.newArrayList(
     );
 
@@ -118,6 +120,28 @@ public class RaisedGui extends ForgeGui {
     public void endModHudTranslate(RenderGuiOverlayEvent.Post event) {
         if (modHud.contains(event.getOverlay().id())) {
             end(event, 0, getHud(), 0);
+        }
+    }
+
+    // MOD CHAT
+    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+    public void startModChatTranslate(RenderGuiOverlayEvent.Pre event) {
+        if (modChat.contains(event.getOverlay().id())) {
+            start(event, 0, getSync() ? getHud() : getChat(), 300);
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    public void endModChatTranslate(RenderGuiOverlayEvent.Pre event) {
+        if (modChat.contains(event.getOverlay().id()) && event.isCanceled()) {
+            end(event, 0, getSync() ? getHud() : getChat(), 300);
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void endModChatTranslate(RenderGuiOverlayEvent.Post event) {
+        if (modChat.contains(event.getOverlay().id())) {
+            end(event, 0, getSync() ? getHud() : getChat(), 300);
         }
     }
 
