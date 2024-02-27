@@ -29,7 +29,7 @@ public class RaisedGui extends ForgeIngameGui {
             ITEM_NAME_ELEMENT,
             RECORD_OVERLAY_ELEMENT
     );
-    public static List<IIngameOverlay>  chat = Lists.newArrayList(
+    public static List<IIngameOverlay> chat = Lists.newArrayList(
             CHAT_PANEL_ELEMENT
     );
     public static List<RenderGameOverlayEvent.ElementType> all = Lists.newArrayList(
