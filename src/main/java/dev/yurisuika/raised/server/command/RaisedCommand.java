@@ -28,6 +28,7 @@ public class RaisedCommand {
                                     setChat(0);
                                     setSupport(true);
                                     setSync(false);
+                                    setTexture(false);
                                     context.getSource().sendMessage(Text.translatable("commands.raised.config.reset"));
                                     return 1;
                                 })
@@ -84,6 +85,19 @@ public class RaisedCommand {
                                         .executes(context -> {
                                             setSync(BoolArgumentType.getBool(context, "value"));
                                             context.getSource().sendMessage(Text.translatable("commands.raised.toggle.sync.set", config.toggle.sync));
+                                            return 1;
+                                        })
+                                )
+                        )
+                        .then(literal("texture")
+                                .executes(context -> {
+                                    context.getSource().sendMessage(Text.translatable("commands.raised.toggle.texture.query", config.toggle.texture));
+                                    return 1;
+                                })
+                                .then(argument("value", BoolArgumentType.bool())
+                                        .executes(context -> {
+                                            setTexture(BoolArgumentType.getBool(context, "value"));
+                                            context.getSource().sendMessage(Text.translatable("commands.raised.toggle.texture.set", config.toggle.texture));
                                             return 1;
                                         })
                                 )
