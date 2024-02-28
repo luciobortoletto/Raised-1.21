@@ -21,6 +21,7 @@ public abstract class RaisedScreen extends Screen {
     public CheckboxWidget checkbox;
     public ClickableWidget support;
     public ClickableWidget sync;
+    public ClickableWidget texture;
 
     public RaisedScreen(Text title) {
         super(title);
@@ -44,6 +45,7 @@ public abstract class RaisedScreen extends Screen {
         checkbox.setTooltip(Tooltip.of(Text.translatable("options.raised.checkbox.tooltip")));
         support = SimpleOption.ofBoolean("options.raised.support", SimpleOption.constantTooltip(Text.translatable("options.raised.support.tooltip")), getSupport(), RaisedConfig::setSupport).createWidget(client.options, 0, 0, 98);
         sync = SimpleOption.ofBoolean("options.raised.sync", SimpleOption.constantTooltip(Text.translatable("options.raised.sync.tooltip")), getSync(), RaisedConfig::setSync).createWidget(client.options, 0, 0, 98);
+        texture = SimpleOption.ofBoolean("options.raised.texture", SimpleOption.constantTooltip(Text.translatable("options.raised.texture.tooltip")), getTexture(), RaisedConfig::setTexture).createWidget(client.options, 0, 0, 200);
     }
 
     @Override
@@ -92,6 +94,7 @@ public abstract class RaisedScreen extends Screen {
             adder.add(chat, 2);
             adder.add(support);
             adder.add(sync);
+            adder.add(texture, 2);
 
             gridWidget.refreshPositions();
             SimplePositioningWidget.setPos(gridWidget, 0, 32, width, height, 0.5F, 0.0F);
@@ -164,6 +167,7 @@ public abstract class RaisedScreen extends Screen {
             adder.add(chat, 2);
             adder.add(support);
             adder.add(sync);
+            adder.add(texture, 2);
 
             gridWidget.refreshPositions();
             SimplePositioningWidget.setPos(gridWidget, 0, 32, width, height, 0.5F, 0.0F);

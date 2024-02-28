@@ -8,6 +8,7 @@
   ],
   "client": [
     "client.event.RegisterGuiOverlaysEventMixin",
+    "client.gui.DrawContextInvoker",
     "client.gui.hud.ChatHudMixin",
     "client.gui.hud.InGameHudMixin"
   ],
