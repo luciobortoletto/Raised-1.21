@@ -146,28 +146,6 @@ public class RaisedGui extends ForgeGui {
         }
     }
 
-    // MOD CHAT
-    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void startModChatTranslate(RenderGuiOverlayEvent.Pre event) {
-        if (modChat.contains(event.getOverlay().id())) {
-            start(event, 0, getSync() ? getHud() : getChat(), 300);
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-    public void endModChatTranslate(RenderGuiOverlayEvent.Pre event) {
-        if (modChat.contains(event.getOverlay().id()) && event.isCanceled()) {
-            end(event, 0, getSync() ? getHud() : getChat(), 300);
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void endModChatTranslate(RenderGuiOverlayEvent.Post event) {
-        if (modChat.contains(event.getOverlay().id())) {
-            end(event, 0, getSync() ? getHud() : getChat(), 300);
-        }
-    }
-
     // MOD ALL
     @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void startModAllTranslate(RenderGuiOverlayEvent.Pre event) {
