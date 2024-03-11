@@ -63,6 +63,7 @@ public abstract class RaisedScreen extends Screen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        super.keyPressed(keyCode, scanCode, modifiers);
         if (options.matchesKey(keyCode, scanCode)) {
             close();
             return true;
