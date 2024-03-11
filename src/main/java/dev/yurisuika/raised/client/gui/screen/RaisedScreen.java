@@ -54,7 +54,6 @@ public abstract class RaisedScreen extends Screen {
             setScreenType();
         }
 
-        renderBackground(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
     }
 
