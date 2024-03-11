@@ -40,7 +40,7 @@ public abstract class InGameHudMixin {
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;renderSpectatorMenu(Lnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
         private void endSpectatorMenuTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-            end(matrices, 0, getHud(), 0);
+            end(matrices);
         }
 
         // HOTBAR
@@ -51,7 +51,7 @@ public abstract class InGameHudMixin {
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbar(FLnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
         private void endHotbarTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-            end(matrices, 0, getHud(), 0);
+            end(matrices);
         }
 
         // STATUS BARS
@@ -62,7 +62,7 @@ public abstract class InGameHudMixin {
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderStatusBars(Lnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
         private void endStatusBarsTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-            end(matrices, 0, getHud(), 0);
+            end(matrices);
         }
 
         // MOUNT HEALTH BAR
@@ -73,7 +73,7 @@ public abstract class InGameHudMixin {
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderMountHealth(Lnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
         private void endMountHealthTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-            end(matrices, 0, getHud(), 0);
+            end(matrices);
         }
 
         // MOUNT JUMP BAR
@@ -84,7 +84,7 @@ public abstract class InGameHudMixin {
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderMountJumpBar(Lnet/minecraft/entity/JumpingMount;Lnet/minecraft/client/util/math/MatrixStack;I)V", shift = At.Shift.AFTER))
         private void endMountJumpBarTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-            end(matrices, 0, getHud(), 0);
+            end(matrices);
         }
 
         // EXPERIENCE BAR
@@ -95,7 +95,7 @@ public abstract class InGameHudMixin {
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderExperienceBar(Lnet/minecraft/client/util/math/MatrixStack;I)V", shift = At.Shift.AFTER))
         private void endExperienceBarTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-            end(matrices, 0, getHud(), 0);
+            end(matrices);
         }
 
         // HELD ITEM TOOLTIP
@@ -106,7 +106,7 @@ public abstract class InGameHudMixin {
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHeldItemTooltip(Lnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
         private void endHeldItemTooltipTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-            end(matrices, 0, getHud(), 0);
+            end(matrices);
         }
 
         // SPECTATOR TOOLTIP
@@ -117,7 +117,7 @@ public abstract class InGameHudMixin {
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;render(Lnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
         private void endSpectatorHudTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-            end(matrices, 0, getHud(), 0);
+            end(matrices);
         }
 
         // OVERLAY MESSAGE
@@ -128,7 +128,7 @@ public abstract class InGameHudMixin {
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V", shift = At.Shift.AFTER))
         private void endOverlayMessageTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-            end(matrices, 0, getHud(), 0);
+            end(matrices);
         }
 
         // CHAT
@@ -139,7 +139,7 @@ public abstract class InGameHudMixin {
 
         @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/ChatHud;render(Lnet/minecraft/client/util/math/MatrixStack;III)V", shift = At.Shift.AFTER))
         private void endChatTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-            end(matrices, 0, getSync() ? getHud() : getChat(), 300);
+            end(matrices);
         }
 
         // HOTBAR SELECTOR
@@ -157,7 +157,7 @@ public abstract class InGameHudMixin {
         @Inject(method = "render", at = @At("HEAD"))
         private void endRenderHeadTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             if (getSupport()) {
-                end(matrices, 0, getHud(), 0);
+                end(matrices);
             }
         }
 
@@ -165,7 +165,7 @@ public abstract class InGameHudMixin {
         @Inject(method = "render", at = @At("TAIL"))
         private void endRenderTailTranslate(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
             if (getSupport()) {
-                end(matrices, 0, getHud(), 0);
+                end(matrices);
             }
         }
 
