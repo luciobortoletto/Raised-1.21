@@ -55,11 +55,11 @@ public abstract class RaisedScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta);
-
         if ((checkbox.isChecked() && client.currentScreen instanceof SliderScreen) || (!checkbox.isChecked() && client.currentScreen instanceof TextScreen)) {
             setScreenType();
         }
+
+        super.render(context, mouseX, mouseY, delta);
     }
 
     @Override
