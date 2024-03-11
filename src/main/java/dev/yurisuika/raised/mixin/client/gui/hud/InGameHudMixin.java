@@ -8,10 +8,9 @@ import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArgs;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import static dev.yurisuika.raised.client.option.RaisedConfig.*;
 
@@ -19,11 +18,21 @@ import static dev.yurisuika.raised.client.option.RaisedConfig.*;
 public abstract class InGameHudMixin {
 
     // HOTBAR SELECTOR
-    @ModifyArgs(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V", ordinal = 1))
-    private void resizeHotbarSelector(Args args) {
+    @ModifyArg(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V", ordinal = 1), index = 0)
+    private Identifier changeHotbarSelectorNamespace(Identifier texture) {
         if (config.toggle.texture) {
-            args.set(0, new Identifier("raised:hud/hotbar_selection"));
-            args.set(4, 24);
+            return new Identifier("raised:hud/hotbar_selection");
+        } else {
+            return texture;
+        }
+    }
+
+    @ModifyArg(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V", ordinal = 1), index = 4)
+    private int resizeHotbarSelector(int value) {
+        if (config.toggle.texture) {
+            return 24;
+        } else {
+            return value;
         }
     }
 
