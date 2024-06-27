@@ -7,10 +7,17 @@
   "mixins": [
   ],
   "client": [
-    "client.gui.hud.ChatHudMixin",
-    "client.gui.hud.InGameHudMixin$Post",
-    "client.gui.hud.InGameHudMixin$Pre",
-    "client.option.OptionInvoker"
+    "client.gui.hud.ChatHudMixin$Chat$Pre",
+    "client.gui.hud.InGameHudMixin$Boss$Pre",
+    "client.gui.hud.InGameHudMixin$Chat$Pre",
+    "client.gui.hud.InGameHudMixin$Effects$Pre",
+    "client.gui.hud.InGameHudMixin$Hotbar$Pre",
+    "client.gui.hud.InGameHudMixin$Other$Post",
+    "client.gui.hud.InGameHudMixin$Other$Pre",
+    "client.gui.hud.InGameHudMixin$Players$Pre",
+    "client.gui.hud.InGameHudMixin$Sidebar$Pre",
+    "client.option.OptionInvoker",
+    "client.render.MinecraftClientMixin$Toasts$Pre",
   ],
   "injectors": {
     "defaultRequire": 1
