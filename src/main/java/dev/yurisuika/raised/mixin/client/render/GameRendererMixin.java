@@ -1,9 +1,8 @@
 package dev.yurisuika.raised.mixin.client.render;
 
-import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.blaze3d.systems.RenderSystem;
 import dev.yurisuika.raised.util.Translate;
 import dev.yurisuika.raised.util.type.Element;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,13 +20,13 @@ public abstract class GameRendererMixin {
              * Moves the {@code toasts} if {@link Element.TOASTS} is enabled.
              */
             @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/toast/ToastManager;draw(Lnet/minecraft/client/gui/DrawContext;)V"))
-            private void startToastsTranslate(float tickDelta, long startTime, boolean tick, CallbackInfo ci, @Local DrawContext context) {
-                Translate.start(context.getMatrices(), Element.TOASTS);
+            private void startToastsTranslate(float tickDelta, long startTime, boolean tick, CallbackInfo ci) {
+                Translate.start(RenderSystem.getModelViewStack(), Element.TOASTS);
             }
 
             @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/toast/ToastManager;draw(Lnet/minecraft/client/gui/DrawContext;)V", shift = At.Shift.AFTER))
-            private void endToastsTranslate(float tickDelta, long startTime, boolean tick, CallbackInfo ci, @Local DrawContext context) {
-                Translate.end(context.getMatrices());
+            private void endToastsTranslate(float tickDelta, long startTime, boolean tick, CallbackInfo ci) {
+                Translate.end(RenderSystem.getModelViewStack());
             }
 
         }
