@@ -143,7 +143,7 @@ public abstract class InGameHudMixin {
              * Resizes the hotbar selector to draw the entire texture.
              */
             @ModifyArgs(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;drawTexture(Lnet/minecraft/client/util/math/MatrixStack;IIIIII)V", ordinal = 1))
-            private void resizeHotbarSelector(Args args) {
+            private void replaceHotbarSelectorHeight(Args args) {
                 args.set(6, 24);
             }
 
