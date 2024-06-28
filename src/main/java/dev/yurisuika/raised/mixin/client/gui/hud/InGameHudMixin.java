@@ -117,12 +117,12 @@ public abstract class InGameHudMixin {
              * Moves the {@code spectator tooltip} for {@link Element.HOTBAR}.
              */
             @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;render(Lnet/minecraft/client/util/math/MatrixStack;)V"))
-            private void startSpectatorHudTranslate(MatrixStack matrixStack, float tickDelta, CallbackInfo ci) {
+            private void startSpectatorTooltipTranslate(MatrixStack matrixStack, float tickDelta, CallbackInfo ci) {
                 Translate.start(matrixStack, Element.HOTBAR);
             }
 
             @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SpectatorHud;render(Lnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
-            private void endSpectatorHudTranslate(MatrixStack matrixStack, float tickDelta, CallbackInfo ci) {
+            private void endSpectatorTooltipTranslate(MatrixStack matrixStack, float tickDelta, CallbackInfo ci) {
                 Translate.end(matrixStack);
             }
 
