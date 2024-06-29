@@ -17,7 +17,7 @@
     "client.gui.hud.InGameHudMixin$Players$Pre",
     "client.gui.hud.InGameHudMixin$Sidebar$Pre",
     "client.option.OptionInvoker",
-    "client.render.MinecraftClientMixin$Toasts$Pre"
+    "client.toast.ToastManagerMixin$Toasts$Pre"
   ],
   "injectors": {
     "defaultRequire": 1
