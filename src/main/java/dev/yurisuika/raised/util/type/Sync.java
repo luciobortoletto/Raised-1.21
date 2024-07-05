@@ -1,14 +1,14 @@
 package dev.yurisuika.raised.util.type;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
+import net.minecraft.util.StringRepresentable;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-public enum Sync implements StringIdentifiable {
+public enum Sync implements StringRepresentable {
 
     HOTBAR(0, "options.raised.sync.hotbar"),
     CHAT(1, "options.raised.sync.chat"),
@@ -20,34 +20,34 @@ public enum Sync implements StringIdentifiable {
     OTHER(7, "options.raised.sync.other"),
     NONE(8,"options.raised.sync.none");
 
-    public static final Codec<Sync> CODEC = StringIdentifiable.createCodec(Sync::values, Sync::byName);
+    public static final Codec<Sync> CODEC = StringRepresentable.fromEnum(Sync::values, Sync::byName);
     public static final Sync[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(type -> type.id)).toArray(Sync[]::new);
     public final int id;
-    public final String translationKey;
+    public final String key;
 
-    Sync(int id, String translationKey) {
+    Sync(int id, String key) {
         this.id = id;
-        this.translationKey = translationKey;
+        this.key = key;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getTranslationKey() {
-        return translationKey;
+    public String getKey() {
+        return key;
     }
 
     public static Sync byName(String name) {
-        return Arrays.stream(Sync.values()).collect(Collectors.toMap(Sync::asString, element -> element)).get(name);
+        return Arrays.stream(Sync.values()).collect(Collectors.toMap(Sync::getSerializedName, element -> element)).get(name);
     }
 
     public static Sync byId(int id) {
-        return VALUES[MathHelper.abs(id % VALUES.length)];
+        return VALUES[Mth.abs(id % VALUES.length)];
     }
 
     @Override
-    public String asString() {
+    public String getSerializedName() {
         return name().toLowerCase();
     }
 

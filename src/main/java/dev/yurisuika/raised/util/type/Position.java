@@ -1,14 +1,14 @@
 package dev.yurisuika.raised.util.type;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
+import net.minecraft.util.StringRepresentable;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-public enum Position implements StringIdentifiable {
+public enum Position implements StringRepresentable {
 
     TOP(0, "options.raised.position.top", 0, 1),
     TOP_LEFT(1, "options.raised.position.top_left", 1, 1),
@@ -19,16 +19,16 @@ public enum Position implements StringIdentifiable {
     BOTTOM_LEFT(6, "options.raised.position.bottom_left", 1, -1),
     BOTTOM_RIGHT(7, "options.raised.position.bottom_right", -1, -1);
 
-    public static final Codec<Position> CODEC = StringIdentifiable.createCodec(Position::values, Position::byName);
+    public static final Codec<Position> CODEC = StringRepresentable.fromEnum(Position::values, Position::byName);
     public static final Position[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(position -> position.id)).toArray(Position[]::new);
     public final int id;
-    public final String translationKey;
+    public final String key;
     public final int x;
     public final int y;
 
-    Position(int id, String translationKey, int x, int y) {
+    Position(int id, String key, int x, int y) {
         this.id = id;
-        this.translationKey = translationKey;
+        this.key = key;
         this.x = x;
         this.y = y;
     }
@@ -37,20 +37,20 @@ public enum Position implements StringIdentifiable {
         return id;
     }
 
-    public String getTranslationKey() {
-        return translationKey;
+    public String getKey() {
+        return key;
     }
 
     public static Position byName(String name) {
-        return Arrays.stream(Position.values()).collect(Collectors.toMap(Position::asString, element -> element)).get(name);
+        return Arrays.stream(Position.values()).collect(Collectors.toMap(Position::getSerializedName, element -> element)).get(name);
     }
 
     public static Position byId(int id) {
-        return VALUES[MathHelper.abs(id % VALUES.length)];
+        return VALUES[Mth.abs(id % VALUES.length)];
     }
 
     @Override
-    public String asString() {
+    public String getSerializedName() {
         return name().toLowerCase();
     }
 
