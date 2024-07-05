@@ -8,8 +8,9 @@
   ],
   "client": [
     "client.event.RegisterGuiOverlaysEventMixin",
-    "client.gui.hud.ChatHudMixin",
-    "client.gui.hud.InGameHudMixin"
+    "client.gui.GuiMixin$Hotbar$Pre",
+    "client.gui.components.ChatComponentMixin$Chat$Pre",
+    "client.gui.components.toasts.ToastComponentMixin$Toasts$Pre"
   ],
   "injectors": {
     "defaultRequire": 1
