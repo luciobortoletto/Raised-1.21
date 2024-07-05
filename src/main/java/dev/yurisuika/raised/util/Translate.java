@@ -1,10 +1,10 @@
 package dev.yurisuika.raised.util;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import dev.yurisuika.raised.util.config.Option;
 import dev.yurisuika.raised.util.type.Element;
 import dev.yurisuika.raised.util.type.Sync;
-import net.minecraft.client.util.math.MatrixStack;
 
 public class Translate {
 
@@ -16,14 +16,14 @@ public class Translate {
         return Option.getY(Option.getSync(element) != Sync.NONE ? Element.byId(Option.getSync(element).getId()) : element) * Option.getPosition(element).getY();
     }
 
-    public static void start(MatrixStack matrixStack, Element element) {
-        matrixStack.push();
-        matrixStack.translate(getX(element), getY(element), element == Element.CHAT ? 300 : 0);
+    public static void start(PoseStack poseStack, Element element) {
+        poseStack.pushPose();
+        poseStack.translate(getX(element), getY(element), element == Element.CHAT ? 300 : 0);
     }
 
-    public static void end(MatrixStack matrixStack) {
-        matrixStack.pop();
-        if (matrixStack == RenderSystem.getModelViewStack()) {
+    public static void end(PoseStack poseStack) {
+        poseStack.popPose();
+        if (poseStack == RenderSystem.getModelViewStack()) {
             RenderSystem.applyModelViewMatrix();
         }
     }
