@@ -1,6 +1,7 @@
 package dev.yurisuika.raised.mixin.client.event;
 
-import net.minecraft.util.Identifier;
+import dev.yurisuika.raised.util.Overlay;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -9,41 +10,67 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static dev.yurisuika.raised.client.gui.RaisedGui.*;
-
 @Mixin(value = RegisterGuiOverlaysEvent.class, remap = false)
 public abstract class RegisterGuiOverlaysEventMixin {
 
-    // MOD ALL BELOW
+    /**
+     * Adds mods registered below all overlays to be moved.
+     */
     @Inject(method = "registerBelowAll", at = @At("HEAD"))
     private void addOverlayBelowAll(String id, IGuiOverlay overlay, CallbackInfo ci) {
-        modAll.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        Overlay.getOther().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
     }
 
-    // MOD HUD/CHAT BELOW
+    /**
+     * Adds mods registered below certain overlays all to be moved.
+     */
     @Inject(method = "registerBelow", at = @At("HEAD"))
-    private void addOverlayBelow(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
-        if (hud.contains(other)) {
-            modHud.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
-        } else if (chat.contains(other)) {
-            modChat.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+    private void addOverlayBelow(ResourceLocation other, String id, IGuiOverlay overlay, CallbackInfo ci) {
+        if (Overlay.getHotbar().contains(other)) {
+            Overlay.getHotbar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (Overlay.getChat().contains(other)) {
+            Overlay.getChat().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (Overlay.getBossbar().contains(other)) {
+            Overlay.getBossbar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (Overlay.getSidebar().contains(other)) {
+            Overlay.getSidebar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (Overlay.getEffects().contains(other)) {
+            Overlay.getEffects().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (Overlay.getPlayers().contains(other)) {
+            Overlay.getPlayers().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (Overlay.getToasts().contains(other)) {
+            Overlay.getToasts().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
 
-    // MOD HUD/CHAT ABOVE
+    /**
+     * Adds mods registered above certain overlays all to be moved.
+     */
     @Inject(method = "registerAbove", at = @At("HEAD"))
-    private void addOverlayAbove(Identifier other, String id, IGuiOverlay overlay, CallbackInfo ci) {
-        if (hud.contains(other)) {
-            modHud.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
-        } else if (chat.contains(other)) {
-            modChat.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+    private void addOverlayAbove(ResourceLocation other, String id, IGuiOverlay overlay, CallbackInfo ci) {
+        if (Overlay.getHotbar().contains(other)) {
+            Overlay.getHotbar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (Overlay.getChat().contains(other)) {
+            Overlay.getChat().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (Overlay.getBossbar().contains(other)) {
+            Overlay.getBossbar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (Overlay.getSidebar().contains(other)) {
+            Overlay.getSidebar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (Overlay.getEffects().contains(other)) {
+            Overlay.getEffects().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (Overlay.getPlayers().contains(other)) {
+            Overlay.getPlayers().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        } else if (Overlay.getToasts().contains(other)) {
+            Overlay.getToasts().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
         }
     }
 
-    // MOD ALL ABOVE
+    /**
+     * Adds mods registered above all overlays to be moved.
+     */
     @Inject(method = "registerAboveAll", at = @At("HEAD"))
     private void addOverlayAboveAll(String id, IGuiOverlay overlay, CallbackInfo ci) {
-        modAll.add(Identifier.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        Overlay.getOther().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
     }
 
 }

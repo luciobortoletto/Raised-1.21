@@ -1,10 +1,12 @@
 package dev.yurisuika.raised;
 
+import dev.yurisuika.raised.client.RaisedOptions;
+import dev.yurisuika.raised.client.commands.RaisedCommand;
 import dev.yurisuika.raised.client.gui.RaisedGui;
-import dev.yurisuika.raised.client.gui.screen.RaisedScreen;
-import dev.yurisuika.raised.server.command.RaisedCommand;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.Text;
+import dev.yurisuika.raised.client.gui.screens.RaisedScreen;
+import dev.yurisuika.raised.util.config.Config;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterClientCommandsEvent;
@@ -14,9 +16,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-import static dev.yurisuika.raised.client.option.RaisedConfig.*;
-import static dev.yurisuika.raised.client.option.RaisedKeyBinding.*;
-
 @Mod("raised")
 public class Raised {
 
@@ -25,8 +24,8 @@ public class Raised {
 
         @SubscribeEvent
         public static void keyInput(InputEvent.Key event) {
-            while (options.wasPressed()) {
-                MinecraftClient.getInstance().setScreen(new RaisedScreen.SliderScreen(Text.translatable("options.raised.title")));
+            while (RaisedOptions.options.consumeClick()) {
+                Minecraft.getInstance().setScreen(new RaisedScreen(Component.translatable("options.raised.title")));
             }
         }
 
@@ -42,21 +41,24 @@ public class Raised {
 
         @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event) {
-            MinecraftForge.EVENT_BUS.register(new RaisedGui());
+            MinecraftForge.EVENT_BUS.register(new RaisedGui.Hotbar());
+            MinecraftForge.EVENT_BUS.register(new RaisedGui.Chat());
+            MinecraftForge.EVENT_BUS.register(new RaisedGui.Bossbar());
+            MinecraftForge.EVENT_BUS.register(new RaisedGui.Sidebar());
+            MinecraftForge.EVENT_BUS.register(new RaisedGui.Effects());
+            MinecraftForge.EVENT_BUS.register(new RaisedGui.Players());
+            MinecraftForge.EVENT_BUS.register(new RaisedGui.Other());
         }
 
         @SubscribeEvent
         public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
-            event.register(options);
+            event.register(RaisedOptions.options);
         }
 
     }
 
     public Raised() {
-        if (!file.exists()) {
-            saveConfig();
-        }
-        loadConfig();
+        Config.loadConfig();
 
         MinecraftForge.EVENT_BUS.register(this);
     }
