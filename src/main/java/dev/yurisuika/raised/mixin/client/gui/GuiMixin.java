@@ -15,7 +15,7 @@ public abstract class GuiMixin {
             /**
              * Resizes the hotbar selector to draw the entire texture.
              */
-            @ModifyArg(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;blit(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V", ordinal = 1), index = 4)
+            @ModifyArg(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;blit(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V", ordinal = 1), index = 6)
             private int replaceHotbarSelectorHeight(int height) {
                 return 24;
             }
