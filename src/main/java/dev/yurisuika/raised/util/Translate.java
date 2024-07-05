@@ -1,6 +1,5 @@
 package dev.yurisuika.raised.util;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.yurisuika.raised.util.config.Option;
 import dev.yurisuika.raised.util.type.Element;
@@ -18,14 +17,11 @@ public class Translate {
 
     public static void start(PoseStack poseStack, Element element) {
         poseStack.pushPose();
-        poseStack.translate(getX(element), getY(element), element == Element.CHAT ? 300 : 0);
+        poseStack.translate(getX(element), getY(element), 0);
     }
 
     public static void end(PoseStack poseStack) {
         poseStack.popPose();
-        if (poseStack == RenderSystem.getModelViewStack()) {
-            RenderSystem.applyModelViewMatrix();
-        }
     }
 
 }
