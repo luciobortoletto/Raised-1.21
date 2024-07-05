@@ -1,204 +1,335 @@
 package dev.yurisuika.raised.client.gui;
 
-import com.google.common.collect.Lists;
-import net.minecraft.client.MinecraftClient;
+import dev.yurisuika.raised.util.Overlay;
+import dev.yurisuika.raised.util.Translate;
+import dev.yurisuika.raised.util.type.Element;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.gui.ForgeIngameGui;
-import net.minecraftforge.client.gui.IIngameOverlay;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import java.util.List;
-
-import static dev.yurisuika.raised.client.option.RaisedConfig.*;
-import static net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType.*;
-
 public class RaisedGui extends ForgeIngameGui {
 
-    public boolean translated = false;
-
-    public static List<IIngameOverlay> hud = Lists.newArrayList(
-            HOTBAR_ELEMENT,
-            PLAYER_HEALTH_ELEMENT,
-            ARMOR_LEVEL_ELEMENT,
-            FOOD_LEVEL_ELEMENT,
-            MOUNT_HEALTH_ELEMENT,
-            AIR_LEVEL_ELEMENT,
-            JUMP_BAR_ELEMENT,
-            EXPERIENCE_BAR_ELEMENT,
-            ITEM_NAME_ELEMENT,
-            RECORD_OVERLAY_ELEMENT
-    );
-    public static List<IIngameOverlay> chat = Lists.newArrayList(
-            CHAT_PANEL_ELEMENT
-    );
-    public static List<RenderGameOverlayEvent.ElementType> all = Lists.newArrayList(
-            ALL
-    );
-    public static List<IIngameOverlay> modHud = Lists.newArrayList(
-    );
-    public static List<IIngameOverlay> modChat = Lists.newArrayList(
-    );
-    public static List<IIngameOverlay> modAll = Lists.newArrayList(
-    );
-
     public RaisedGui() {
-        super(MinecraftClient.getInstance());
+        super(Minecraft.getInstance());
     }
 
-    public void start(RenderGameOverlayEvent event, int x, int y, int z) {
-        if (!translated) {
-            translated = true;
-            event.getMatrixStack().push();
-            event.getMatrixStack().translate(x, -y, +z);
+    public static class Hotbar extends RaisedGui {
+
+        public boolean translated = false;
+
+        /**
+         * Moves the {@code spectator menu}, {@code hotbar}, {@code health bar}, {@code armor bar}, {@code food bar},
+         * {@code air bar}, {@code mount health bar}, {@code mount jump bar}, {@code experience bar},
+         * {@code held item tooltip}, {@code spectator tooltip}, and {@code overlay message} for {@link Element.HOTBAR}.
+         */
+        public Hotbar() {}
+
+        @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+        public void startHotbarTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getHotbar().contains(event.getOverlay())) {
+                if (!translated) {
+                    translated = true;
+                    Translate.start(event.getMatrixStack(), Element.HOTBAR);
+                }
+            }
         }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+        public void endHotbarTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getHotbar().contains(event.getOverlay()) && event.isCanceled()) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
+        }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public void endHotbarTranslate(RenderGameOverlayEvent.PostLayer event) {
+            if (Overlay.getHotbar().contains(event.getOverlay())) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
+        }
+
     }
 
-    public void end(RenderGameOverlayEvent event) {
-        if (translated) {
-            translated = false;
-            event.getMatrixStack().pop();
+    public static class Chat extends RaisedGui {
+
+        public boolean translated = false;
+
+        /**
+         * Moves the {@code chat} for {@link Element.CHAT}.
+         */
+        public Chat() {}
+
+        @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+        public void startChatTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getChat().contains(event.getOverlay())) {
+                if (!translated) {
+                    translated = true;
+                    Translate.start(event.getMatrixStack(), Element.CHAT);
+                }
+            }
         }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+        public void endChatTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getChat().contains(event.getOverlay()) && event.isCanceled()) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
+        }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public void endChatTranslate(RenderGameOverlayEvent.PostLayer event) {
+            if (Overlay.getChat().contains(event.getOverlay())) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
+        }
+
     }
 
-    // HUD
-    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void startHudTranslate(RenderGameOverlayEvent.PreLayer event) {
-        if (hud.contains(event.getOverlay())) {
-            start(event, 0, getHud(), 0);
+    public static class Bossbar extends RaisedGui {
+
+        public boolean translated = false;
+
+        /**
+         * Moves the {@code bossbar} for {@link Element.BOSSBAR}.
+         */
+        public Bossbar() {}
+
+        @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+        public void startBossbarTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getBossbar().contains(event.getOverlay())) {
+                if (!translated) {
+                    translated = true;
+                    Translate.start(event.getMatrixStack(), Element.BOSSBAR);
+                }
+            }
         }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+        public void endBossbarTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getBossbar().contains(event.getOverlay()) && event.isCanceled()) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
+        }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public void endBossbarTranslate(RenderGameOverlayEvent.PostLayer event) {
+            if (Overlay.getBossbar().contains(event.getOverlay())) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
+        }
+
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-    public void endHudTranslate(RenderGameOverlayEvent.PreLayer event) {
-        if (hud.contains(event.getOverlay()) && event.isCanceled()) {
-            end(event);
+    public static class Sidebar extends RaisedGui {
+
+        public boolean translated = false;
+
+        /**
+         * Moves the {@code sidebar} for {@link Element.SIDEBAR}.
+         */
+        public Sidebar() {}
+
+        @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+        public void startSidebarTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getSidebar().contains(event.getOverlay())) {
+                if (!translated) {
+                    translated = true;
+                    Translate.start(event.getMatrixStack(), Element.SIDEBAR);
+                }
+            }
         }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+        public void endSidebarTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getSidebar().contains(event.getOverlay()) && event.isCanceled()) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
+        }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public void endSidebarTranslate(RenderGameOverlayEvent.PostLayer event) {
+            if (Overlay.getSidebar().contains(event.getOverlay())) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
+        }
+
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void endHudTranslate(RenderGameOverlayEvent.PostLayer event) {
-        if (hud.contains(event.getOverlay())) {
-            end(event);
+    public static class Effects extends RaisedGui {
+
+        public boolean translated = false;
+
+        /**
+         * Moves the {@code status effects} for {@link Element.EFFECTS}.
+         */
+        public Effects() {}
+
+        @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+        public void startEffectsTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getEffects().contains(event.getOverlay())) {
+                if (!translated) {
+                    translated = true;
+                    Translate.start(event.getMatrixStack(), Element.EFFECTS);
+                }
+            }
         }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+        public void endEffectsTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getEffects().contains(event.getOverlay()) && event.isCanceled()) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
+        }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public void endEffectsTranslate(RenderGameOverlayEvent.PostLayer event) {
+            if (Overlay.getEffects().contains(event.getOverlay())) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
+        }
+
     }
 
-    // CHAT
-    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void startChatTranslate(RenderGameOverlayEvent.PreLayer event) {
-        if (chat.contains(event.getOverlay())) {
-            start(event, 0, getSync() ? getHud() : getChat(), 300);
+    public static class Players extends RaisedGui {
+
+        public boolean translated = false;
+
+        /**
+         * Moves the {@code player list} for {@link Element.PLAYERS}.
+         */
+        public Players() {}
+
+        @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+        public void startPlayersTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getPlayers().contains(event.getOverlay())) {
+                if (!translated) {
+                    translated = true;
+                    Translate.start(event.getMatrixStack(), Element.PLAYERS);
+                }
+            }
         }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+        public void endPlayersTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getPlayers().contains(event.getOverlay()) && event.isCanceled()) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
+        }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public void endPlayersTranslate(RenderGameOverlayEvent.PostLayer event) {
+            if (Overlay.getPlayers().contains(event.getOverlay())) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
+        }
+
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-    public void endChatTranslate(RenderGameOverlayEvent.PreLayer event) {
-        if (chat.contains(event.getOverlay()) && event.isCanceled()) {
-            end(event);
-        }
-    }
+    public static class Other extends RaisedGui {
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void endChatTranslate(RenderGameOverlayEvent.PostLayer event) {
-        if (chat.contains(event.getOverlay())) {
-            end(event);
-        }
-    }
+        public boolean translated = false;
 
-    // ALL (PRE)
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void startAllPreTranslate(RenderGameOverlayEvent.Pre event) {
-        if (all.contains(event.getType()) && getSupport()) {
-            start(event, 0, getHud(), 0);
-        }
-    }
+        /**
+         * Moves registered mod elements for {@link Element.OTHER}.
+         */
+        public Other() {}
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void endAllPostTranslate(RenderGameOverlayEvent.Pre event) {
-        if (all.contains(event.getType()) && getSupport()) {
-            end(event);
+        @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+        public void startOtherTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getOther().contains(event.getOverlay())) {
+                if (!translated) {
+                    translated = true;
+                    Translate.start(event.getMatrixStack(), Element.OTHER);
+                }
+            }
         }
-    }
 
-    // ALL (POST)
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void startAllPostTranslate(RenderGameOverlayEvent.Post event) {
-        if (all.contains(event.getType()) && getSupport()) {
-            start(event, 0, getHud(), 0);
+        @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+        public void endOtherTranslate(RenderGameOverlayEvent.PreLayer event) {
+            if (Overlay.getOther().contains(event.getOverlay()) && event.isCanceled()) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
         }
-    }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void endAllPostTranslate(RenderGameOverlayEvent.Post event) {
-        if (all.contains(event.getType()) && getSupport()) {
-            end(event);
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public void endOtherTranslate(RenderGameOverlayEvent.PostLayer event) {
+            if (Overlay.getOther().contains(event.getOverlay())) {
+                if (translated) {
+                    translated = false;
+                    Translate.end(event.getMatrixStack());
+                }
+            }
         }
-    }
 
-    // MOD HUD
-    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void startModHudTranslate(RenderGameOverlayEvent.PreLayer event) {
-        if (modHud.contains(event.getOverlay())) {
-            start(event, 0, getHud(), 0);
+        @SubscribeEvent(priority = EventPriority.HIGHEST)
+        public void startOtherTranslate(RenderGameOverlayEvent.Pre event) {
+            if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
+                Translate.start(event.getMatrixStack(), Element.OTHER);
+            }
         }
-    }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-    public void endModHudTranslate(RenderGameOverlayEvent.PreLayer event) {
-        if (modHud.contains(event.getOverlay()) && event.isCanceled()) {
-            end(event);
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public void endOtherTranslate(RenderGameOverlayEvent.Pre event) {
+            if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
+                Translate.end(event.getMatrixStack());
+            }
         }
-    }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void endModHudTranslate(RenderGameOverlayEvent.PostLayer event) {
-        if (modHud.contains(event.getOverlay())) {
-            end(event);
+        @SubscribeEvent(priority = EventPriority.HIGHEST)
+        public void startOtherTranslate(RenderGameOverlayEvent.Post event) {
+            if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
+                Translate.start(event.getMatrixStack(), Element.OTHER);
+            }
         }
-    }
 
-    // MOD CHAT
-    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void startModChatTranslate(RenderGameOverlayEvent.PreLayer event) {
-        if (modChat.contains(event.getOverlay())) {
-            start(event, 0, getSync() ? getHud() : getChat(), 300);
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public void endOtherTranslate(RenderGameOverlayEvent.Post event) {
+            if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
+                Translate.end(event.getMatrixStack());
+            }
         }
-    }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-    public void endModChatTranslate(RenderGameOverlayEvent.PreLayer event) {
-        if (modChat.contains(event.getOverlay()) && event.isCanceled()) {
-            end(event);
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void endModChatTranslate(RenderGameOverlayEvent.PostLayer event) {
-        if (modChat.contains(event.getOverlay())) {
-            end(event);
-        }
-    }
-
-    // MOD ALL
-    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void startModAllTranslate(RenderGameOverlayEvent.PreLayer event) {
-        if (modAll.contains(event.getOverlay()) && getSupport()) {
-            start(event, 0, getHud(), 0);
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-    public void endModAllTranslate(RenderGameOverlayEvent.PreLayer event) {
-        if (modAll.contains(event.getOverlay()) && event.isCanceled() && getSupport()) {
-            end(event);
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void endModAllTranslate(RenderGameOverlayEvent.PostLayer event) {
-        if (modAll.contains(event.getOverlay()) && getSupport()) {
-            end(event);
-        }
     }
 
 }
