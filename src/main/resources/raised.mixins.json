@@ -7,10 +7,11 @@
   "mixins": [
   ],
   "client": [
+    "client.OptionInvoker",
+    "client.gui.GuiMixin$Hotbar$Pre",
     "client.gui.OverlayRegistryMixin",
-    "client.gui.hud.ChatHudMixin",
-    "client.gui.hud.InGameHudMixin",
-    "client.option.OptionInvoker"
+    "client.gui.components.ChatComponentMixin$Chat$Pre",
+    "client.gui.components.toasts.ToastComponentMixin$Toasts$Pre"
   ],
   "injectors": {
     "defaultRequire": 1
