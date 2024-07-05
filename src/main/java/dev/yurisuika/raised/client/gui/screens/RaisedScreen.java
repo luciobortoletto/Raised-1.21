@@ -111,7 +111,7 @@ public class RaisedScreen extends Screen {
     }
 
     public IconToggleButton createIconToggleButton(Element element, int x, int y) {
-        return new IconToggleButton(x, y, 20, 20, new TranslatableComponent(element.getKey()), 20, 20, new ResourceLocation("raised:textures/gui/icon/" + element.getKey() + ".png"), button -> {
+        return new IconToggleButton(x, y, 20, 20, new TranslatableComponent(element.getKey()), 20, 20, new ResourceLocation("raised:textures/gui/icon/" + element.getSerializedName() + ".png"), button -> {
             RaisedScreen.element = element;
             minecraft.setScreen(new RaisedScreen(new TranslatableComponent("options.raised.title")));
         }, element == RaisedScreen.element);
