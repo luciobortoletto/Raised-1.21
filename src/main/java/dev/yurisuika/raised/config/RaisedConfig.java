@@ -1,7 +1,9 @@
 package dev.yurisuika.raised.config;
 
-import dev.yurisuika.raised.util.config.option.*;
-import dev.yurisuika.raised.util.type.*;
+import dev.yurisuika.raised.util.config.option.Elements;
+import dev.yurisuika.raised.util.config.option.Properties;
+import dev.yurisuika.raised.util.type.Position;
+import dev.yurisuika.raised.util.type.Sync;
 
 public class RaisedConfig {
 
