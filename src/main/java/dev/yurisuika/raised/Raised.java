@@ -7,20 +7,20 @@ import dev.yurisuika.raised.client.gui.screens.RaisedScreen;
 import dev.yurisuika.raised.util.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RegisterClientCommandsEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.InputEvent;
+import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.common.NeoForge;
 
 @Mod("raised")
 public class Raised {
 
     @Mod.EventBusSubscriber(modid = "raised", value = Dist.CLIENT)
-    public static class ClientForgeEvents {
+    public static class ClientNeoForgeEvents {
 
         @SubscribeEvent
         public static void keyInput(InputEvent.Key event) {
@@ -41,13 +41,13 @@ public class Raised {
 
         @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event) {
-            MinecraftForge.EVENT_BUS.register(new RaisedGui.Hotbar());
-            MinecraftForge.EVENT_BUS.register(new RaisedGui.Chat());
-            MinecraftForge.EVENT_BUS.register(new RaisedGui.Bossbar());
-            MinecraftForge.EVENT_BUS.register(new RaisedGui.Sidebar());
-            MinecraftForge.EVENT_BUS.register(new RaisedGui.Effects());
-            MinecraftForge.EVENT_BUS.register(new RaisedGui.Players());
-            MinecraftForge.EVENT_BUS.register(new RaisedGui.Other());
+            NeoForge.EVENT_BUS.register(new RaisedGui.Hotbar());
+            NeoForge.EVENT_BUS.register(new RaisedGui.Chat());
+            NeoForge.EVENT_BUS.register(new RaisedGui.Bossbar());
+            NeoForge.EVENT_BUS.register(new RaisedGui.Sidebar());
+            NeoForge.EVENT_BUS.register(new RaisedGui.Effects());
+            NeoForge.EVENT_BUS.register(new RaisedGui.Players());
+            NeoForge.EVENT_BUS.register(new RaisedGui.Other());
         }
 
         @SubscribeEvent
@@ -59,8 +59,6 @@ public class Raised {
 
     public Raised() {
         Config.loadConfig();
-
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
 }

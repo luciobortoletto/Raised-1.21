@@ -2,7 +2,7 @@ package dev.yurisuika.raised.util;
 
 import com.google.common.collect.Lists;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
+import net.neoforged.neoforge.client.gui.overlay.VanillaGuiOverlay;
 
 import java.util.List;
 
