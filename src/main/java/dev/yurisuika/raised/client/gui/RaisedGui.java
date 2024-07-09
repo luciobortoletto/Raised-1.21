@@ -4,12 +4,12 @@ import dev.yurisuika.raised.util.Overlay;
 import dev.yurisuika.raised.util.Translate;
 import dev.yurisuika.raised.util.type.Element;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.client.event.RenderGuiOverlayEvent;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.RenderGuiOverlayEvent;
+import net.neoforged.neoforge.client.gui.overlay.ExtendedGui;
 
-public class RaisedGui extends ForgeGui {
+public class RaisedGui extends ExtendedGui {
 
     public RaisedGui() {
         super(Minecraft.getInstance());
