@@ -6,19 +6,19 @@ import dev.yurisuika.raised.client.gui.screens.RaisedScreen;
 import dev.yurisuika.raised.util.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RegisterClientCommandsEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.InputEvent;
+import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 
 @Mod("raised")
 public class Raised {
 
-    @Mod.EventBusSubscriber(modid = "raised", value = Dist.CLIENT)
-    public static class ClientForgeEvents {
+    @EventBusSubscriber(modid = "raised", value = Dist.CLIENT)
+    public static class ClientNeoForgeEvents {
 
         @SubscribeEvent
         public static void keyInput(InputEvent.Key event) {
@@ -34,7 +34,7 @@ public class Raised {
 
     }
 
-    @Mod.EventBusSubscriber(modid = "raised", bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = "raised", bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModBusEvents {
 
         @SubscribeEvent
@@ -46,8 +46,6 @@ public class Raised {
 
     public Raised() {
         Config.loadConfig();
-
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
 }
