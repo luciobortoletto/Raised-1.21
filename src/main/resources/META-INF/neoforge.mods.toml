@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "51,)"
+loaderVersion = "1,)"
 license = "GNU Lesser General Public License v3.0"
 
 [[mods]]
@@ -15,16 +15,19 @@ description = '''
 Raises the hotbar so the selector is not cut off!
 '''
 
+[[mixins]]
+config = "raised.mixins.json"
+
 [[dependencies.raised]]
 modId = "minecraft"
-mandatory = true
+type = "required"
 versionRange = "[1.21,1.22)"
 ordering = "NONE"
 side = "CLIENT"
 
 [[dependencies.raised]]
-modId = "forge"
-mandatory = true
-versionRange = "[51,)"
+modId = "neoforge"
+type = "required"
+versionRange = "[21,)"
 ordering = "NONE"
 side = "CLIENT"
