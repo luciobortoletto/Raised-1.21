@@ -3,17 +3,11 @@ package dev.yurisuika.raised.client.gui;
 import dev.yurisuika.raised.util.Overlay;
 import dev.yurisuika.raised.util.Translate;
 import dev.yurisuika.raised.util.type.Element;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class RaisedGui extends ForgeGui {
-
-    public RaisedGui() {
-        super(Minecraft.getInstance());
-    }
+public class RaisedGui {
 
     public static class Hotbar extends RaisedGui {
 
