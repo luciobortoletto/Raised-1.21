@@ -3,7 +3,6 @@ package dev.yurisuika.raised.mixin.client.event;
 import dev.yurisuika.raised.util.Overlay;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,7 +17,7 @@ public abstract class RegisterGuiLayersEventMixin {
      */
     @Inject(method = "registerBelowAll", at = @At("HEAD"))
     private void addOverlayBelowAll(ResourceLocation id, LayeredDraw.Layer layer, CallbackInfo ci) {
-        Overlay.getOther().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        Overlay.getOther().add(id);
     }
 
     /**
@@ -27,19 +26,19 @@ public abstract class RegisterGuiLayersEventMixin {
     @Inject(method = "registerBelow", at = @At("HEAD"))
     private void addOverlayBelow(ResourceLocation other, ResourceLocation id, LayeredDraw.Layer layer, CallbackInfo ci) {
         if (Overlay.getHotbar().contains(other)) {
-            Overlay.getHotbar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getHotbar().add(id);
         } else if (Overlay.getChat().contains(other)) {
-            Overlay.getChat().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getChat().add(id);
         } else if (Overlay.getBossbar().contains(other)) {
-            Overlay.getBossbar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getBossbar().add(id);
         } else if (Overlay.getSidebar().contains(other)) {
-            Overlay.getSidebar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getSidebar().add(id);
         } else if (Overlay.getEffects().contains(other)) {
-            Overlay.getEffects().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getEffects().add(id);
         } else if (Overlay.getPlayers().contains(other)) {
-            Overlay.getPlayers().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getPlayers().add(id);
         } else if (Overlay.getToasts().contains(other)) {
-            Overlay.getToasts().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getToasts().add(id);
         }
     }
 
@@ -49,19 +48,19 @@ public abstract class RegisterGuiLayersEventMixin {
     @Inject(method = "registerAbove", at = @At("HEAD"))
     private void addOverlayAbove(ResourceLocation other, ResourceLocation id, LayeredDraw.Layer layer, CallbackInfo ci) {
         if (Overlay.getHotbar().contains(other)) {
-            Overlay.getHotbar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getHotbar().add(id);
         } else if (Overlay.getChat().contains(other)) {
-            Overlay.getChat().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getChat().add(id);
         } else if (Overlay.getBossbar().contains(other)) {
-            Overlay.getBossbar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getBossbar().add(id);
         } else if (Overlay.getSidebar().contains(other)) {
-            Overlay.getSidebar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getSidebar().add(id);
         } else if (Overlay.getEffects().contains(other)) {
-            Overlay.getEffects().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getEffects().add(id);
         } else if (Overlay.getPlayers().contains(other)) {
-            Overlay.getPlayers().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getPlayers().add(id);
         } else if (Overlay.getToasts().contains(other)) {
-            Overlay.getToasts().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getToasts().add(id);
         }
     }
 
@@ -70,7 +69,7 @@ public abstract class RegisterGuiLayersEventMixin {
      */
     @Inject(method = "registerAboveAll", at = @At("HEAD"))
     private void addOverlayAboveAll(ResourceLocation id, LayeredDraw.Layer layer, CallbackInfo ci) {
-        Overlay.getOther().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        Overlay.getOther().add(id);
     }
 
 }

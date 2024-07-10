@@ -151,7 +151,7 @@ public class RaisedScreen extends Screen {
         return IconToggleButton.builder(Component.translatable(element.getKey()), button -> {
             RaisedScreen.element = element;
             minecraft.setScreen(new RaisedScreen(Component.translatable("options.raised.title")));
-        }, element == RaisedScreen.element).size(20, 20).texture(new ResourceLocation("raised:icon/" + element.getSerializedName()), 20, 20).tooltip(Tooltip.create(Component.translatable(element.getKey()))).build();
+        }, element == RaisedScreen.element).size(20, 20).texture(ResourceLocation.tryParse("raised:icon/" + element.getSerializedName()), 20, 20).tooltip(Tooltip.create(Component.translatable(element.getKey()))).build();
     }
 
     public void setIconToggleButton(IconToggleButton widget) {
@@ -214,13 +214,13 @@ public class RaisedScreen extends Screen {
                 int slot = Mth.lerpDiscrete(percentX, 5, 8) * 20;
                 Texture texture = Option.getTexture();
 
-                guiGraphics.blitSprite(new ResourceLocation("hud/hotbar"), -182, offset - 22, 182, 22);
+                guiGraphics.blitSprite(ResourceLocation.tryParse("hud/hotbar"), -182, offset - 22, 182, 22);
                 if (texture == Texture.REPLACE || (texture == Texture.AUTO && Pack.getPack())) {
-                    guiGraphics.blitSprite(new ResourceLocation("raised:hud/hotbar_selection"), -182 - 1 + slot, offset - 23, 24, 24);
+                    guiGraphics.blitSprite(ResourceLocation.tryParse("raised:hud/hotbar_selection"), -182 - 1 + slot, offset - 23, 24, 24);
                 } else {
-                    guiGraphics.blitSprite(new ResourceLocation("hud/hotbar_selection"), -182 - 1 + slot, offset - 23, 24, 23);
+                    guiGraphics.blitSprite(ResourceLocation.tryParse("hud/hotbar_selection"), -182 - 1 + slot, offset - 23, 24, 23);
                     if (texture == Texture.PATCH || (texture == Texture.AUTO && !Pack.getPack())) {
-                        ((GuiGraphicsInvoker)guiGraphics).invokeInnerBlit(new ResourceLocation("textures/gui/sprites/hud/hotbar_selection.png"), -182 - 1 + slot, -182 - 1 + slot + 24, offset, offset + 1, 0, 0, 1, 1 / 23.0F, 0);
+                        ((GuiGraphicsInvoker)guiGraphics).invokeInnerBlit(ResourceLocation.tryParse("textures/gui/sprites/hud/hotbar_selection.png"), -182 - 1 + slot, -182 - 1 + slot + 24, offset, offset + 1, 0, 0, 1, 1 / 23.0F, 0);
                     }
                 }
 
@@ -242,15 +242,15 @@ public class RaisedScreen extends Screen {
             case BOSSBAR -> {
                 int width = Math.max(font.width(translatableX), font.width(translatableY));
 
-                guiGraphics.blitSprite(new ResourceLocation("boss_bar/red_background"), -182, offset - 5 - 19, 182, 5);
+                guiGraphics.blitSprite(ResourceLocation.tryParse("boss_bar/red_background"), -182, offset - 5 - 19, 182, 5);
                 if (x > 0) {
                     int progress = Mth.lerpDiscrete(percentX, 91, 182);
-                    guiGraphics.blit(new ResourceLocation("textures/gui/sprites/boss_bar/red_progress.png"), -182, offset - 5 - 19, progress, 5, 0, 0, progress, 5, 182, 5);
+                    guiGraphics.blit(ResourceLocation.tryParse("textures/gui/sprites/boss_bar/red_progress.png"), -182, offset - 5 - 19, progress, 5, 0, 0, progress, 5, 182, 5);
                 }
-                guiGraphics.blitSprite(new ResourceLocation("boss_bar/white_background"), -182, offset - 5, 182, 5);
+                guiGraphics.blitSprite(ResourceLocation.tryParse("boss_bar/white_background"), -182, offset - 5, 182, 5);
                 if (y > 0) {
                     int progress = Mth.lerpDiscrete(percentY, 91, 182);
-                    guiGraphics.blit(new ResourceLocation("textures/gui/sprites/boss_bar/white_progress.png"), -182, offset - 5, progress, 5, 0, 0, progress, 5, 182, 5);
+                    guiGraphics.blit(ResourceLocation.tryParse("textures/gui/sprites/boss_bar/white_progress.png"), -182, offset - 5, progress, 5, 0, 0, progress, 5, 182, 5);
                 }
 
                 guiGraphics.drawString(font, translatableX, -91 + 8 + (width / 2) - (font.width(translatableX) / 2), offset - 5 - 9 - 19, 16777215);
@@ -272,8 +272,8 @@ public class RaisedScreen extends Screen {
                 guiGraphics.drawString(font, String.valueOf(y), -91 + 1 + width - widthY, offset - 1 - 9, CommonColors.SOFT_RED, false);
             }
             case EFFECTS -> {
-                guiGraphics.blitSprite(new ResourceLocation("hud/effect_background"), -91 + 1, offset - 24 - 1, 24, 24);
-                guiGraphics.blitSprite(new ResourceLocation("hud/effect_background"), -91 + 1 + 24 + 1, offset - 24 - 1, 24, 24);
+                guiGraphics.blitSprite(ResourceLocation.tryParse("hud/effect_background"), -91 + 1, offset - 24 - 1, 24, 24);
+                guiGraphics.blitSprite(ResourceLocation.tryParse("hud/effect_background"), -91 + 1 + 24 + 1, offset - 24 - 1, 24, 24);
 
                 guiGraphics.setColor(1.0F, 1.0F, 1.0F, percentX);
                 guiGraphics.blit(-91 + 1 + 3, offset - 24 - 1 + 3, 0, 18, 18, minecraft.getMobEffectTextures().get(MobEffects.LUCK));
@@ -305,7 +305,7 @@ public class RaisedScreen extends Screen {
                 guiGraphics.blitSprite(getSignal(percentY), -91 + 1 + 144 - 1 - 10, offset - 1 - 9, 10, 8);
             }
             case TOASTS -> {
-                guiGraphics.blitSprite(new ResourceLocation("toast/advancement"), -91 - 40, offset - 32, 160, 32);
+                guiGraphics.blitSprite(ResourceLocation.tryParse("toast/advancement"), -91 - 40, offset - 32, 160, 32);
 
                 guiGraphics.renderFakeItem(Items.ENCHANTED_GOLDEN_APPLE.getDefaultInstance(), -91 + 8, offset - 32 + 8);
 
@@ -324,17 +324,17 @@ public class RaisedScreen extends Screen {
     public static ResourceLocation getSignal(float percent) {
         ResourceLocation resourceLocation;
         if (percent > 0.8F) {
-            resourceLocation = new ResourceLocation("icon/ping_5");
+            resourceLocation = ResourceLocation.tryParse("icon/ping_5");
         } else if (percent > 0.6F) {
-            resourceLocation = new ResourceLocation("icon/ping_4");
+            resourceLocation = ResourceLocation.tryParse("icon/ping_4");
         } else if (percent > 0.4F) {
-            resourceLocation = new ResourceLocation("icon/ping_3");
+            resourceLocation = ResourceLocation.tryParse("icon/ping_3");
         } else if (percent > 0.2F) {
-            resourceLocation = new ResourceLocation("icon/ping_2");
+            resourceLocation = ResourceLocation.tryParse("icon/ping_2");
         } else if (percent > 0.0F) {
-            resourceLocation = new ResourceLocation("icon/ping_1");
+            resourceLocation = ResourceLocation.tryParse("icon/ping_1");
         } else {
-            resourceLocation = new ResourceLocation("icon/ping_unknown");
+            resourceLocation = ResourceLocation.tryParse("icon/ping_unknown");
         }
         return resourceLocation;
     }
