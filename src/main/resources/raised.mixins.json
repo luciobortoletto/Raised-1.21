@@ -8,15 +8,9 @@
     "server.packs.repository.PackRepositoryMixin"
   ],
   "client": [
+    "client.event.RegisterGuiLayersEventMixin",
     "client.gui.GuiGraphicsInvoker",
-    "client.gui.GuiMixin$Chat$Pre",
-    "client.gui.GuiMixin$Effects$Pre",
     "client.gui.GuiMixin$Hotbar$Pre",
-    "client.gui.GuiMixin$Other$Post",
-    "client.gui.GuiMixin$Other$Pre",
-    "client.gui.GuiMixin$Players$Pre",
-    "client.gui.GuiMixin$Sidebar$Pre",
-    "client.gui.components.BossHealthOverlayMixin$Boss$Pre",
     "client.gui.components.ChatComponentMixin$Chat$Pre",
     "client.gui.components.toasts.ToastComponentMixin$Toasts$Pre",
     "client.gui.screens.ChatScreenMixin$Chat$Pre"
