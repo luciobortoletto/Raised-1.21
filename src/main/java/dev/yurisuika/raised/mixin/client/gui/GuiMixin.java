@@ -71,7 +71,7 @@ public abstract class GuiMixin {
             @ModifyArgs(method = "renderItemHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lnet/minecraft/resources/ResourceLocation;IIII)V", ordinal = 1))
             private void replaceHotbarSelector(Args args) {
                 if (Option.getTexture() == Texture.REPLACE || (Option.getTexture() == Texture.AUTO && Pack.getPack())) {
-                    args.set(0, new ResourceLocation("raised:hud/hotbar_selection"));
+                    args.set(0, ResourceLocation.tryParse("raised:hud/hotbar_selection"));
                     args.set(4, 24);
                 }
             }
@@ -84,7 +84,7 @@ public abstract class GuiMixin {
                 if (Option.getTexture() == Texture.PATCH  || (Option.getTexture() == Texture.AUTO && !Pack.getPack())) {
                     int x = (guiGraphics.guiWidth() / 2) - 92 + player.getInventory().selected * 20;
                     int y = guiGraphics.guiHeight();
-                    ((GuiGraphicsInvoker)guiGraphics).invokeInnerBlit(new ResourceLocation("textures/gui/sprites/hud/hotbar_selection.png"), x, x + 24, y, y + 1, 0, 0, 1, 1 / 23.0F, 0);
+                    ((GuiGraphicsInvoker)guiGraphics).invokeInnerBlit(ResourceLocation.tryParse("textures/gui/sprites/hud/hotbar_selection.png"), x, x + 24, y, y + 1, 0, 0, 1, 1 / 23.0F, 0);
                 }
             }
 
