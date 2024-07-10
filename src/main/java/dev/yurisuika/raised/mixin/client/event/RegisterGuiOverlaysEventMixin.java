@@ -18,7 +18,7 @@ public abstract class RegisterGuiOverlaysEventMixin {
      */
     @Inject(method = "registerBelowAll", at = @At("HEAD"))
     private void addOverlayBelowAll(String id, IGuiOverlay overlay, CallbackInfo ci) {
-        Overlay.getOther().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        Overlay.getOther().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
     }
 
     /**
@@ -27,19 +27,19 @@ public abstract class RegisterGuiOverlaysEventMixin {
     @Inject(method = "registerBelow", at = @At("HEAD"))
     private void addOverlayBelow(ResourceLocation other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (Overlay.getHotbar().contains(other)) {
-            Overlay.getHotbar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getHotbar().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         } else if (Overlay.getChat().contains(other)) {
-            Overlay.getChat().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getChat().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         } else if (Overlay.getBossbar().contains(other)) {
-            Overlay.getBossbar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getBossbar().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         } else if (Overlay.getSidebar().contains(other)) {
-            Overlay.getSidebar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getSidebar().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         } else if (Overlay.getEffects().contains(other)) {
-            Overlay.getEffects().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getEffects().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         } else if (Overlay.getPlayers().contains(other)) {
-            Overlay.getPlayers().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getPlayers().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         } else if (Overlay.getToasts().contains(other)) {
-            Overlay.getToasts().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getToasts().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         }
     }
 
@@ -49,19 +49,19 @@ public abstract class RegisterGuiOverlaysEventMixin {
     @Inject(method = "registerAbove", at = @At("HEAD"))
     private void addOverlayAbove(ResourceLocation other, String id, IGuiOverlay overlay, CallbackInfo ci) {
         if (Overlay.getHotbar().contains(other)) {
-            Overlay.getHotbar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getHotbar().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         } else if (Overlay.getChat().contains(other)) {
-            Overlay.getChat().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getChat().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         } else if (Overlay.getBossbar().contains(other)) {
-            Overlay.getBossbar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getBossbar().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         } else if (Overlay.getSidebar().contains(other)) {
-            Overlay.getSidebar().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getSidebar().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         } else if (Overlay.getEffects().contains(other)) {
-            Overlay.getEffects().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getEffects().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         } else if (Overlay.getPlayers().contains(other)) {
-            Overlay.getPlayers().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getPlayers().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         } else if (Overlay.getToasts().contains(other)) {
-            Overlay.getToasts().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+            Overlay.getToasts().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
         }
     }
 
@@ -70,7 +70,7 @@ public abstract class RegisterGuiOverlaysEventMixin {
      */
     @Inject(method = "registerAboveAll", at = @At("HEAD"))
     private void addOverlayAboveAll(String id, IGuiOverlay overlay, CallbackInfo ci) {
-        Overlay.getOther().add(ResourceLocation.tryParse(ModLoadingContext.get().getActiveNamespace() + ":" + id));
+        Overlay.getOther().add(ResourceLocation.tryBuild(ModLoadingContext.get().getActiveNamespace(), id));
     }
 
 }

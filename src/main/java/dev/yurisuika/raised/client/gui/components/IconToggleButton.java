@@ -14,7 +14,7 @@ public class IconToggleButton extends Button {
     public final int textureWidth;
     public final int textureHeight;
     public boolean toggled;
-    public static final ResourceLocation TEXTURE = new ResourceLocation("textures/gui/widgets.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.tryParse("textures/gui/widgets.png");
 
     public IconToggleButton(int x, int y, int width, int height, Component message, int textureWidth, int textureHeight, ResourceLocation texture, OnPress onPress, CreateNarration createNarration, boolean toggled) {
         super(x, y, width, height, message, onPress, createNarration == null ? DEFAULT_NARRATION : createNarration);
