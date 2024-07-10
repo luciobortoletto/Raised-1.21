@@ -110,7 +110,7 @@ public class RaisedScreen extends Screen {
         return IconToggleButton.builder(Component.translatable(element.getKey()), button -> {
             RaisedScreen.element = element;
             minecraft.setScreen(new RaisedScreen(Component.translatable("options.raised.title")));
-        }, element == RaisedScreen.element).pos(x, y).size(20, 20).texture(new ResourceLocation("raised:textures/gui/icon/" + element.getSerializedName() + ".png"), 20, 20).tooltip(Tooltip.create(Component.translatable(element.getKey()))).build();
+        }, element == RaisedScreen.element).pos(x, y).size(20, 20).texture(ResourceLocation.tryParse("raised:textures/gui/icon/" + element.getSerializedName() + ".png"), 20, 20).tooltip(Tooltip.create(Component.translatable(element.getKey()))).build();
     }
 
     public void setIconToggleButton(IconToggleButton widget) {
@@ -178,7 +178,7 @@ public class RaisedScreen extends Screen {
             case HOTBAR -> {
                 int slot = (int)Mth.lerp(percentX, 5, 8) * 20;
 
-                RenderSystem.setShaderTexture(0, new ResourceLocation("textures/gui/widgets.png"));
+                RenderSystem.setShaderTexture(0, ResourceLocation.tryParse("textures/gui/widgets.png"));
                 blit(poseStack, -182, offset - 22, 0, 0, 182, 22);
                 blit(poseStack, -182 - 1 + slot, offset - 23, 0, 22, 24, 24);
 
@@ -205,7 +205,7 @@ public class RaisedScreen extends Screen {
             case BOSSBAR -> {
                 int width = Math.max(font.width(translatableX), font.width(translatableY));
 
-                RenderSystem.setShaderTexture(0, new ResourceLocation("textures/gui/bars.png"));
+                RenderSystem.setShaderTexture(0, ResourceLocation.tryParse("textures/gui/bars.png"));
                 blit(poseStack,-182, offset - 5 - 19, 0, 20, 182, 5);
                 if (x > 0) {
                     int progress = (int)Mth.lerp(percentX, 91, 182);
@@ -237,15 +237,15 @@ public class RaisedScreen extends Screen {
                 font.draw(poseStack, String.valueOf(y), -91 + 1 + width - widthY, offset - 1 - 9, -2142128);
             }
             case EFFECTS -> {
-                RenderSystem.setShaderTexture(0, new ResourceLocation("textures/gui/container/inventory.png"));
+                RenderSystem.setShaderTexture(0, ResourceLocation.tryParse("textures/gui/container/inventory.png"));
                 blit(poseStack, -91 + 1, offset - 24 - 1, 141, 166, 24, 24);
                 blit(poseStack, -91 + 1 + 24 + 1, offset - 24 - 1, 141, 166, 24, 24);
 
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, percentX);
-                RenderSystem.setShaderTexture(0, new ResourceLocation("textures/mob_effect/luck.png"));
+                RenderSystem.setShaderTexture(0, ResourceLocation.tryParse("textures/mob_effect/luck.png"));
                 blit(poseStack,-91 + 1 + 3, offset - 24 - 1 + 3, 0, 0, 18, 18, 18, 18);
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, percentY);
-                RenderSystem.setShaderTexture(0, new ResourceLocation("textures/mob_effect/unluck.png"));
+                RenderSystem.setShaderTexture(0, ResourceLocation.tryParse("textures/mob_effect/unluck.png"));
                 blit(poseStack,-91 + 1 + 3 + 24 + 1, offset - 24 - 1 + 3, 0, 0, 18, 18, 18, 18);
 
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
@@ -269,12 +269,12 @@ public class RaisedScreen extends Screen {
                 font.drawShadow(poseStack, stringX, -91 + 1 + 144 - 1 - 10 - 1 - widthX, offset - 1 - 9 - 9, -171);
                 font.drawShadow(poseStack, stringY, -91 + 1 + 144 - 1 - 10 - 1 - widthY, offset - 1 - 9, -171);
 
-                RenderSystem.setShaderTexture(0, new ResourceLocation("textures/gui/icons.png"));
+                RenderSystem.setShaderTexture(0, ResourceLocation.tryParse("textures/gui/icons.png"));
                 blit(poseStack, -91 + 1 + 144 - 1 - 10, offset - 1 - 9 - 9, 0, 176 + getSignal(percentX) * 8, 10, 8);
                 blit(poseStack, -91 + 1 + 144 - 1 - 10, offset - 1 - 9, 0, 176 + getSignal(percentY) * 8, 10, 8);
             }
             case TOASTS -> {
-                RenderSystem.setShaderTexture(0, new ResourceLocation("textures/gui/toasts.png"));
+                RenderSystem.setShaderTexture(0, ResourceLocation.tryParse("textures/gui/toasts.png"));
                 blit(poseStack, -91 - 40, offset - 32, 0, 0, 160, 32);
 
                 RenderSystem.getModelViewStack().pushPose();
