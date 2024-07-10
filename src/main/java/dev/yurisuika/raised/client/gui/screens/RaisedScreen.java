@@ -128,7 +128,7 @@ public class RaisedScreen extends Screen {
     }
 
     public IconToggleButton createIconToggleButton(Element element, int x, int y) {
-        return new IconToggleButton(x, y, 20, 20, new TranslatableComponent(element.getKey()), 20, 20, new ResourceLocation("raised:textures/gui/icon/" + element.getSerializedName() + ".png"), button -> {
+        return new IconToggleButton(x, y, 20, 20, new TranslatableComponent(element.getKey()), 20, 20, ResourceLocation.tryParse("raised:textures/gui/icon/" + element.getSerializedName() + ".png"), button -> {
             RaisedScreen.element = element;
             minecraft.setScreen(new RaisedScreen(new TranslatableComponent("options.raised.title")));
         }, element == RaisedScreen.element);
@@ -199,7 +199,7 @@ public class RaisedScreen extends Screen {
             case HOTBAR: {
                 int slot = (int)Mth.lerp(percentX, 5, 8) * 20;
 
-                minecraft.getTextureManager().bind(new ResourceLocation("textures/gui/widgets.png"));
+                minecraft.getTextureManager().bind(ResourceLocation.tryParse("textures/gui/widgets.png"));
                 blit(poseStack, -182, offset - 22, 0, 0, 182, 22);
                 blit(poseStack, -182 - 1 + slot, offset - 23, 0, 22, 24, 24);
 
@@ -223,7 +223,7 @@ public class RaisedScreen extends Screen {
             case BOSSBAR: {
                 int width = Math.max(font.width(translatableX), font.width(translatableY));
 
-                minecraft.getTextureManager().bind(new ResourceLocation("textures/gui/bars.png"));
+                minecraft.getTextureManager().bind(ResourceLocation.tryParse("textures/gui/bars.png"));
                 blit(poseStack,-182, offset - 5 - 19, 0, 20, 182, 5);
                 if (x > 0) {
                     int progress = (int)Mth.lerp(percentX, 91, 182);
@@ -256,15 +256,15 @@ public class RaisedScreen extends Screen {
                 break;
             }
             case EFFECTS: {
-                minecraft.getTextureManager().bind(new ResourceLocation("textures/gui/container/inventory.png"));
+                minecraft.getTextureManager().bind(ResourceLocation.tryParse("textures/gui/container/inventory.png"));
                 blit(poseStack, -91 + 1, offset - 24 - 1, 141, 166, 24, 24);
                 blit(poseStack, -91 + 1 + 24 + 1, offset - 24 - 1, 141, 166, 24, 24);
 
                 RenderSystem.color4f(1.0F, 1.0F, 1.0F, percentX);
-                minecraft.getTextureManager().bind(new ResourceLocation("textures/mob_effect/luck.png"));
+                minecraft.getTextureManager().bind(ResourceLocation.tryParse("textures/mob_effect/luck.png"));
                 blit(poseStack,-91 + 1 + 3, offset - 24 - 1 + 3, 0, 0, 18, 18, 18, 18);
                 RenderSystem.color4f(1.0F, 1.0F, 1.0F, percentY);
-                minecraft.getTextureManager().bind(new ResourceLocation("textures/mob_effect/unluck.png"));
+                minecraft.getTextureManager().bind(ResourceLocation.tryParse("textures/mob_effect/unluck.png"));
                 blit(poseStack,-91 + 1 + 3 + 24 + 1, offset - 24 - 1 + 3, 0, 0, 18, 18, 18, 18);
 
                 RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -298,13 +298,13 @@ public class RaisedScreen extends Screen {
                 font.drawShadow(poseStack, stringX, -91 + 1 + 144 - 1 - 10 - 1 - widthX, offset - 1 - 9 - 9, -171);
                 font.drawShadow(poseStack, stringY, -91 + 1 + 144 - 1 - 10 - 1 - widthY, offset - 1 - 9, -171);
 
-                minecraft.getTextureManager().bind(new ResourceLocation("textures/gui/icons.png"));
+                minecraft.getTextureManager().bind(ResourceLocation.tryParse("textures/gui/icons.png"));
                 blit(poseStack, -91 + 1 + 144 - 1 - 10, offset - 1 - 9 - 9, 0, 176 + getSignal(percentX) * 8, 10, 8);
                 blit(poseStack, -91 + 1 + 144 - 1 - 10, offset - 1 - 9, 0, 176 + getSignal(percentY) * 8, 10, 8);
                 break;
             }
             case TOASTS: {
-                minecraft.getTextureManager().bind(new ResourceLocation("textures/gui/toasts.png"));
+                minecraft.getTextureManager().bind(ResourceLocation.tryParse("textures/gui/toasts.png"));
                 blit(poseStack, -91 - 40, offset - 32, 0, 0, 160, 32);
 
                 itemRenderer.renderAndDecorateFakeItem(Items.ENCHANTED_GOLDEN_APPLE.getDefaultInstance(), -91 + 8, offset - 32 + 8);
