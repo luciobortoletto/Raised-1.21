@@ -18,18 +18,18 @@ import net.minecraft.network.chat.Component;
 
 public class RaisedCommand {
 
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext buildContext) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context) {
         dispatcher.register(Commands.literal("raised")
                 .then(Commands.literal("config")
                         .then(Commands.literal("reload")
-                                .executes(context -> {
+                                .executes(commandContext -> {
                                     Config.loadConfig();
-                                    context.getSource().sendSuccess(Component.translatable("commands.raised.config.reload"), false);
+                                    commandContext.getSource().sendSuccess(Component.translatable("commands.raised.config.reload"), false);
                                     return 1;
                                 })
                         )
                         .then(Commands.literal("reset")
-                                .executes(context -> {
+                                .executes(commandContext -> {
                                     Option.setElements(new Elements(
                                             new Properties.Hotbar(
                                                     0,
@@ -80,7 +80,7 @@ public class RaisedCommand {
                                                     Sync.NONE
                                             )
                                     ));
-                                    context.getSource().sendSuccess(Component.translatable("commands.raised.config.reset"), false);
+                                    commandContext.getSource().sendSuccess(Component.translatable("commands.raised.config.reset"), false);
                                     return 1;
                                 })
                         )
@@ -92,53 +92,53 @@ public class RaisedCommand {
                     .then(Commands.literal("elements")
                             .then(Commands.literal(element.getSerializedName())
                                     .then(Commands.literal("x")
-                                            .executes(context -> {
-                                                context.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.x.query", Component.translatable(element.getKey()), Option.getY(element)), false);
+                                            .executes(commandContext -> {
+                                                commandContext.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.x.query", Component.translatable(element.getKey()), Option.getY(element)), false);
                                                 return 1;
                                             })
                                             .then(Commands.argument("x", IntegerArgumentType.integer(0))
-                                                    .executes(context -> {
-                                                        Option.setX(element, IntegerArgumentType.getInteger(context, "x"));
-                                                        context.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.x.set", Component.translatable(element.getKey()), Option.getX(element)), false);
+                                                    .executes(commandContext -> {
+                                                        Option.setX(element, IntegerArgumentType.getInteger(commandContext, "x"));
+                                                        commandContext.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.x.set", Component.translatable(element.getKey()), Option.getX(element)), false);
                                                         return 1;
                                                     })
                                             )
                                     )
                                     .then(Commands.literal("y")
-                                            .executes(context -> {
-                                                context.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.y.query", Component.translatable(element.getKey()), Option.getY(element)), false);
+                                            .executes(commandContext -> {
+                                                commandContext.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.y.query", Component.translatable(element.getKey()), Option.getY(element)), false);
                                                 return 1;
                                             })
                                             .then(Commands.argument("y", IntegerArgumentType.integer(0))
-                                                    .executes(context -> {
-                                                        Option.setY(element, IntegerArgumentType.getInteger(context, "y"));
-                                                        context.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.y.set", Component.translatable(element.getKey()), Option.getY(element)), false);
+                                                    .executes(commandContext -> {
+                                                        Option.setY(element, IntegerArgumentType.getInteger(commandContext, "y"));
+                                                        commandContext.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.y.set", Component.translatable(element.getKey()), Option.getY(element)), false);
                                                         return 1;
                                                     })
                                             )
                                     )
                                     .then(Commands.literal("position")
-                                            .executes(context -> {
-                                                context.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.position.query", Component.translatable(element.getKey()), Component.translatable(Option.getPosition(element).getKey())), false);
+                                            .executes(commandContext -> {
+                                                commandContext.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.position.query", Component.translatable(element.getKey()), Component.translatable(Option.getPosition(element).getKey())), false);
                                                 return 1;
                                             })
                                             .then(Commands.argument("position", PositionArgument.position())
-                                                    .executes(context -> {
-                                                        Option.setPosition(element, PositionArgument.getPosition(context, "position"));
-                                                        context.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.position.set", Component.translatable(element.getKey()), Component.translatable(Option.getPosition(element).getKey())), false);
+                                                    .executes(commandContext -> {
+                                                        Option.setPosition(element, PositionArgument.getPosition(commandContext, "position"));
+                                                        commandContext.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.position.set", Component.translatable(element.getKey()), Component.translatable(Option.getPosition(element).getKey())), false);
                                                         return 1;
                                                     })
                                             )
                                     )
                                     .then(Commands.literal("sync")
-                                            .executes(context -> {
-                                                context.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.sync.query", Component.translatable(element.getKey()), Component.translatable(Option.getSync(element).getKey())), false);
+                                            .executes(commandContext -> {
+                                                commandContext.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.sync.query", Component.translatable(element.getKey()), Component.translatable(Option.getSync(element).getKey())), false);
                                                 return 1;
                                             })
                                             .then(Commands.argument("sync", SyncArgument.sync())
-                                                    .executes(context -> {
-                                                        Option.setSync(element, SyncArgument.getSync(context, "sync"));
-                                                        context.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.sync.set", Component.translatable(element.getKey()), Component.translatable(Option.getSync(element).getKey())), false);
+                                                    .executes(commandContext -> {
+                                                        Option.setSync(element, SyncArgument.getSync(commandContext, "sync"));
+                                                        commandContext.getSource().sendSuccess(Component.translatable("commands.raised.elements.element.sync.set", Component.translatable(element.getKey()), Component.translatable(Option.getSync(element).getKey())), false);
                                                         return 1;
                                                     })
                                             )
