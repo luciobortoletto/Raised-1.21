@@ -73,7 +73,7 @@ public class Option {
     }
 
     public static Texture getTexture() {
-        return getToggle().texture;
+        return getToggle().getTexture();
     }
 
     public static void setTexture(Texture value) {
